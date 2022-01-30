@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- <form action = "{% url 'search' %}" method = "get">
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name">
+    <input type="submit" value="OK">
+</form> -->
+
+<form action = "{% url 'search' %}" method = "POST">
+    {% csrf_token %}
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="search" placeholder="search" name="user_searched">
+    <input type="submit" value="OK">
+</form>
+
+<!-- {% if searched %}
+<h1> you searched for {{ searched }} !!</h1>
+{% else %}
+<h1>no searches so far...</h1>
+{% endif %} -->
+
+{% if searched %}
+{% for item in searched %}
+
+<h3>ID</h3>
+<h5>{{item.id}}</h5>
+<h3>Product</h3>
+<h5>{{item.title}}</h5>
+<img src="{{item.image}}" alt="">
+{% endfor %}
+{% else %}
+<h1>no searches so far...</h1>
+  {% endif %}
+{% endblock %}
