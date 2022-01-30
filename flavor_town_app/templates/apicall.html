@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h2>Spoonacular API</h2>
+  
+  <!-- {% for k, v in stuff.items %}
+  {% if k == 'image' %}
+  <img src="{{v}}" alt="">
+  {% else %}
+  <h3>{{ k }}</h3>
+    <h1>{{ v }}</h1>
+    {% endif %}
+    {% endfor %} -->
+
+    {% for item in stuff %}
+
+    <h1>ID</h1>
+    <h3>{{item.id}}</h3>
+    <h1>Product</h1>
+    <h3>{{item.title}}</h3>
+    <img src="{{item.image}}" alt="">
+   
+      {% endfor %}
+
+{% endblock %}
