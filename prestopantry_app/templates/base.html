@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> -->
-    <title>Flavor Town</title>
+    <title>PrestoPantry</title>
   </head>
   <body>
 
@@ -18,11 +18,11 @@
           <div id="links">
               <a href="{% url 'about' %}">About</a>&nbsp;
               <a href="{% url 'home' %}">Home</a>&nbsp;
-              <a href="{% url 'index' %}">index</a>&nbsp;
+              {% comment %} <a href="{% url 'index' %}">index</a>&nbsp; {% endcomment %}
               <a href="{% url 'apicall' %}">api test</a>&nbsp;
               <a href="{% url 'search'%}">Search</a>&nbsp;&nbsp;&nbsp;&nbsp;
               
-              <div><h1>FLAVOR TOWN</h1></div>
+              <div><h1>PrestoPantry</h1></div>
           </div>
         
         </nav>
