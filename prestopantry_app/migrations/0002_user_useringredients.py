@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='UserIngredients',
+            name='UserIngredient',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('ingredient_id', models.IntegerField()),
