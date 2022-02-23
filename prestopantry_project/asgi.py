@@ -1,5 +1,5 @@
 """
-ASGI config for flavor_town_project project.
+ASGI config for prestopantry_project project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flavor_town_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'prestopantry_project.settings')
 
 application = get_asgi_application()

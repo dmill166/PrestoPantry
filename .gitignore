@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Environment Credentials
-/flavor_town_project/settings.py
+/prestopantry_project/settings.py

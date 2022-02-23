@@ -1,6 +1,6 @@
 from operator import le
 from django.conf import settings
-from flavor_town_app.models import Owner, Question
+from prestopantry_app.models.developers import Developer
 import django
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -18,14 +18,14 @@ def home(request):
     return render(request, 'home.html')
 
 def about(request):
-    site_owner_list = Owner.objects.all()
+    site_owner_list = Developer.objects.all()
     context = {'site_owner': site_owner_list}
     return render(request, 'about.html', context)
 
-def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'index.html', context)
+# def index(request):
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     context = {'latest_question_list': latest_question_list}
+#     return render(request, 'index.html', context)
 
 def apicall(request):
     response = requests.get('https://api.spoonacular.com/food/products/search?query=beer&number=4&apiKey=' + settings.API_KEY)
