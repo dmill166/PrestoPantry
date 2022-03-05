@@ -16,13 +16,18 @@
 
         <nav class="navbar-fixed">
           <div id="links">
-              <a href="{% url 'about' %}">About</a>&nbsp;
+              {% comment %} <a href="{% url 'about' %}">About</a>&nbsp;
               <a href="{% url 'home' %}">Home</a>&nbsp;
-              {% comment %} <a href="{% url 'index' %}">index</a>&nbsp; {% endcomment %}
+              <a href="{% url 'index' %}">index</a>&nbsp;
               <a href="{% url 'apicall' %}">api test</a>&nbsp;
-              <a href="{% url 'search'%}">Search</a>&nbsp;&nbsp;&nbsp;&nbsp;
-              
-              <div><h1>PrestoPantry</h1></div>
+              <a href="{% url 'search'%}">Search</a>&nbsp;&nbsp;&nbsp;&nbsp; {% endcomment %}
+            <a href="{% url 'home' %}">PrestoPantry</a>&nbsp;
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'logout' %}">Log Out</a>&nbsp;
+            {% else %}
+              <a href="{% url 'signup' %}">Sign Up</a>&nbsp;
+              <a href="{% url 'login' %}">Login</a>&nbsp;
+            {% endif %}
           </div>
         
         </nav>
@@ -36,7 +41,10 @@
       </main>
       &nbsp;
       <footer class="page-footer">
-        <div class="right"> All Rights Reserved, &copy; 2022 Flavor Town &nbsp;</div>
+        <div class="nav-footer">
+          <a href="{% url 'about' %}">About Us</a><br>
+        </div>
+        <div class="right"> All Rights Reserved, &copy; 2022 PrestoPantry &nbsp;</div>
       </footer>
 
     <!-- Optional JavaScript -->
