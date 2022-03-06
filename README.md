@@ -3,8 +3,8 @@ Group Project for Senior (Capstone) Course @ MSU Denver (CS 4360)
 
 
 ## Required Modules
-To install required modules run this command **INSIDE** of the virtualenv
+To install required modules run these commands **INSIDE** of the Python virtualenv (assuming Python is installed)
 
-```
-pip install -r requirements.txt
-```
+1. `python -m ensurepip --upgrade`
+
+2. `pip install -r requirements.txt`
