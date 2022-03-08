@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.forms import UserCreationForm
 from prestopantry_app.backends.user_auth import UserAuthBackend
 from prestopantry_app.models.users import User
@@ -27,11 +26,4 @@ class SignupForm(UserCreationForm):
             raise forms.ValidationError("Email already taken")
         return email
     
-    def clean_password(self):
-        # Validate password with django built-in password validation
-        password = self.cleaned_data['password1']
-        try:
-            validate_password(password)
-        except forms.ValidationError as e:
-            raise forms.ValidationError(e)
 
