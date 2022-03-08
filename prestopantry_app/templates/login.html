@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Login!</h2>
-<form action = "" method = "POST">
+{% if error %}
+<div class="login-error" style="color:red;">
+    <p>{{ error }}</p>
+</div>
+{% endif %}
+<form action = "{% url 'login' %}" method = "POST">
     {% csrf_token %}
     <label for="email">Email: </label>
     <input id="email" type="email" name="email"><br>
@@ -9,5 +14,4 @@
     <input type="password" id="pwd" name="pwd"><br>
     <input type="submit" value="Login">
 </form>
-
 {% endblock %}

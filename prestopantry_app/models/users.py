@@ -1,16 +1,10 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
-
-class User(models.Model):
-    id = models.AutoField(primary_key=True, auto_created=True)
+# custom user class that extends the default user class
+class User(AbstractUser):
+    email = models.EmailField(unique=True, null= True, max_length=254)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email = models.CharField(max_length=255)
-    username = models.CharField(max_length=50)
-    password_hash = models.CharField(max_length=64)
-    begin_date = models.DateField()
-    end_date = models.DateField()
-    current_ind = models.BooleanField()
-    created_record = models.DateTimeField()
-    modified_record = models.DateTimeField()
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']  
+
