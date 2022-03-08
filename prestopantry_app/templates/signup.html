@@ -8,19 +8,9 @@
 {% else %}
 
 <h2>Sign Up!</h2>
-{% if error%}
-<div class="signup-error" style="color:red;">
-    <p>{{ error }}</p>
-</div>
-{% endif%}
 <form action = "{% url 'signup' %}" method = "POST">
     {% csrf_token %}
-    <label for"username">Display Name:</label>
-    <input type="text" id="username" name="username"><br>
-    <label for="email">Email: </label>
-    <input type="email" id="email" name="email"><br>  
-    <label for="pwd">Password:</label>
-    <input type="password" id="pwd" name="pwd"><br>
+    {{form.as_p}}
     <input type="submit" value="Create Account">
 </form>
 {% endif%}
