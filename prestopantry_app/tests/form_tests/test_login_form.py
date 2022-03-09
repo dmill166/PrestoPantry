@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 class LoginFormTests(TestCase):
     def test_login_form_authentication(self):
         # Invalid email (no user)
-        form_invalid_email = LoginForm({'email': 'test1@gma', 'password': 'test_password'})
+        form_invalid_email = LoginForm(data = {'email': 'test1@gma', 'password': 'test_password'})
         self.assertFalse(form_invalid_email.is_valid())
 
         # valid email and password 
