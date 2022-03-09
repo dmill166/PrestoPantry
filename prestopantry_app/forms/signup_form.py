@@ -25,5 +25,3 @@ class SignupForm(UserCreationForm):
         if (UserAuthBackend().email_taken(email)):
             raise forms.ValidationError("Email already taken")
         return email
-    
-
