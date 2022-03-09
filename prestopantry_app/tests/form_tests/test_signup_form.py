@@ -5,18 +5,19 @@ from django.contrib.auth import get_user_model
 
 class SignupFormTests(TestCase):
     def test_clean_username(self):
+        # Username does not exist (form.is_valid() should pass)
+        pass
+    
         # Username exists (form.is_valid() should fail)
         pass
 
-        # Username does not exist (form.is_valid() should pass)
-        pass
-
     def test_clean_email(self):
+        # Email does not exist (form.is_valid() should pass)
+        pass
+    
         # Email exists (form.is_valid() should fail)
         pass
 
-        # Email does not exist (form.is_valid() should pass)
-        pass
 
     def test_save(self):
         # Create and save user (if info valid)
@@ -24,5 +25,14 @@ class SignupFormTests(TestCase):
         self.assertTrue(form.is_valid())
         UserModel = get_user_model()    
         self.assertEqual(form.save(), UserModel.objects.get(email="test1@gmail.com"))
+        
+        # Invalid username (user not created - search by email or username)
+        
+        # Invalid email (user not created - search by email or username)
+        
+        # Invalid password (user not created - search by email or username)
+        
+        # Passwords don't match (user not created - search by email or username)
+        
 
 
