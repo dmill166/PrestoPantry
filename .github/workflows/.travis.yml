@@ -1,7 +1,7 @@
 language: python            # this works for Linux but is an error on macOS or Windows
 jobs:
   include:
-    - name: "Python 3.8.0 on Xenial Linux"
+    - name: Python 3.8.0 on Xenial Linux
       python: 3.8           # this works for Linux but is ignored on macOS or Windows
     - name: "Python 3.8.7 on macOS"
       os: osx
