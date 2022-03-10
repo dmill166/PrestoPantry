@@ -11,12 +11,8 @@ jobs:
   include:
   - name: "Python 3.8.0 on Xenial Linux"
     python: 3.8           # this works for Linux but is ignored on macOS or Windows
-  - name: "Python 3.8.7 on macOS"
-    os: osx
-    osx_image: xcode13.1  # Python 3.8.7 running on macOS 11.6.2
-    language: shell       # 'language: python' is an error on Travis CI macOS
 before_script:
-  - psql -c 'create database "PP_DB";' -U postgres
+  - psql -c 'create database "test_db";' -U postgres
 script:
   - python manage.py makemigrations
   - python manage.py migrate

@@ -26,6 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 
 
@@ -87,11 +88,11 @@ WSGI_APPLICATION = 'prestopantry_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'PP_DB',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': '',
-        'PORT': '5432'
+        'NAME': os.environ['PRESTOPANTRY_DB_NAME'],
+        'USER': os.environ['PRESTOPANTRY_DB_USER'],
+        'PASSWORD': os.environ['PRESTOPANTRY_DB_PASSWORD'],
+        'HOST': os.environ['PRESTOPANTRY_DB_HOST'],
+        'PORT': os.environ['PRESTOPANTRY_DB_PORT'],
 
     }
 }
