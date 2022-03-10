@@ -1,5 +1,11 @@
 services:
   - postgresql
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
 language: python            # this works for Linux but is an error on macOS or Windows
 jobs:
   include:
