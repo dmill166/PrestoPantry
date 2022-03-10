@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'PP_DB',
         'USER': 'postgres',
         'PASSWORD': '12345',
-        'HOST': 'localhost',
+        'HOST': '',
         'PORT': '5432'
 
     }
