@@ -1,13 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Login!</h2>
-<form action = "" method = "POST">
+<form action = "{% url 'login' %}" method = "POST">
     {% csrf_token %}
-    <label for="email">Email: </label>
-    <input id="email" type="email" name="email"><br>
-    <label for="pwd">Password:</label>
-    <input type="password" id="pwd" name="pwd"><br>
+    {{form.as_p}}
     <input type="submit" value="Login">
 </form>
-
 {% endblock %}
