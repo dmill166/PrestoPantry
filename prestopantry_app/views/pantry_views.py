@@ -1,12 +1,8 @@
 
 from prestopantry_app.backends.spoonacular_api import JsonScraper
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
-import requests
-import ipdb
-import json
-# ipdb.set_trace()
+from django.shortcuts import render
+
 @login_required(login_url='login')
 def search_by_ingredient(request):
       if request.method == 'POST' and 'ingredient_button' in request.POST:

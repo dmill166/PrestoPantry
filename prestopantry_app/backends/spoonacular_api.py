@@ -1,7 +1,7 @@
 from django.conf import settings
 import requests
 
-SPOON_API = settings.API_KEY
+SPOON_API = settings.SPOON_API_KEY
 
 headers = {
     'content-type': "application/json",
