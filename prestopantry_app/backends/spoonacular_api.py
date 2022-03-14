@@ -6,7 +6,6 @@ SPOON_API = settings.SPOON_API_KEY
 headers = {
     'content-type': "application/json",
     'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-    # 'x-rapidapi-key': "a4da0d5351msh0dc3d6a9435605fp1cd066jsnefcaed1be35c"
     'x-rapidapi-key': SPOON_API
     }
 
