@@ -128,5 +128,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Environment Credentials
-/prestopantry_project/settings.py
