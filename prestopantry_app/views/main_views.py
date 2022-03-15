@@ -24,12 +24,6 @@ def landing_page(request):
 def community(request):
     return render(request, 'community.html')
 
-def signup(request):
-    return render(request, 'signup.html')
-
-def login(request):
-    return render(request, 'login.html')
-
 def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
