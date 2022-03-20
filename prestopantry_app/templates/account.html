@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Account</h2>
+<h3>{{success_msg}}</h3>
+{% for form in forms%}
+<form action = "{% url 'account' %}" method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Confirm">
+</form>
+{% endfor %}
+{% endblock %}

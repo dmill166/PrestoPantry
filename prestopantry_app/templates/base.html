@@ -23,6 +23,7 @@
               <a href="{% url 'search'%}">Search</a>&nbsp;&nbsp;&nbsp;&nbsp; {% endcomment %}
             <a href="{% url 'home' %}">PrestoPantry</a>&nbsp;
             {% if request.user.is_authenticated %}
+              <a href="{% url 'account' %}">My Account</a>&nbsp;
               <a href="{% url 'logout' %}">Log Out</a>&nbsp;
             {% else %}
               <a href="{% url 'signup' %}">Sign Up</a>&nbsp;
