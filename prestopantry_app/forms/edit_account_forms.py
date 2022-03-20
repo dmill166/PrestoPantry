@@ -5,7 +5,7 @@ from prestopantry_app.models.users import User
 
 class EditUsernameForm(UserChangeForm):
     password = None
-    username = forms.CharField(label="Display Name", max_length=50)
+    username = forms.CharField(label="Display name", max_length=50)
 
     class Meta:
         model = User

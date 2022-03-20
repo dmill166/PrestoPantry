@@ -67,7 +67,7 @@ class EditAccountViewTests(TestCase):
             form_mock.assert_called()
             self.assertEqual(response.status_code, 200)
 
-        request = self.factory.post('/account/', {'first_name': 'test_first_name', 'last_name': 'test_last_name'})
+        request = self.factory.post('/account/', {'first_name': 'testFirstName', 'last_name': 'testLastName'})
         request.user = self.user
         with patch('prestopantry_app.forms.edit_account_forms.EditNameForm.is_valid') as form_mock:
             response = edit_account(request)

@@ -2,11 +2,51 @@
 {% block content %}
 <h2>Edit Account</h2>
 <h3>{{success_msg}}</h3>
-{% for form in forms%}
-<form action = "{% url 'account' %}" method = "POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Confirm">
-</form>
-{% endfor %}
+<h4>
+    {% if username_form %}
+    <form action = "{% url 'account' %}" method = "POST">
+        {% csrf_token %}
+        <p>{{username_form}}
+        <input type="submit" value="Confirm"></p>
+    </form>
+    {% else %}
+    <form action = "{% url 'account' %}" method = "GET">
+        <p>Display Name: {{request.user.username}}
+        <input name="change_username" type="submit" value="Edit"></p>
+    </form>
+    {% endif %}
+
+    {% if email_form %}
+    <form action = "{% url 'account' %}" method = "POST">
+        {% csrf_token %}
+        <p>{{email_form}}
+        <input type="submit" value="Confirm"></p>
+    </form>
+    {% else %}
+    <form action = "{% url 'account' %}" method = "GET">
+        <p>Email: {{request.user.email}}
+        <input name="change_email" type="submit" value="Edit"></p>
+    </form>
+    {% endif %}
+
+    {% if name_form%}
+    <form action = "{% url 'account' %}" method = "POST">
+        {% csrf_token %}
+        <p>{{name_form.as_p}}
+        <input type="submit" value="Confirm"></p>
+    </form>
+    {% else %}
+    <form action = "{% url 'account' %}" method = "GET">
+        <p>First Name: {{request.user.first_name}}</p>
+        <p>Last Name: {{request.user.last_name}}
+        <input name="change_name" type="submit" value="Edit"></p>
+    </form>
+    {% endif %}
+
+    <form action = "{% url 'account' %}" method = "POST">
+        {% csrf_token %}
+        {{pass_form.as_p}}
+        <input type="submit" value="Confirm">
+    </form>
+</h4>
 {% endblock %}
