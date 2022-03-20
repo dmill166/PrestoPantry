@@ -12,13 +12,13 @@ class UserAuthTests(TestCase):
         # User exists
         User.objects.create_user(username='test_user', email="test1@gmail.com", password="test_password")
         auth_user = UserAuthBackend().authenticate(None, email="test1@gmail.com", password="test_password")
-        UserModel = get_user_model()    
+        UserModel = get_user_model()
         db_user = UserModel.objects.get(email="test1@gmail.com")
-        self.assertEquals(auth_user, db_user)
+        self.assertEqual(auth_user, db_user)
 
         # Invalid password
         self.assertIsNone(UserAuthBackend().authenticate(None, email="test1@gmail.com", password="password"))
-    
+
     def test_email_taken(self):
         # Email does not exist
         self.assertFalse(UserAuthBackend().email_taken("test1@gmail.com"))
