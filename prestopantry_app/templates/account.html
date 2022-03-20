@@ -11,7 +11,7 @@
     </form>
     {% else %}
     <form action = "{% url 'account' %}" method = "GET">
-        <p>Display Name: {{request.user.username}}
+        <p>Display name: {{request.user.username}}
         <input name="change_username" type="submit" value="Edit"></p>
     </form>
     {% endif %}
