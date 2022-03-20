@@ -52,13 +52,20 @@ class EditNameFormTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='test_user1', email='test1@gmail.com', password='test_password')
         self.client.force_login(self.user)
-        self.form = EditNameForm({'first_name': 'test_first_name', 'last_name': 'test_last_name'}, instance=self.user)
+        self.form = EditNameForm({'first_name': 'testFirsName', 'last_name': 'testLastName'}, instance=self.user)
 
     def test_clean(self):
         self.assertTrue(self.form.is_valid())
 
+        form_invalid = EditNameForm({'first_name': 'testFirsName1', 'last_name': 'testLastName'}, instance=self.user)
+        self.assertFalse(form_invalid.is_valid())
+
+        form_invalid = EditNameForm({'first_name': 'testFirsName', 'last_name': 'testLastName1'}, instance=self.user)
+        self.assertFalse(form_invalid.is_valid())
+
     def test_save(self):
         # Updates name
+        self.form.is_valid()
         self.form.save()
         self.assertEqual(self.user.first_name, self.form.cleaned_data['first_name'])
         self.assertEqual(self.user.last_name, self.form.cleaned_data['last_name'])
