@@ -1,19 +1,9 @@
-from multiprocessing.connection import Client
 from django.test import TestCase
 from django.urls import reverse
 from prestopantry_app.models.users import User
 
-
-# context = {
-#     'image': 'garlic-powder.png', 
-#     'ingredient_info': [('Garlic Powder', 872421, '842441131321')], 
-#     'ingredient_name': 'garlic powder'
-#     }
-
-
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
-        # self.client = Client()
         self.user = User.objects.create_user('goldmember','drevil@gmail.com','ilovegold')
 
     def test_pantry_ingredients_view(self):
@@ -31,7 +21,3 @@ class PantryIngredientsViewTest(TestCase):
         data = {'q': '88'}
         response = self.client.get(reverse('pantry-ingredients'), data)
         self.assertContains(response, 'No Searches found...')
-
-        # response = self.client.post('/pantry-ingredients/', context, content_type='application/json')
-        # self.assertEqual(response.status_code, 200 )
-    
