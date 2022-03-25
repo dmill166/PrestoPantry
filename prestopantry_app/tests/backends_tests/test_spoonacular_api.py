@@ -1,6 +1,5 @@
 from django.test import TestCase
-from prestopantry_app.models.users import User
-from prestopantry_app.backends.spoonacular_api import JsonScraper
+from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 
 
 ingredient_payload = {
@@ -39,8 +38,8 @@ class SpoonacularApiTest(TestCase):
         global ingredient_payload
         global recipe_json
         global recipe_payload
-        self.ingredient_scraper = JsonScraper.harvest_ingredients(ingredient_json)
-        self.recipe_scraper = JsonScraper.harvest_recipe_per_ingredients(recipe_json)
+        self.ingredient_scraper = SpoonacularAPI.harvest_ingredients(ingredient_json)
+        self.recipe_scraper = SpoonacularAPI.harvest_recipe_per_ingredients(recipe_json)
 
     def test_ingredient_harvester_for_image(self):
         image_json = self.ingredient_scraper['image']

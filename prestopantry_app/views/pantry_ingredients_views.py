@@ -1,6 +1,7 @@
-from prestopantry_app.backends.spoonacular_api import JsonScraper
+from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+
 
 @login_required(login_url='login')
 def search_by_ingredient(request):
@@ -10,11 +11,12 @@ def search_by_ingredient(request):
           'ingredients': [request.POST['ingredient_name']], 
           'servings': 1 
           }
+        json_scraper = SpoonacularAPI()
 
-        response = JsonScraper.ingredient_request("POST", data=str(payload))
+        response = json_scraper.ingredient_request("POST", data=str(payload))
         ingredient_json = response.json()
         if response.status_code == 200 and ingredient_json != []:
-          context = JsonScraper.harvest_ingredients(ingredient_json)
+          context = json_scraper.harvest_ingredients(ingredient_json)
       
           return render(request, 'pantry_ingredients_page.html', {'context': context})
 
@@ -28,11 +30,11 @@ def search_by_ingredient(request):
           'ranking':2
           }
 
-        response = JsonScraper.recipe_request("GET", params=payload)
+        response = json_scraper.recipe_request("GET", params=payload)
         recipe_json = response.json()
         if response.status_code == 200 and recipe_json != []:
 
-          context = JsonScraper.harvest_recipe_per_ingredients(recipe_json)
+          context = json_scraper.harvest_recipe_per_ingredients(recipe_json)
 
           return render(request, 'pantry_ingredients_page.html', {'recipe_context': context})
       
