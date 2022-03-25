@@ -5,13 +5,13 @@ from django.shortcuts import render
 
 @login_required(login_url='login')
 def search_by_ingredient(request):
+      json_scraper = SpoonacularAPI
       if request.method == 'POST' and 'ingredient_button' in request.POST:
 
         payload = { 
           'ingredients': [request.POST['ingredient_name']], 
           'servings': 1 
           }
-        json_scraper = SpoonacularAPI
 
         response = json_scraper.ingredient_request("POST", data=str(payload))
         ingredient_json = response.json()
