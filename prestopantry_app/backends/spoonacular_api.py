@@ -13,7 +13,7 @@ url1 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredi
 url2 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
 
 
-class JsonScraper():
+class SpoonacularAPI():
 
     def ingredient_request(request, data):
         response = requests.request(request, url1, data=str(data), headers=headers)
