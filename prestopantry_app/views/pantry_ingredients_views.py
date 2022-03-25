@@ -1,7 +1,6 @@
 from prestopantry_app.backends.spoonacular_api import JsonScraper
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-import ipdb
 
 @login_required(login_url='login')
 def search_by_ingredient(request):
@@ -32,8 +31,6 @@ def search_by_ingredient(request):
         response = JsonScraper.recipe_request("GET", params=payload)
         recipe_json = response.json()
         if response.status_code == 200 and recipe_json != []:
-
-          # ipdb.set_trace()
 
           context = JsonScraper.harvest_recipe_per_ingredients(recipe_json)
 
