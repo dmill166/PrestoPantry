@@ -10,7 +10,7 @@ class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email')
-    
+
     # Clean functions are called when the form is submitted
     def clean_username(self):
         # Check if username is taken - more validation would go here
@@ -18,7 +18,7 @@ class SignupForm(UserCreationForm):
         if (UserAuthBackend().username_taken(username)):
             raise forms.ValidationError("Username already taken")
         return username
-    
+
     def clean_email(self):
         # Check if email is taken - UserCreationForm does rest of validation
         email = self.cleaned_data['email']
