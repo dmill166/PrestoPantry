@@ -6,6 +6,7 @@ from prestopantry_app.forms.login_form import LoginForm
 from prestopantry_app.forms.signup_form import SignupForm
 from prestopantry_app.forms.edit_account_forms import EditNameForm, EditUsernameForm, EditEmailForm
 
+
 def login(request):
     form = LoginForm()
     if request.method == 'POST':
@@ -46,16 +47,19 @@ def edit_account_post(request, context):
         context['username_form'] = EditUsernameForm(request.POST, instance=request.user)
         if context['username_form'].is_valid():
             context['username_form'].save()
+            context.pop('username_form')
             context['success_msg'] = 'Username updated successfully'
     elif 'email' in request.POST:
         context['email_form'] = EditEmailForm(request.POST, instance=request.user)
         if context['email_form'].is_valid():
             context['email_form'].save()
+            context.pop('email_form')
             context['success_msg'] = 'Email updated successfully'
     elif 'first_name' and 'last_name' in request.POST:
         context['name_form'] = EditNameForm(request.POST, instance=request.user)
         if context['name_form'].is_valid():
             context['name_form'].save()
+            context.pop('name_form')
             context['success_msg'] = 'Name updated successfully'
     elif 'old_password' and 'new_password1' and 'new_password2' in request.POST:
         context['pass_form'] = PasswordChangeForm(request.user, request.POST)

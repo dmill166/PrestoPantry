@@ -1,6 +1,6 @@
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
+from prestopantry_app.forms.edit_account_forms import EditUsernameForm, EditNameForm, EditEmailForm
 from prestopantry_app.models.users import User
-from prestopantry_app.views.account_views import edit_account
 from unittest.mock import patch
 
 
@@ -39,7 +39,6 @@ class SignupViewTests(TestCase):
 class EditAccountViewTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='test_user', email="test1@gmail.com", password='test_password')
-        self.factory = RequestFactory()
 
     def test_edit_account_view(self):
         # Get request
@@ -53,31 +52,53 @@ class EditAccountViewTests(TestCase):
         self.assertTemplateUsed(response, 'account.html')
 
         # Post requests
-        request = self.factory.post('/account/', {'username': 'test_user1'})
-        request.user = self.user
-        with patch('prestopantry_app.forms.edit_account_forms.EditUsernameForm.is_valid') as form_mock:
-            response = edit_account(request)
-            form_mock.assert_called()
+        # Valid Username Form
+        with patch('prestopantry_app.views.account_views.EditUsernameForm.is_valid') as form_mock:
+            response = self.client.post('/account/', {'username': 'test_user1'})
+            form_mock.assert_called_once()
             self.assertEqual(response.status_code, 200)
+            self.assertNotIn('username_form', response.context)
 
-        request = self.factory.post('/account/', {'email': 'test1_new@gmail.com'})
-        request.user = self.user
-        with patch('prestopantry_app.forms.edit_account_forms.EditEmailForm.is_valid') as form_mock:
-            response = edit_account(request)
-            form_mock.assert_called()
+        # Invalid Username Form
+        with patch('prestopantry_app.views.account_views.EditUsernameForm.is_valid') as form_mock:
+            form_mock.return_value = False
+            response = self.client.post('/account/', {'username': 'test_user1_invalid!@#$%^&*()'})
+            form_mock.assert_called_once()
             self.assertEqual(response.status_code, 200)
+            self.assertIsInstance(response.context['username_form'], EditUsernameForm)
 
-        request = self.factory.post('/account/', {'first_name': 'testFirstName', 'last_name': 'testLastName'})
-        request.user = self.user
-        with patch('prestopantry_app.forms.edit_account_forms.EditNameForm.is_valid') as form_mock:
-            response = edit_account(request)
-            form_mock.assert_called()
+        # Valid Email Form
+        with patch('prestopantry_app.views.account_views.EditEmailForm.is_valid') as form_mock:
+            response = self.client.post('/account/', {'email': 'test1_new@gmail.com'})
+            form_mock.assert_called_once()
             self.assertEqual(response.status_code, 200)
+            self.assertNotIn('email_form', response.context)
 
-        request = self.factory.post('/account/', {'old_password': 'test_password', 'new_password1': 'test_password_new', 'new_password2': 'test_password_new'})
-        request.user = self.user
+        # Invalid Email Form
+        with patch('prestopantry_app.views.account_views.EditEmailForm.is_valid') as form_mock:
+            form_mock.return_value = False
+            response = self.client.post('/account/', {'email': 'test1_new_invalid@gma'})
+            form_mock.assert_called_once()
+            self.assertEqual(response.status_code, 200)
+            self.assertIsInstance(response.context['email_form'], EditEmailForm)
+
+        # Valid Name Form
+        with patch('prestopantry_app.views.account_views.EditNameForm.is_valid') as form_mock:
+            response = self.client.post('/account/', {'first_name': 'testFirstName', 'last_name': 'testLastName'})
+            form_mock.assert_called_once()
+            self.assertEqual(response.status_code, 200)
+            self.assertNotIn('name_form', response.context)
+
+        # Invalid Name Form
+        with patch('prestopantry_app.views.account_views.EditNameForm.is_valid') as form_mock:
+            form_mock.return_value = False
+            response = self.client.post('/account/', {'first_name': 'testFirstNameInvalid1', 'last_name': 'testLastNameInvalid1'})
+            form_mock.assert_called_once()
+            self.assertEqual(response.status_code, 200)
+            self.assertIsInstance(response.context['name_form'], EditNameForm)
+
         with patch('django.contrib.auth.forms.PasswordChangeForm.is_valid') as form_mock:
             form_mock.return_value = False
-            response = edit_account(request)
-            form_mock.assert_called()
+            response = self.client.post('/account/', {'old_password': 'test_password', 'new_password1': 'test_password_new', 'new_password2': 'test_password_new'})
+            form_mock.assert_called_once()
             self.assertEqual(response.status_code, 200)
