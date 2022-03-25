@@ -3,7 +3,7 @@ from unicodedata import name
 from django.urls import path
 
 from .views.account_views import login, signup, edit_account
-from .views import main_views
+from .views import main_views, pantry_ingredients_views
 
 urlpatterns = [
     path('', main_views.community, name='home'),
@@ -13,4 +13,6 @@ urlpatterns = [
     path('account/', edit_account, name='account'),
     path('logout/', main_views.logout_view, name='logout'),
     path('about/', main_views.about, name='about'),
+    path('pantry-ingredients/', pantry_ingredients_views.search_by_ingredient, name='pantry-ingredients'),
+
 ]
