@@ -11,7 +11,7 @@ def search_by_ingredient(request):
           'ingredients': [request.POST['ingredient_name']], 
           'servings': 1 
           }
-        json_scraper = SpoonacularAPI()
+        json_scraper = SpoonacularAPI
 
         response = json_scraper.ingredient_request("POST", data=str(payload))
         ingredient_json = response.json()
