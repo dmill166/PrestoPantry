@@ -4,7 +4,6 @@ boto3==1.21.8
 botocore==1.24.8
 certifi==2021.10.8
 charset-normalizer==2.0.12
-crispy-bootstrap5==0.6
 click==8.0.4
 Django==4.0.2
 django-dynamic-preferences==1.12.0
