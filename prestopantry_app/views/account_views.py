@@ -1,22 +1,24 @@
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from prestopantry_app.forms.login_form import LoginForm
 from prestopantry_app.forms.signup_form import SignupForm
 from prestopantry_app.forms.edit_account_forms import EditNameForm, EditUsernameForm, EditEmailForm
 
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='home')
 def login(request):
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.user_cache)
-            return redirect('/')
+            return redirect('home')
     return render(request, 'login.html', {'form': form})
 
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='home')
 def signup(request):
     form = SignupForm()
     if request.method == 'POST':
@@ -27,7 +29,7 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-@login_required(login_url='/login')
+@login_required(login_url='login')
 def edit_account(request):
     context = {'pass_form': PasswordChangeForm(request.user)}
     if request.method == 'GET':
