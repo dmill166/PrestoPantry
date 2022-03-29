@@ -15,9 +15,12 @@ class LoginViewTests(TestCase):
         self.assertTemplateUsed(response, 'login.html')
         # Post request
         response = self.client.post('/login/', {'username': 'test_user', 'email': 'test1@gmail.com', 'password': 'test_password'})
-        response.user = self.user
-        self.assertEqual(response.status_code, 302)
+        self.client.force_login(self.user)
         self.assertRedirects(response, '/')
+
+        # Redirect if user logged in
+        response = self.client.get('/login/')
+        self.assertRedirects(response, '/?next=/login/')
 
 
 class SignupViewTests(TestCase):
@@ -31,9 +34,12 @@ class SignupViewTests(TestCase):
         self.assertTemplateUsed(response, 'signup.html')
         # Post request
         response = self.client.post('/signup/')
-        response.user = self.user
+        self.client.force_login(self.user)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'signup.html')
+        # Redirect if user logged in
+        response = self.client.get('/signup/')
+        self.assertRedirects(response, '/?next=/signup/')
 
 
 class EditAccountViewTests(TestCase):
