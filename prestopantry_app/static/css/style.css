@@ -1,3 +1,44 @@
 .errorlist{color:red;
   font-weight:bold;
 }
+
+.navbar-brand{
+  font-size: 2.2rem;
+}
+
+.btn-outline-secondary{
+font-size: 110%;
+}
+
+.padd-account-button{
+  padding-right: .4rem;
+}
+
+.navbar{
+  background-color: rgba(107, 148, 69, 0.151);
+}
+.footer{
+  background-color: rgb(175, 175, 175);
+}
+
+.fa-linkedin-in{
+  font-size: 1.8rem;
+}
+.fa-github{
+  font-size: 1.8rem;
+}
+
+.about-button > a{
+  font-size: 140%;
+  color: white;
+}
+.about-button{
+  padding-bottom: .4rem;
+}
+.about-button > a:hover{
+  text-decoration: none;
+  color: black;
+}
+.copyright{
+  font-size: 110%;
+}
