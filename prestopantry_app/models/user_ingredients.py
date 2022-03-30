@@ -3,10 +3,6 @@ from prestopantry_app.models.users import User
 
 
 class UserIngredient(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     ingredient_id = models.IntegerField()
-    begin_date = models.DateField()
-    end_date = models.DateField(    )
-    current_ind = models.BooleanField()
-    created_record = models.DateTimeField()
-    modified_record = models.DateTimeField()
+    ingredient_name = models.CharField(max_length=300)
