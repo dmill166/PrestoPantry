@@ -23,6 +23,11 @@
     <input type="submit" value="SEARCH" name="ingredient_per_recipe_button">
 </form>
 
+<!-- <form action = "{% url 'pantry-ingredients' %}" method = "post">
+    {% csrf_token %}
+
+</form> -->
+
 
 {% if context %}
 
@@ -31,6 +36,12 @@
 
     {% for item in context.ingredient_info %}
         <li> <b>Ingredient:</b> {{item.0}} |&nbsp;&nbsp;| <b>Id:</b> {{item.1}} <b>Upc:</b> {{item.2}}</li>
+        <form method = "post">
+            {% csrf_token %}
+            <input type="hidden" value="{{item.1}}" name="ingredient_id">
+            <input type="hidden" value="{{item.0}}" name="ingredient_name">
+            <input type="submit" value="Add" name="add_ingredient_button">
+        </form>
     {% endfor %}
 
 

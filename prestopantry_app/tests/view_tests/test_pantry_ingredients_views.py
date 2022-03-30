@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from prestopantry_app.models.users import User
+from prestopantry_app.models.user_ingredients import UserIngredient
 
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
@@ -21,3 +22,13 @@ class PantryIngredientsViewTest(TestCase):
         data = {'q': '88'}
         response = self.client.get(reverse('pantry-ingredients'), data)
         self.assertContains(response, 'No Searches found...')
+
+        # # test add
+        data = {'ingredient_name': 'Torkelson Cheese Co. Brick Cheese Wisconsin', 
+        'ingredient_id': '406181', 'add_ingredient_button': ''}
+        response = self.client.post('/pantry-ingredients/', data)
+        try:
+            ingredient=UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+            ingredient_id='40618', user=self.user)
+        except UserIngredient.DoesNotExist:
+            self.fail("Ingredient failed to save." + str(data))
