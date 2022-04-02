@@ -1,20 +1,148 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<h2>PrestoPantry</h2>
-<section class="about">
-    <p class="about_para">Here we give some details about what PrestoPantry is about</p>
-    <h2>Our Team</h2>
-    <div id="team">
-        {% for name in site_owner%}
-        <div><h3>{{ name.first_name }} {{name.last_name}}</h3> Developer <br>Contact {{name.first_name}} <br>Email: {{name.email}} </div>
-        {% endfor %}
-        <!-- <div><h3>Adam C Wojdyla</h3> Developer <br>Contact Adam <br>Email: @gmail.com </div>
-        <div><h3>Dakota Miller</h3>GitHub Manager, Developer<br> Contact Dakota<br>Email: @gmail.com </div>
-        <div><h3>Riley </h3> Developer <br> Contact Riley<br>Email: @gmail.com </div>
-        <div><h3>Hector Cruz </h3>UX & Design, Developer<br> Contact Hector<br>Email: @gmail.com </div> -->
+<h2>About Us</h2>
+<!-- {% for name in site_owner%}
+{% if forloop.counter0|divisibleby:2  %}
+<section>
+    <div class="card mb-3 about_us_card">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{% static "images/awojdyla.png" %}" class="card-img" alt="...">
+          </div>
+          <div class="col-md-1 text-center about_us_links">
+            <a class="btn btn-floating m-0 " href={{name.linkedin_link}} role="button"><i class="fab fa-linkedin-in"></i></a>
+            <a class="btn btn-floating m-0" href={{name.git_hub_link}} role="button"><i class="fab fa-github"></i></a>
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title">{{name.first_name}} {{name.last_name}}</h5>
+              <p class="card-text">{{name.developer_about}}</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </section>
+    {% else %}
+    <section>
+        <div class="card mb-3 about_us_card">
+            <div class="row no-gutters">
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{name.first_name}} {{name.last_name}}</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="col-md-1 text-center about_us_links">
+                  <a class="btn btn-floating m-0 " href={{name.linkedin_link}} role="button"><i class="fab fa-linkedin-in"></i></a>
+                  <a class="btn btn-floating m-0" href={{name.git_hub_link}} role="button"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="col-md-4">
+                  <img src="..." class="card-img" alt="...">
+                </div>
+            </div>
+        </section>
+    {% endif %}
+    {% endfor %} -->
 
-    </div>
-</section>
+    
+    <section>
+      <div class="card mb-3 about_us_card">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{% static "images/rstrong.png" %}" class="card-img about_img" alt="{% static "images/hcruz.png" %}">
+          </div>
+          <div class="col-md-1 text-center about_us_links">
+            <a class="btn btn-floating m-0 " href="https://www.linkedin.com/in/riley-strong-0101/" role="button"><i class="fab fa-linkedin-in"></i></a>
+            <a class="btn btn-floating m-0" href="https://github.com/riley-strong" role="button"><i class="fab fa-github"></i></a>
+          </div>
+          <div class="col-md-7">
+            <div class="card-body about_us_text">
+              <h3 class="card-title">Riley Strong</h3>
+              <p class="card-text">
+                Riley is a coding prodigy. With a plethora of experience 
+                in the field, he has maintained steady growth as a developer. 
+                With an incredible dedication to self-development, there is a 
+                tool out there he can’t master. 
+               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <div class="card mb-3 about_us_card">
+          <div class="row no-gutters">
+            <div class="col-md-7">
+              <div class="card-body about_us_text">
+                <h3 class="card-title">Adam Wojdyla</h3>
+                <p class="card-text">
+                  Adam is a web wizard, bringing a host of knowledge to the 
+                  team from his combined academic experiences and targeted self-development 
+                  within web application development (including the completion of General 
+                  Assembly Boot Camp during summer of 2021). 
+                </p>
+              </div>
+            </div>
+            <div class="col-md-1 text-center about_us_links">
+              <a class="btn btn-floating m-0 " href="https://www.linkedin.com/in/adam-wojdyla/" role="button"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-floating m-0" href="https://github.com/awojdyla89" role="button"><i class="fab fa-github"></i></a>
+            </div>
+            <div class="col-md-4">
+              <img src="{% static "images/awojdyla.png" %}" class="card-img about_img" alt="{% static "images/hcruz.png" %}">
+            </div>
+          </div>
+        </section>
 
-{% endblock %}
+        <section>
+          <div class="card mb-3 about_us_card">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="{% static "images/dmiller.png" %}" class="card-img about_img" alt="{% static "images/hcruz.png" %}">
+              </div>
+              <div class="col-md-1 text-center about_us_links">
+                <a class="btn btn-floating m-0 " href="https://www.linkedin.com/in/dakota-miller-/" role="button"><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-floating m-0" href="https://github.com/dmill166" role="button"><i class="fab fa-github"></i></a>
+              </div>
+              <div class="col-md-7">
+                <div class="card-body about_us_text">
+                  <h3 class="card-title">Dakota Miller</h3>
+                  <p class="card-text">
+                    Dakota is a resident data expert and professional student.
+                     His academic journey has afforded him two degrees with at least 
+                     two more planned. His professional background has centered 
+                     around SQL Server development but includes ventures into 
+                     other flavors of SQL (Teradata, AWS Redshift, AWS Athena, PostGreSQL) 
+                     as well as Python and VBA.
+                     </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <section>
+            <div class="card mb-3 about_us_card">
+              <div class="row no-gutters">
+                <div class="col-md-7">
+                  <div class="card-body about_us_text">
+                    <h3 class="card-title">Hector Cruz</h3>
+                    <p class="card-text">
+                      Hector is our AWS expert, bringing new and exciting 
+                      tools to the team. His experience in cybersecurity and cloud 
+                      computing has allotted him the skills necessary to keep software 
+                      safe and available. 
+                     </p>
+                  </div>
+                </div>
+                <div class="col-md-1 text-center about_us_links">
+                  <a class="btn btn-floating m-0 " href="https://www.linkedin.com/in/hcruz5/" role="button"><i class="fab fa-linkedin-in"></i></a>
+                  <a class="btn btn-floating m-0" href="https://github.com/hcruz5" role="button"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="col-md-4">
+                  <img src="{% static "images/hcruz.png" %}" class="card-img about_img" alt="{% static "images/hcruz.png" %}">
+                </div>
+              </div>
+            </section>
+
+  {% endblock %}
