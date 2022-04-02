@@ -3,7 +3,6 @@ from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from prestopantry_app.models.user_ingredients import UserIngredient
-from prestopantry_app.forms.add_ingredient_forms import AddIngredientForm
 from prestopantry_app.models.user_ingredients import UserIngredient
 
 
