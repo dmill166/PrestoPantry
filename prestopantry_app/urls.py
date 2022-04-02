@@ -1,6 +1,7 @@
 # from operator import index
 from unicodedata import name
 from django.urls import path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from .views.account_views import login, signup, edit_account
 from .views import main_views, pantry_ingredients_views
@@ -16,3 +17,5 @@ urlpatterns = [
     path('pantry-ingredients/', pantry_ingredients_views.search_by_ingredient, name='pantry-ingredients'),
 
 ]
+
+urlpatterns += staticfiles_urlpatterns()
