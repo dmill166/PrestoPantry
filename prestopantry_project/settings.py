@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from telnetlib import AUTHENTICATION
 from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
