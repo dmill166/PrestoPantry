@@ -102,7 +102,7 @@ class EditAccountViewTests(TestCase):
             form_mock.assert_called_once()
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context['name_form'], EditNameForm)
-        
+
         # Password Change Form Included
         with patch('django.contrib.auth.forms.PasswordChangeForm.is_valid') as form_mock:
             form_mock.return_value = False
@@ -113,11 +113,10 @@ class EditAccountViewTests(TestCase):
 
         # OAuth User
         self.client.force_login(self.oauth_user)
-    
+
         # Email Change Form Cannot be Included (even with 'proper' get request)
         response = self.client.get('account', {'email': True})
         self.assertNotIn('email_form', response.context)
-
 
         # Password Change Form Not Included (oauth user)
         response = self.client.get('/account/')
