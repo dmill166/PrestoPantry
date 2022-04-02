@@ -45,7 +45,7 @@ def search_by_ingredient(request):
       elif request.method == 'POST' and 'add_ingredient_button' in request.POST:
         obj = UserIngredient.objects
         ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
-        ingredient_name=request.POST['ingredient_name'])
+        ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
         
         return render(request, 'pantry_ingredients_page.html')
       

@@ -40,6 +40,7 @@
             {% csrf_token %}
             <input type="hidden" value="{{item.1}}" name="ingredient_id">
             <input type="hidden" value="{{item.0}}" name="ingredient_name">
+            <input type="hidden" value="{{item.2}}" name="upc">
             <input type="submit" value="Add" name="add_ingredient_button">
         </form>
     {% endfor %}

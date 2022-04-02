@@ -23,10 +23,10 @@ class PantryIngredientsViewTest(TestCase):
 
         # # test add
         data = {'ingredient_name': 'Torkelson Cheese Co. Brick Cheese Wisconsin', 
-        'ingredient_id': '406181', 'add_ingredient_button': ''}
+        'ingredient_id': '406181', 'add_ingredient_button': '', 'upc': '123344564378'}
         response = self.client.post('/pantry-ingredients/', data)
         try:
             ingredient=UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-            ingredient_id='40618', user=self.user)
+            ingredient_id='406181', user=self.user, upc=123344564378)
         except UserIngredient.DoesNotExist:
             self.fail("Ingredient failed to save." + str(data))
