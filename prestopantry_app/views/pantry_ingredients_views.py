@@ -1,6 +1,9 @@
+from ast import Add
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from prestopantry_app.models.user_ingredients import UserIngredient
+from prestopantry_app.models.user_ingredients import UserIngredient
 
 
 @login_required(login_url='login')
@@ -37,5 +40,12 @@ def search_by_ingredient(request):
           context = json_scraper.harvest_recipe_per_ingredients(recipe_json)
 
           return render(request, 'pantry_ingredients_page.html', {'recipe_context': context})
+
+      elif request.method == 'POST' and 'add_ingredient_button' in request.POST:
+        obj = UserIngredient.objects
+        ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
+        ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
+        
+        return render(request, 'pantry_ingredients_page.html')
       
       return render(request, 'pantry_ingredients_page.html', {})
