@@ -13,5 +13,6 @@
     {{form.as_p}}
     <input type="submit" value="Create Account">
 </form>
+<a href="{% url 'social:begin' 'google-oauth2' %}">Signup with Google</a>
 {% endif%}
 {% endblock %}

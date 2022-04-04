@@ -1,6 +1,5 @@
 # from operator import index
-from unicodedata import name
-from django.urls import path
+from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from .views.account_views import login, signup, edit_account
@@ -15,6 +14,7 @@ urlpatterns = [
     path('logout/', main_views.logout_view, name='logout'),
     path('about/', main_views.about, name='about'),
     path('pantry-ingredients/', pantry_ingredients_views.search_by_ingredient, name='pantry-ingredients'),
+    path('auth/', include('social_django.urls', namespace='social')),
 
 ]
 

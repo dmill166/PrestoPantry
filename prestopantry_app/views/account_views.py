@@ -13,7 +13,7 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
-            auth_login(request, form.user_cache)
+            auth_login(request, form.user_cache, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
     return render(request, 'login.html', {'form': form})
 
@@ -25,18 +25,21 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth_login(request, user)
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
     return render(request, 'signup.html', {'form': form})
 
 
 @login_required(login_url='login')
 def edit_account(request):
-    context = {'pass_form': PasswordChangeForm(request.user)}
+    context = {}
+    if not request.user.oauth_user():
+        context['pass_form'] = PasswordChangeForm(request.user)
     if request.method == 'GET':
         if 'change_username' in request.GET:
             context['username_form'] = EditUsernameForm(instance=request.user)
         elif 'change_email' in request.GET:
-            context['email_form'] = EditEmailForm(instance=request.user)
+            if not request.user.oauth_user():
+                context['email_form'] = EditEmailForm(instance=request.user)
         elif 'change_name' in request.GET:
             context['name_form'] = EditNameForm(instance=request.user)
     elif request.method == 'POST':
@@ -53,7 +56,7 @@ def edit_account_post(request, context):
             context['success_msg'] = 'Username updated successfully'
     elif 'email' in request.POST:
         context['email_form'] = EditEmailForm(request.POST, instance=request.user)
-        if context['email_form'].is_valid():
+        if context['email_form'].is_valid() and not request.user.oauth_user():
             context['email_form'].save()
             context.pop('email_form')
             context['success_msg'] = 'Email updated successfully'
@@ -67,6 +70,6 @@ def edit_account_post(request, context):
         context['pass_form'] = PasswordChangeForm(request.user, request.POST)
         if context['pass_form'].is_valid():
             user = context['pass_form'].save()
-            auth_login(request, user)
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             context['success_msg'] = 'Password updated successfully'
     return request, context

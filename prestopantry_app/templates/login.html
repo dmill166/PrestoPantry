@@ -6,4 +6,5 @@
     {{form.as_p}}
     <input type="submit" value="Login">
 </form>
+<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
 {% endblock %}
