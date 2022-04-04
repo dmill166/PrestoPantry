@@ -29,20 +29,24 @@
 </form> -->
 
 
-{% if context %}
+{% if ingredient_name %}
 
-    <h3>{{context.ingredient_name}}</h3>
-    <h5>Image: {{ context.image }}</h5>
+    <h3>{{ingredient_name}}</h3>
+    <h5>Image: {{ image }}</h5>
 
-    {% for item in context.ingredient_info %}
+    {% for item in ingredient_info %}
         <li> <b>Ingredient:</b> {{item.0}} |&nbsp;&nbsp;| <b>Id:</b> {{item.1}} <b>Upc:</b> {{item.2}}</li>
-        <form method = "post">
-            {% csrf_token %}
-            <input type="hidden" value="{{item.1}}" name="ingredient_id">
-            <input type="hidden" value="{{item.0}}" name="ingredient_name">
-            <input type="hidden" value="{{item.2}}" name="upc">
-            <input type="submit" value="Add" name="add_ingredient_button">
-        </form>
+        {% if item.3 == True %}
+            <p> Ingredient Added!</p>
+        {% else %}
+            <form method = "post">
+                {% csrf_token %}
+                <input type="hidden" value="{{item.1}}" name="ingredient_id">
+                <input type="hidden" value="{{item.0}}" name="ingredient_name">
+                <input type="hidden" value="{{item.2}}" name="upc">
+                <input type="submit" value="Add" name="add_ingredient_button">
+            </form>
+        {% endif %}
     {% endfor %}
 
 
