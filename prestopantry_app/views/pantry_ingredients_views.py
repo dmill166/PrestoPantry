@@ -20,7 +20,7 @@ def search_by_ingredient(request):
             context = json_scraper.harvest_ingredients(ingredient_json)
             request.session['ingredient_search_results'] = context
 
-            return render(request, 'pantry_ingredients_page.html', context)
+            return render(request, 'search_pantry_ingredients.html', context)
 
     elif request.method == 'POST' and 'ingredient_per_recipe_button' in request.POST:
 
@@ -38,7 +38,7 @@ def search_by_ingredient(request):
 
             context = json_scraper.harvest_recipe_per_ingredients(recipe_json)
 
-            return render(request, 'pantry_ingredients_page.html', {'recipe_context': context})
+            return render(request, 'search_pantry_ingredients.html', {'recipe_context': context})
 
     elif request.method == 'POST' and 'add_ingredient_button' in request.POST:
         obj = UserIngredient.objects
@@ -53,6 +53,6 @@ def search_by_ingredient(request):
                 request.session['ingredient_search_results'] = new_ingredient_search_results
                 break
 
-        return render(request, 'pantry_ingredients_page.html', request.session['ingredient_search_results'])
+        return render(request, 'search_pantry_ingredients.html', request.session['ingredient_search_results'])
 
-    return render(request, 'pantry_ingredients_page.html', {})
+    return render(request, 'search_pantry_ingredients.html', {})

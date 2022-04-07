@@ -115,7 +115,7 @@ class EditAccountViewTests(TestCase):
         self.client.force_login(self.oauth_user)
 
         # Email Change Form Cannot be Included (even with 'proper' get request)
-        response = self.client.get('account', {'email': True})
+        response = self.client.get('/account/', {'email': True})
         self.assertNotIn('email_form', response.context)
 
         # Password Change Form Not Included (oauth user)
