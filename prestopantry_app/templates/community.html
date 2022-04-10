@@ -1,6 +1,49 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<h1>COMMUNITY PAGE <br/> Welcome to PrestoPantry</h1>
-<h3>Hello {{user.username}}!</h3>
+
+{% if request.user.is_authenticated %}
+<h1>Community Page</h1>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h1 class="display-4 fw-normal">Hey {{ user.first_name }} welcome back!</h1>
+      <!-- <p class="lead fw-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
+      <a class="btn btn-outline-secondary" href="#">Coming soon</a> -->
+    </div>
+    <!-- <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div> -->
+  </div>
+
+  {% else %}
+  <h1>Community Page</h1>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h1 class="display-4 fw-normal">Welcome to PresoPantry!</h1>
+      <p class="lead fw-normal">Search for ingredients, add them to your online pantry and search for recipes!</p>
+      <!-- <a class="btn btn-outline-secondary" href="#">Coming soon</a> -->
+    </div>
+    <!-- <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div> -->
+  </div>
+
+
+{% endif %}
+
+<!-- <section class="vh-100 edit_account_section">
+    <div class="container py-5 h-100 ">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-8 col-xl-5">
+                <div class="card shadow-2-strong signup_card">
+                    <div class="card-body p-12 edit_account_card">
+                  <h1>COMMUNITY PAGE <br/> Welcome to PrestoPantry</h1>
+                  <h3>Hello {{user.username}}!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section> -->
+
 {% endblock %}

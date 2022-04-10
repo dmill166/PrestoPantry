@@ -2,7 +2,7 @@
   font-weight:bold;
 }
 .main_container{
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(43, 43, 43);
 }
 
 .navbar-brand{
@@ -89,4 +89,56 @@ font-size: 110%;
 .about_us_text > p{
   font-size: 1.3rem;
   color: rgb(110, 166, 251);
+}
+/* .login_card{
+  margin: 0 auto;
+  float: none; 
+  margin-bottom: 10px; 
+
+} */
+.login_section{
+  /* background-color: #181825; */
+  background: url("/static/images/login_image.jpeg") ;
+  background-attachment: fixed;
+  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:contain;
+  /* position: absolute; */
+   /* top:100px; */
+  /* left:0px;  */
+  /* width: 100%; */
+  /* height: 100%; */
+  
+}
+.login_card{
+  border-radius: 1.5rem;
+}
+.google_login_button{
+  background-color: #dd4b39;
+}
+.signup_section{
+background-color: #1f202c;
+}
+.signup_card{
+  border-radius: 1.5rem;
+}
+
+.edit_account_section{
+  background-color: #181825;
+}
+.success_msg{
+  color: green;
+
+}
+
+.edit_account_card > h3{
+  text-align: center;
+
+}
+.account_edit_buttons{
+  display: flex;
+  justify-content: space-between;
+  height: 2.5rem;
+  padding-bottom: .8rem;
 }
