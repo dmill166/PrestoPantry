@@ -1,6 +1,84 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<h1>LANDING PAGE <br/> Welcome to PrestoPantry! </h1>
-<h2>What we do</h2>
+
+
+  <h1>Landing Page</h1>
+
+<!-- <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h1 class="display-4 fw-normal">Welcome to PresoPantry!</h1>
+      <p class="lead fw-normal">Search for ingredients, add them to your online pantry and search for recipes!</p>
+      <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+    </div>
+  </div> -->
+
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" >
+      <div class="carousel-item active" data-bs-interval="5000">
+        <!-- <img src="..." class="d-block w-100 " alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+          <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+        </div> -->
+        <div class="position-relative overflow-auto p-3 p-md-5 m-md-3 text-center bg-light">
+            
+            <div class="col-md-10 p-lg-5 mx-auto my-5">
+                <h1 class="display-4 fw-normal">Welcome to PresoPantry!</h1>
+                <img src="{% static "images/spoon_ingredients.jpeg" %}" class="d-block w-100 " alt="...">
+              <p class="lead fw-normal">Search for ingredients, add them to your online pantry and search for recipes!</p>
+              <a class="btn btn-outline-secondary" href="#">Go to My Pantry</a>
+            </div>
+          </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <!-- <img src="..." class="d-block w-100" alt="..."> -->
+        <!-- <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Some representative placeholder content for the second slide.</p>
+          <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+        </div> -->
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+            <div class="col-md-10 p-lg-5 mx-auto my-5">
+              <h1 class="display-4 fw-normal">Ingredient Searching Made Simple</h1>
+              <p class="lead fw-normal">Search for ingredients in your pantry and add them to your online pantry.</p>
+              <a class="btn btn-outline-secondary" href="#">Start Searching</a>
+            </div>
+          </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <!-- <img src="..." class="d-block w-100" alt="..."> -->
+        <!-- <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+          <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+        </div> -->
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+            <div class="col-md-10 p-lg-5 mx-auto my-5">
+              <h1 class="display-4 fw-normal">Recipe Community</h1>
+              <p class="lead fw-normal">Check out the recipe community where you can explore and share recipes with others.</p>
+              <a class="btn btn-outline-secondary" href="#">Recipe Community</a>
+            </div>
+          </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+<!-- <h1>LANDING PAGE <br/> Welcome to PrestoPantry! </h1>
+<h2>What we do</h2> -->
 {% endblock %}
