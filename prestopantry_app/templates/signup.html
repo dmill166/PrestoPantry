@@ -1,48 +1,51 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 
-{% if request.user.is_authenticated%}
-
-
-
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-  <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 fw-normal">Hey, {{user.username}} Welcome!</h1>
-    <!-- <p class="lead fw-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
-    <a class="btn btn-outline-secondary" href="#">Coming soon</a> -->
-    <a href="{% url 'landing_page' %}" class="btn btn-outline-secondary btn-lg">Let's Get Started</a>
-  </div>
-  <!-- <div class="product-device shadow-sm d-none d-md-block"></div>
-  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div> -->
-</div>
-
-{% else %}
-
-<section class="vh-100 signup_section">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-8 col-xl-5">
-          <div class="card shadow-2-strong signup_card">
-              <div class="card-body p-5 text-left">
-                <h3 class="mb-5 text-center">Sign Up</h3>
+<div class="signup_section">
+<section class="vh-100">
+    <div class="container-fluid ">
+      <div class="row d-flex justify-content-center align-items-center  pt-3">
+        <div class="col-12 col-md-8 col-lg-8 col-xl-5 ">
+          <div class="card shadow-2-strong signup_card ">
+              <div class="card-body">
+                <h3 class="mb-2 text-center signup_header">Sign Up</h3>
   
               <form action = "{% url 'signup' %}" method = "POST">
                 {% csrf_token %}
-              <div class="form-outline mb-4">{{form|crispy}}</div>
-              <button class="btn btn-primary btn-lg btn-block " type="submit">Let's Go!</button>
+
+                <div class="form-group" >
+
+                  {% for field in form %}
+                  <div class="signup_label">
+
+                    <label class="form-label ">{{field.label}}</label>
+                  </div>
+                  <div class="mb-2 signup_field">{{field}}</div>
+                  {{field.help_text}}
+                  {{field.errors}}
+                  {% endfor %}
+                </div>
+                <div class="text-center">
+
+                  <button class="btn btn-primary btn-lg btn-block mt-3" type="submit">Sign Me Up</button>
+                </div>
+              <div class="my-3 text-center">Already have an account? <a href="{% url 'login' %}">Click Here</a></div>
              </form>
 
-             <hr class="my-4">
-              <a class="btn btn-lg btn-block btn-primary google_login_button" href="{% url 'social:begin' 'google-oauth2' %}"
-                ><i class="fab fa-google me-2"></i> Sign in with google</a>
-  
+             <hr class="my-2">
+             <div class="text-center">
+
+               <a class="btn btn-lg btn-block btn-primary google_login_button" href="{% url 'social:begin' 'google-oauth2' %}"
+                 ><i class="fab fa-google me-2"></i> Sign in with google</a>
+   
+             </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 </section>
+</div>
 
-{% endif %}
 {% endblock %}
