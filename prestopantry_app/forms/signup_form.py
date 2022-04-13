@@ -2,11 +2,31 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from prestopantry_app.backends.user_auth import UserAuthBackend
 from prestopantry_app.models.users import User
+from django.contrib.auth import  password_validation
+from django.utils.translation import gettext, gettext_lazy as _
+
 
 
 class SignupForm(UserCreationForm):
-    username = forms.CharField(label="Display Name", max_length=50)
+    username = forms.CharField(label="Display Name", widget=forms.TextInput(attrs={'class': 'form-control huge'}))
 
+
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control huge'}),
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    password2 = forms.CharField(
+        label=_("Password confirmation"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control huge'}),
+        strip=False,
+        help_text=_("Enter the same password as before, for verification."),
+    )
+
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control huge'})
+    )
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email')

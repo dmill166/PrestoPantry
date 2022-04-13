@@ -14,10 +14,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>PrestoPantry</title>
   </head>
-  <body class= "main_container">
+  <body class= "main_container" style="background-color: rgb(0, 0, 0);">
 
     <nav class="navbar navbar-expand-lg navbar-light nav_bar">
-      <a class="navbar-brand" href="{% url 'home' %}">Presto Pantry</a>
+      <a class="navbar-brand" href="{% url 'landing_page' %}">Presto Pantry</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,21 +26,21 @@
         {% if request.user.is_authenticated %}
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 padd_nav_button">
-          <li class="nav-item ">
-            <a  href="{% url 'account' %}" class="btn btn-outline-secondary" > My Account </a>
+          <li class="nav-item pb-2">
+            <a  href="{% url 'account' %}" class="btn btn-outline-light btn-lg" > My Account </a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'pantry-ingredients' %}" class="btn btn-outline-secondary" > Search Ingredients </a>
+            <a href="{% url 'pantry' %}" class="btn btn-outline-light btn-lg" > My Pantry </a>
           </li>
         </ul>
-          <a href="{% url 'logout' %}" class="btn btn-outline-secondary" >Logout</a>
+          <a href="{% url 'logout' %}" class="btn btn-outline-light btn-lg" >Logout</a>
 
         {% else %}
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
         <div class="">
-          <a href="{% url 'signup' %}" class="btn btn-outline-secondary" >Sign Up</a>
-          <a href="{% url 'login' %}" class="btn btn-outline-secondary" >Login</a>
+          <a href="{% url 'signup' %}" class="btn btn-outline-light btn-lg" >Sign Up</a>
+          <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg" >Login</a>
         </div>
      
         {% endif %}
@@ -48,7 +48,7 @@
       </div>
     </nav>
         
-      <main class="container d-flex flex-column min-vh-100 ">
+      <main class="container d-flex flex-column min-vh-100 p-0" style="background-color: rgb(0, 0, 0)">
         
         {% block content %}
         {% endblock %}
@@ -57,14 +57,13 @@
 
 
 <!-- Footer -->
-<footer class="footer text-center text-white mt-auto">
+<footer class="footer text-center text-white mt-auto ">
   <div class="container p-1">
     <div class="about-button">
     <a class="" href="{% url 'about' %}">About Us</a>
   </div>
     <section class="mb-3">
-      <a class="btn btn-floating m-0 " href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
-      <a class="btn btn-floating m-0" href="#!" role="button"><i class="fab fa-github"></i></a>
+      <a class="btn btn-floating m-0" href="https://github.com/dmill166/PrestoPantry" role="button"><i class="fab fa-github"></i></a>
     </section>
   </div>
  <div class="copyright"> All Rights Reserved, &copy; 2022 PrestoPantry</div>

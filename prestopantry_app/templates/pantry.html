@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="text-white text-center">
+<h2> My Pantry </h2>
+
+{% comment %} Text place holder {% endcomment %}
+<p> Nothing in pantry </p> 
+<a  href="{% url 'search-pantry-ingredients' %}"> Add Ingredients </a>
+
+</div>
+{% endblock %}

@@ -1,40 +1,32 @@
 .errorlist{color:red;
   font-weight:bold;
 }
-.main_container{
-  background-color: rgb(238, 238, 238);
+.landing_header_text{
+  text-align: center;
+  color: white;
+  font-weight: bold;
 }
-
+.pantry_header_text{
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
 .navbar-brand{
-  font-size: 2.2rem;
+  font-size: 3.2rem;
+  font-family: impact;
 }
 .nav_bar{
-  background-color: rgba(175, 175, 175);
   padding-left: .5rem;
   padding-right: .5rem;
-}
+  background-color: rgb(23,178,245);
 
-.btn-outline-secondary{
-font-size: 110%;
 }
-
 .padd_nav_button > li{
   padding-right: .4rem;
 }
-/* .login_signup_button{
-  padding-right: .4rem;
-}
-.logout_button{
-  padding-left: .4rem;
-} */
-
-/* .navbar{
-  background-color: rgba(175, 175, 175);
-} */
 .footer{
-  background-color: rgb(175, 175, 175);
+  background-color: rgb(23,178,245);
 }
-
 .fa-linkedin-in{
   font-size: 2.6rem;
   color: white;
@@ -48,6 +40,10 @@ font-size: 110%;
 }
 .fa-github:hover{
   color: black;
+}
+.about_header{
+  color: white;
+  font-size: 2.5rem;
 }
 .about-button > a{
   font-size: 140%;
@@ -63,14 +59,11 @@ font-size: 110%;
 .copyright{
   font-size: 110%;
 }
-
 .about_us_links{
   background-color: grey;
   border-radius: 1rem;
 }
 .about_us_links > a{
-  /* padding-top: 1rem;
-  padding-bottom: 1rem; */
   font-size: 6.4rem;
 }
 .about_us_card{
@@ -89,4 +82,92 @@ font-size: 110%;
 .about_us_text > p{
   font-size: 1.3rem;
   color: rgb(110, 166, 251);
+}
+.login_section{
+  background: url("/static/images/login_image1.jpeg") ;  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
+}
+.login_card{
+  border-radius: 1.5rem;
+  background-color: #aba8a8cf;
+}
+.login_header{
+font-size: 2.5rem;
+font-weight: bold;
+color: black;
+}
+.login_label{
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-shadow: #dd4b39;
+  color: black;
+}
+
+.google_login_button{
+  background-color: #dd4b39;
+}
+.signup_section{
+background: url("/static/images/blueberry.jpeg") ;
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+
+}
+.signup_card{
+  border-radius: 1.5rem;
+  background-color: #c5c5c5cf;
+}
+.signup_header{
+font-size: 2.2rem;
+font-weight: bold;
+color: black;
+}
+.signup_label{
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: #dd4b39;
+  color: black;
+}
+
+.edit_account_section{
+  background-color: #000000;
+}
+.success_msg{
+  color: green;
+}
+.edit_account_card > h3{
+  text-align: center;
+}
+.account_edit_buttons{
+  display: flex;
+  justify-content: space-between;
+  height: 2.5rem;
+  padding-bottom: .8rem;
+}
+.new_password_label{
+  font-size: 20px;
+  color: #dd4b39;
+  font-style: italic;
+}
+.landing_images > img {
+    float: left;
+    width:  5rem;
+    height: 25rem;
+    object-fit: cover;
+    padding-bottom: 1rem;
+}
+.landing_descr{
+  font-size: 1.5rem;
+  padding-top: 1rem;
+}
+.ingredient_cards{
+  border-radius: 1rem;
+}
+.ingredient_add_button{
+  position: relative;
+  top: 90%;
+  left: 70%;
 }
