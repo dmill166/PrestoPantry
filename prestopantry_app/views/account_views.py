@@ -7,18 +7,18 @@ from prestopantry_app.forms.signup_form import SignupForm
 from prestopantry_app.forms.edit_account_forms import EditNameForm, EditUsernameForm, EditEmailForm
 
 
-@user_passes_test(lambda u: not u.is_authenticated, login_url='home')
+@user_passes_test(lambda u: not u.is_authenticated, login_url='landing_page')
 def login(request):
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.user_cache, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('home')
+            return redirect('landing_page')
     return render(request, 'login.html', {'form': form})
 
 
-@user_passes_test(lambda u: not u.is_authenticated, login_url='home')
+@user_passes_test(lambda u: not u.is_authenticated, login_url='landing_page')
 def signup(request):
     form = SignupForm()
     if request.method == 'POST':
@@ -26,6 +26,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('landing_page')
     return render(request, 'signup.html', {'form': form})
 
 

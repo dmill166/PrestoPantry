@@ -21,7 +21,6 @@ class PantryIngredientsViewTest(TestCase):
         response = self.client.get(reverse('search-pantry-ingredients'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search_pantry_ingredients.html')
-        self.assertContains(response, '<h2>Ingredient Search Central</h2>')
 
         # test search
         data = {'q': '88'}

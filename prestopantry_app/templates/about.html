@@ -1,51 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<h2>About Us</h2>
-<!-- {% for name in site_owner%}
-{% if forloop.counter0|divisibleby:2  %}
-<section>
-    <div class="card mb-3 about_us_card">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="{% static "images/awojdyla.png" %}" class="card-img" alt="...">
-          </div>
-          <div class="col-md-1 text-center about_us_links">
-            <a class="btn btn-floating m-0 " href={{name.linkedin_link}} role="button"><i class="fab fa-linkedin-in"></i></a>
-            <a class="btn btn-floating m-0" href={{name.git_hub_link}} role="button"><i class="fab fa-github"></i></a>
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <h5 class="card-title">{{name.first_name}} {{name.last_name}}</h5>
-              <p class="card-text">{{name.developer_about}}</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-        </div>
-    </section>
-    {% else %}
-    <section>
-        <div class="card mb-3 about_us_card">
-            <div class="row no-gutters">
-                <div class="col-md-7">
-                    <div class="card-body">
-                        <h5 class="card-title">{{name.first_name}} {{name.last_name}}</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="col-md-1 text-center about_us_links">
-                  <a class="btn btn-floating m-0 " href={{name.linkedin_link}} role="button"><i class="fab fa-linkedin-in"></i></a>
-                  <a class="btn btn-floating m-0" href={{name.git_hub_link}} role="button"><i class="fab fa-github"></i></a>
-                </div>
-                <div class="col-md-4">
-                  <img src="..." class="card-img" alt="...">
-                </div>
-            </div>
-        </section>
-    {% endif %}
-    {% endfor %} -->
-
+<div class="text-center">
+  <h2 class="about_header">About Us</h2>
+</div>
     
     <section>
       <div class="card mb-3 about_us_card">

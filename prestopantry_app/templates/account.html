@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 
 <section class="vh-100 edit_account_section">
@@ -10,41 +10,49 @@
               <div class="card-body p-12 edit_account_card">
                 <h3>Edit Account Information</h3>
                 <hr class="my-4">
-                <!-- <h4 class="success_msg">{{success_msg}}</h4> -->
 
                     {% if username_form %}
                     <form action = "{% url 'account' %}" method = "POST" >
                         {% csrf_token %}
-                        <div class="form-outline mb-4">{{username_form|crispy}}
+                        <div class="form-group" >
+                        {% for field in username_form %}
+                        <label>{{ field.label }}</label>
+                        <div class="form-outline mb-4">{{field}}
                             <button class="btn btn-success btn-sm btn-block" type="submit">Confirm</button>
                         </div>
-                        <!-- <input type="submit" value="Confirm"> -->
+                        {{ field.help_text }}
+                        {{field.errors}}
+                        </div>
+                        {% endfor %}
                     </form>
                     {% else %}
                     <form action = "{% url 'account' %}" method = "GET" class="account_edit_buttons">
                         <div class="form-outline mb-4 "> <strong>{{request.user.username}}</strong> </div>
                         <button class="btn btn-secondary btn-sm btn-block" name="change_username" type="submit">Edit Display Name</button>
-                        
-                        <!-- <input name="change_username" type="submit" value="Edit"> -->
                     </form>
                     {% endif %}
 
                     {% if email_form %}
                     <form action = "{% url 'account' %}" method = "POST">
                         {% csrf_token %}
-                        <!-- <p>{{email_form|crispy}}
-                        <input type="submit" value="Confirm"></p> -->
-                        <div class="form-outline mb-4">{{email_form|crispy}}
-                            <button class="btn btn-success btn-sm btn-block" type="submit">Confirm</button>
-                        </div>
+
+                        <div class="form-group" >
+                            {% for field in email_form %}
+                            <label>{{ field.label }}</label>
+                            <div class="form-outline mb-4">{{field}}
+                                <button class="btn btn-success btn-sm btn-block" type="submit">Confirm</button>
+                            </div>
+                            {{ field.help_text }}
+                            {{field.errors}}
+                            </div>
+                            {% endfor %}
+                        
                     </form>
                     {% else %}
                     {% if request.user.oauth_user %}
                     <p>Email: {{request.user.email}}
                     {% else %}
                     <form action = "{% url 'account' %}" method = "GET" class="account_edit_buttons">
-                        <!-- <p>Email: {{request.user.email}}
-                        <input name="change_email" type="submit" value="Edit"></p> -->
                         <div class="form-outline mb-4"> <strong>{{request.user.email}}</strong> </div>
                         <button class="btn btn-secondary btn-sm btn-block" name="change_email" type="submit">Edit Email</button>
                     </form>
@@ -54,20 +62,23 @@
                     {% if name_form %}
                     <form action = "{% url 'account' %}" method = "POST">
                         {% csrf_token %}
-                        <!-- <p>{{name_form.as_p}} -->
-                            <!-- <p>{{name_form|crispy}}
-                        <input type="submit" value="Confirm"></p> -->
+                        <div class="form-group" >
+                            {% for field in name_form %}
+                            <label>{{ field.label }}</label>
+                            <div class="form-outline mb-4">{{field}}
+                                {% if field.label == "Last name" %}
+                                <button class="btn btn-success btn-sm btn-block" type="submit">Confirm</button>
+                                
+                                {% endif %}
 
-                        <div class="form-outline mb-4">{{name_form|crispy}}
-                            <button class="btn btn-success btn-sm btn-block" type="submit">Confirm</button>
+                            </div>
+                            {{ field.help_text }}
+                            {{field.errors}}
                         </div>
+                        {% endfor %}
                     </form>
                     {% else %}
                     <form action = "{% url 'account' %}" method = "GET" class="account_edit_buttons">
-                        <!-- <p>First name: {{request.user.first_name}}</p>
-                        <p>Last name: {{request.user.last_name}}
-                        <input name="change_name" type="submit" value="Edit"></p> -->
-
                         <div class="form-outline mb-4"> <strong>{{request.user.first_name}} {{request.user.last_name}}</strong> </div>
                         <button class="btn btn-secondary btn-sm btn-block" name="change_name" type="submit">Edit Full Name</button>
                     </form>
@@ -75,14 +86,19 @@
 
                     <h5 class="success_msg">{{success_msg}}</h5>
                     <hr class="my-2">
+                    
                     {% if pass_form %}
                     <form action = "{% url 'account' %}" method = "POST">
                         {% csrf_token %}
-                        <!-- {{pass_form.as_p}} -->
-                        <!-- {{pass_form|crispy}}
-                        <input type="submit" value="Confirm"> -->
-                        
-                        <div class="form-outline mb-4">{{pass_form|crispy}}</div>
+
+                        <div class="form-group" >
+                        {% for field in pass_form %}
+                            <label class="">{{field.label}}</label>
+                            <div class="mb-3">{{field}}</div>
+                            {{ field.help_text }}
+                            {{field.errors}}
+                            {% endfor %}
+                        </div>
                         <button class="btn btn-primary btn-sm btn-block" type="submit">Change Password</button>
                     </form>
                     {% endif %}
