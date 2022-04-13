@@ -48,12 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'storages',
-    'crispy_forms',
-    'crispy_bootstrap5',
+    
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,7 +144,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'landing_page'
 LOGOUT_REDIRECT_URL = 'logout'
 
 SOCIAL_AUTH_PIPELINE = (

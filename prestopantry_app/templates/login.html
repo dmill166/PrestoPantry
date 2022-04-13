@@ -1,24 +1,38 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
 
 
   <section class="vh-100 login_section" >
-  
     <div class="container py-5 h-100 ">
       <div class="row d-flex justify-content-center align-items-center h-100 ">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5 ">
           <div class="card shadow-2-strong login_card ">
             <div class="card-body p-5 text-center">
-              <!-- <img src="{% static "images/login_image.jpeg" %}" class="d-block w-100 " alt="..."> -->
-              <h3 class="mb-5">Login</h3>
+              <h3 class="mb-5 login_header">Login</h3>
               
               <form action = "{% url 'login' %}" method = "POST">
                 {% csrf_token %}
-              <div class="form-outline mb-4">{{form|crispy}}</div>
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                <div class="form-group" >
+
+
+                  {% for field in form %}
+                  <label class="form-label login_label">{{ field.label }}</label>
+                  <div class="mb-4 login_field">{{ field }}</div>
+                  
+                  {{ field.help_text }}
+                  {% endfor %}
+
+                  <div class="text-danger">
+                    {% for _, err in form.errors.items  %}
+                    {{ err }}
+                    {% endfor %}
+                  </div>
+                    
+                </div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
               </form>
+              <div class="my-3">Don't have an account? <a href="{% url 'signup' %}">Click Here</a></div>
 
               <hr class="my-4">
               <a class="btn btn-lg btn-block btn-primary google_login_button" href="{% url 'social:begin' 'google-oauth2' %}"
