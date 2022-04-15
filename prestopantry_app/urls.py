@@ -11,7 +11,7 @@ urlpatterns = [
     path('account/', edit_account, name='account'),
     path('logout/', main_views.logout_view, name='logout'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
-    path('pantry/', TemplateView.as_view(template_name='pantry.html'), name='pantry'),
+    path('pantry/', my_pantry_page_view.display_pantry, name='pantry'),
     path('search-pantry-ingredients/', pantry_ingredients_views.search_by_ingredient, name='search-pantry-ingredients'),
     path('auth/', include('social_django.urls', namespace='social')),
 ]
