@@ -1,6 +1,10 @@
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.base import TemplateView
+<<<<<<< HEAD
+=======
+
+>>>>>>> 38378f0 (Made changed Riley recommended.)
 from .views.account_views import login, signup, edit_account
 from .views import main_views, pantry_ingredients_views
 
@@ -11,7 +15,7 @@ urlpatterns = [
     path('account/', edit_account, name='account'),
     path('logout/', main_views.logout_view, name='logout'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
-    path('pantry/', my_pantry_page_view.display_pantry, name='pantry'),
+    path('pantry/', pantry_ingredients_views.display_pantry, name='pantry'),
     path('search-pantry-ingredients/', pantry_ingredients_views.search_by_ingredient, name='search-pantry-ingredients'),
     path('auth/', include('social_django.urls', namespace='social')),
 ]

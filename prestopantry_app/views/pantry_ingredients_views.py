@@ -56,3 +56,8 @@ def search_by_ingredient(request):
         return render(request, 'search_pantry_ingredients.html', request.session['ingredient_search_results'])
 
     return render(request, 'search_pantry_ingredients.html', {})
+
+@login_required(login_url='login')
+def display_pantry(request):
+    ingredients = UserIngredient.objects.filter(user=request.user)
+    return render(request, 'pantry.html', {'ingred': ingredients}) 
