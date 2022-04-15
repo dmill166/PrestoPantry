@@ -1,10 +1,6 @@
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.base import TemplateView
-<<<<<<< HEAD
-=======
-
->>>>>>> 38378f0 (Made changed Riley recommended.)
 from .views.account_views import login, signup, edit_account
 from .views import main_views, pantry_ingredients_views
 
