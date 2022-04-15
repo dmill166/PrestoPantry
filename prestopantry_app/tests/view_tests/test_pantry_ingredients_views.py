@@ -38,7 +38,6 @@ class PantryIngredientsViewTest(TestCase):
             response = self.client.post(reverse('search-pantry-ingredients'), {'ingredient_button': '', 'ingredient_name': 'test'})
             mock_request.assert_called_once()
             self.assertEqual(response.status_code, 200)
-            self.assertNotContains(response, 'Search Error')
 
         # test search page
         response = self.client.get(reverse('search-pantry-ingredients'))
