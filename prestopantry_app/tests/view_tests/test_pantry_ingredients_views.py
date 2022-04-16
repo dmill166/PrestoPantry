@@ -1,12 +1,15 @@
 from django.test import TestCase
 from django.urls import reverse
+from dynamic_preferences.registries import global_preferences_registry
 from prestopantry_app.models.users import User
 from prestopantry_app.models.user_ingredients import UserIngredient
+from unittest.mock import patch
 
 
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('goldmember','drevil@gmail.com','ilovegold')
+        self.global_preferences = global_preferences_registry.manager()
     
     def test_my_pantry_view(self):
         self.client.force_login(self.user)
@@ -22,12 +25,25 @@ class PantryIngredientsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search_pantry_ingredients.html')
 
-        # test search
-        data = {'q': '88'}
-        response = self.client.get(reverse('search-pantry-ingredients'), data)
-        self.assertContains(response, 'No Searches found...')
+        with patch('prestopantry_app.backends.spoonacular_api.requests.request') as mock_request:
+            # Test when Spoon API is disabled
+            self.global_preferences['spoonacular_api_enabled'] = False
+            response = self.client.post(reverse('search-pantry-ingredients'), {'ingredient_button': '', 'ingredient_name': 'test'})
+            mock_request.assert_not_called()
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, 'Search Error')
 
-        # # test add
+            # Test when Spoon API is enabled
+            self.global_preferences['spoonacular_api_enabled'] = True
+            response = self.client.post(reverse('search-pantry-ingredients'), {'ingredient_button': '', 'ingredient_name': 'test'})
+            mock_request.assert_called_once()
+            self.assertEqual(response.status_code, 200)
+
+        # test search page
+        response = self.client.get(reverse('search-pantry-ingredients'))
+        self.assertContains(response, 'No results found, please check spelling and try again')
+
+        # test add
         session = self.client.session
         session.update({'ingredient_search_results': {'ingredient_info': [['Torkelson Cheese Co. Brick Cheese Wisconsin', 406181, 123344564378]]}})
         session.save()

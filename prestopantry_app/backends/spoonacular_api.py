@@ -1,5 +1,6 @@
 from django.conf import settings
 import requests
+from dynamic_preferences.registries import global_preferences_registry
 
 SPOON_API = settings.SPOON_API_KEY
 
@@ -14,17 +15,18 @@ url2 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/find
 
 
 class SpoonacularAPI():
+    global_preferences = global_preferences_registry.manager()
 
-    def ingredient_request(request, data):
-        response = requests.request(request, url1, data=str(data), headers=headers)
-        return response
+    def ingredient_request(cls, request, data):
+        if cls.global_preferences['spoonacular_api_enabled']:
+            return requests.request(request, url1, data=str(data), headers=headers)
 
-    def recipe_request(request, params):
-        response = requests.request(request, url2, params=params, headers=headers)
-        return response
+    def recipe_request(cls, request, params):
+        if cls.global_preferences['spoonacular_api_enabled']:
+            return requests.request(request, url2, params=params, headers=headers)
         
 
-
+    @staticmethod
     def harvest_ingredients(json_file):
         ingredient_name = json_file[0]['originalName']
         image = json_file[0]['ingredientImage']
@@ -48,6 +50,7 @@ class SpoonacularAPI():
 
         return ingredient_payload
 
+    @staticmethod
     def harvest_recipe_per_ingredients(json_file):
 
         payload = []
