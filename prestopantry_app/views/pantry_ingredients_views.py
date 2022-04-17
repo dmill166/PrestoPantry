@@ -3,10 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from prestopantry_app.models.user_ingredients import UserIngredient
 
-
 @login_required(login_url='login')
 def search_by_ingredient(request):
-    json_scraper = SpoonacularAPI
+    json_scraper = SpoonacularAPI()
     if request.method == 'POST' and 'ingredient_button' in request.POST:
 
         payload = {
@@ -14,13 +13,16 @@ def search_by_ingredient(request):
           'servings': 1
           }
 
-        response = json_scraper.ingredient_request("POST", data=str(payload))
-        ingredient_json = response.json()
-        if response.status_code == 200 and ingredient_json != []:
-            context = json_scraper.harvest_ingredients(ingredient_json)
-            request.session['ingredient_search_results'] = context
+        response = json_scraper.ingredient_request(request="POST", data=str(payload))
+        if response and response.status_code == 200:
+            ingredient_json = response.json()
+            if ingredient_json != []:
+                context = json_scraper.harvest_ingredients(ingredient_json)
+                request.session['ingredient_search_results'] = context
 
-            return render(request, 'search_pantry_ingredients.html', context)
+                return render(request, 'search_pantry_ingredients.html', context)
+        else:
+            return render(request, 'search_pantry_ingredients.html', {'error': 'Search Error'})
 
     elif request.method == 'POST' and 'ingredient_per_recipe_button' in request.POST:
 
@@ -55,4 +57,9 @@ def search_by_ingredient(request):
 
         return render(request, 'search_pantry_ingredients.html', request.session['ingredient_search_results'])
 
-    return render(request, 'search_pantry_ingredients.html', {})
+    return render(request, 'search_pantry_ingredients.html', {'error': 'No results found, please check spelling and try again'})
+
+@login_required(login_url='login')
+def display_pantry(request):
+    ingredients = UserIngredient.objects.filter(user=request.user)
+    return render(request, 'pantry.html', {'ingred': ingredients}) 

@@ -6,6 +6,7 @@ certifi==2021.10.8
 charset-normalizer==2.0.12
 crispy-bootstrap5==0.6
 Django==4.0.2
+django-dynamic-preferences==1.12.0
 django-storages==1.12.3
 idna==3.3
 jmespath==0.10.0
