@@ -7,6 +7,7 @@ charset-normalizer==2.0.12
 crispy-bootstrap5==0.6
 Django==4.0.2
 django-storages==1.12.3
+Google-Images-Search==1.4.2
 idna==3.3
 jmespath==0.10.0
 psycopg2==2.9.3
