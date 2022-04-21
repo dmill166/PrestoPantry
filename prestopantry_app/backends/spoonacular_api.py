@@ -1,8 +1,12 @@
 from django.conf import settings
 import requests
 from dynamic_preferences.registries import global_preferences_registry
+from google_images_search import GoogleImagesSearch
+from googleapiclient.errors import HttpError
 
 SPOON_API = settings.SPOON_API_KEY
+GCS_DEVELOPER_KEY = settings.GCS_DEVELOPER_KEY
+GCS_CX = settings.GCS_CX
 
 headers = {
     'content-type': "application/json",
@@ -12,7 +16,6 @@ headers = {
 
 url1 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/map"
 url2 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
-
 
 class SpoonacularAPI():
     global_preferences = global_preferences_registry.manager()
@@ -35,11 +38,19 @@ class SpoonacularAPI():
         ingredient_tup = ()
         ingredient_arr = []
 
-        for product in products:
+        gis = GoogleImagesSearch(GCS_DEVELOPER_KEY, GCS_CX)
+
+        for product in products[:5]:
           name = product['title']
           id = product['id']
-          upc = product['upc']
-          ingredient_tup =(name, id, upc)
+          upc = product['upc']         
+          
+          try:
+            gis.search({'q': name, 'num': 1})
+            imageurl = gis.results()[0].url
+          except HttpError:
+            imageurl = None
+          ingredient_tup =(imageurl, name, id, upc)
           ingredient_arr.append(ingredient_tup)
 
         ingredient_payload = {

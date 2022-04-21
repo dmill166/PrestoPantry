@@ -166,6 +166,11 @@ color: black;
 .ingredient_cards{
   border-radius: 1rem;
 }
+.ingredient_cards > img{
+  border-radius: 1rem;
+  height: 248.59px;
+  width: 286px;
+}
 .ingredient_add_button{
   position: relative;
   top: 90%;
