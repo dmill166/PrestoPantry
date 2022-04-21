@@ -38,18 +38,25 @@
     <div class="row ps-4">
         {% for item in ingredient_info %}
         <div class=" col-sm-2 col-md-3 col-lg-3 g-4">
-            <div class="card ingredient_cards" style="width: 18rem; height:18rem;">
-                <!-- <img src="..." class="placeholder rounded-6" alt="..."> -->
+            <div class="card ingredient_cards" style="width: 18rem;">
+
+                {% if item.0 == None %}
+                <img class="card-img-top" src="{% static "images/hcruz.png" %}" alt="...">
+                {% else %}
+                  
+                <img class="card-img-top" src="{{ item.0 }}" alt="...">
+                {% endif %}
+
              
             <div class="card-body">
                     <ul class="list-group list-group-flush bg-transparent">
-                        <li class="list-group-item"><b>Ingredient:</b> {{item.0}}</li>
-                        <li class="list-group-item"><b>Id:</b> {{item.1}}</li>
-                        <li class="list-group-item"><b>Upc:</b> {{item.2}}</li>
+                        <li class="list-group-item overflow-auto" style="height: 7rem;"><b>Ingredient:</b> {{item.1}}</li>
+                        <li class="list-group-item"><b>Id:</b> {{item.2}}</li>
+                        <li class="list-group-item"><b>Upc:</b> {{item.3}}</li>
                     </ul>
 
                     <hr class="my-2">
-                    {% if item.3 == True %}
+                    {% if item.4 == True %}
                     <div class="text-success">
                        <b>Ingredient Added!</b>
                            
@@ -59,9 +66,9 @@
                     
                         <form method = "post">
                             {% csrf_token %}
-                            <input type="hidden" value="{{item.1}}" name="ingredient_id">
-                            <input type="hidden" value="{{item.0}}" name="ingredient_name">
-                            <input type="hidden" value="{{item.2}}" name="upc">
+                            <input type="hidden" value="{{item.2}}" name="ingredient_id">
+                            <input type="hidden" value="{{item.1}}" name="ingredient_name">
+                            <input type="hidden" value="{{item.3}}" name="upc">
                             <input type="submit" value="Add" name="add_ingredient_button" class="btn btn-success btn-md ">
 
                         </form>

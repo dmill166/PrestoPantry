@@ -46,7 +46,7 @@ def search_by_ingredient(request):
                                 ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
         session_ingredient_info = request.session['ingredient_search_results']['ingredient_info']
         for i in session_ingredient_info:
-            if i[1] == ingredient.ingredient_id:
+            if i[2] == ingredient.ingredient_id:
                 i.append(True)
                 new_ingredient_search_results = request.session['ingredient_search_results']
                 new_ingredient_search_results['ingredient_info'] = session_ingredient_info
