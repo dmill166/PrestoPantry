@@ -46,7 +46,7 @@ class SpoonacularAPI():
           upc = product['upc']         
           
           try:
-            gis.search({'q': name, 'num': 1})
+            gis.search({'q': name, 'imgType': 'photo', 'num': 1})
             imageurl = gis.results()[0].url
           except HttpError:
             imageurl = None
