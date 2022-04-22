@@ -1,10 +1,12 @@
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.views.decorators.http import require_http_methods
 from prestopantry_app.models.user_ingredients import UserIngredient
 
 
 @login_required(login_url='login')
+@require_http_methods(["GET", "POST"])
 def search_pantry_ingredients(request):
     if request.method == 'POST':
         if 'ingredient_button' in request.POST:
