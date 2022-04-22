@@ -35,12 +35,20 @@
         </ul>
           <a href="{% url 'logout' %}" class="btn btn-outline-light btn-lg" >Logout</a>
 
+          {% comment %}
+          <a href="{% url 'community' %}" class="btn btn-outline-light btn-lg" >Community</a>
+            
+          {% endcomment %}
+
+
         {% else %}
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
         <div class="">
           <a href="{% url 'signup' %}" class="btn btn-outline-light btn-lg" >Sign Up</a>
           <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg" >Login</a>
+
+
         </div>
      
         {% endif %}
