@@ -35,7 +35,11 @@
         </ul>
           <a href="{% url 'logout' %}" class="btn btn-outline-light btn-lg" >Logout</a>
 
+          {% comment %}
           <a href="{% url 'community' %}" class="btn btn-outline-light btn-lg" >Community</a>
+            
+          {% endcomment %}
+
 
         {% else %}
 
@@ -44,7 +48,6 @@
           <a href="{% url 'signup' %}" class="btn btn-outline-light btn-lg" >Sign Up</a>
           <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg" >Login</a>
 
-          <a href="{% url 'community' %}" class="btn btn-outline-light btn-lg" >Community</a>
 
         </div>
      
