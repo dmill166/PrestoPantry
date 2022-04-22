@@ -180,6 +180,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #~/.bash_profile
 GITGUARDIAN_API_KEY=os.environ['GITGUARDIAN_API_KEY']
-
-#/etc/environment
-#GITGUARDIAN_API_KEY=os.environ['GITGUARDIAN_API_KEY']
