@@ -167,6 +167,9 @@ SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ['PRESTOPANTRY_GOAUTH_CLIENT_ID']
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['PRESTOPANTRY_GOAUTH_CLIENT_SECRET']
 
+GCS_DEVELOPER_KEY = os.environ['PRESTOPANTRY_GCS_DEVELOPER_KEY']
+GCS_CX = os.environ['PRESTOPANTRY_GCS_CX']
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/'prestopantry_app/static']
 
@@ -177,3 +180,6 @@ STATICFILES_DIRS = [BASE_DIR/'prestopantry_app/static']
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#~/.bash_profile
+GITGUARDIAN_API_KEY=os.environ['GITGUARDIAN_API_KEY']
