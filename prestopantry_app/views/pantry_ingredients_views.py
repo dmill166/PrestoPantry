@@ -86,4 +86,4 @@ def add_ingredient(request):
 @login_required(login_url='login')
 def display_pantry(request):
     ingredients = UserIngredient.objects.filter(user=request.user)
-    return render(request, 'pantry.html', {'ingred': ingredients})
+    return render(request, 'pantry.html', {'ingredients': ingredients}) 

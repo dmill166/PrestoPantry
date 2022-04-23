@@ -176,3 +176,10 @@ color: black;
   top: 90%;
   left: 70%;
 }
+.pantry_section{
+  background: url("/static/images/pantry.jpeg") ;  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
+  background-attachment: fixed;
+}

@@ -80,7 +80,7 @@ class PantryIngredientsViewTest(TestCase):
                                                   ingredient_id='406181', user=self.user, upc=123344564378)
         self.client.force_login(self.user)
         response = self.client.get('/pantry/')
-        self.assertEqual(response.context['ingred'].all().get(), ingredient)
+        self.assertEqual(response.context['ingredients'].all().get(), ingredient)
 
         # test no user
         self.client.logout()

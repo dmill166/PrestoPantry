@@ -1,23 +1,73 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <div class="text-white text-center">
 <h2> My Pantry </h2>
+</div>
 
-{% comment %} Text place holder {% endcomment %}
+{% comment %}  
 
 {% if ingred %}
-
     {% for item in ingred %}
-        <li> {{item.ingredient_name}} </li>
+        <li> {{ item.ingredient_name }} </li>
+        <li> {{ item.ingredient_id }} </li>
+        <li> {{ item.upc }}</li>
     {% endfor %}
-
 {% else %}
 <p> Nothing in pantry </p> 
 {% endif %}
 
 <a  href="{% url 'search-pantry-ingredients' %}"> Add Ingredients </a>
-
-
 </div>
+
+{% endcomment %}
+
+
+<section class="pantry_section rounded">
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-8" >
+            <!-- <div class="p-2">
+                <h5 class="text-white text-center">Ingredient List</h5>
+            </div> -->
+
+            {% if ingredients %}
+
+            {% for item in ingredients %}
+              
+            <div class="d-flex flex-row justify-content-around align-items-center p-2 mt-4 px-3 rounded text-white" style="background-color: rgba(47, 48, 35, 0.621);">
+                
+                <div class="mr-1"><img class="rounded" src="https://i.imgur.com/XiFJkhI.jpg" width="70"></div>
+                <div class="col-7 d-flex flex-column align-items-center "><span style="font-size: 1rem; font-weight: bolder;">{{ item.ingredient_name }}</span>
+                    <div class="d-flex flex-row">
+                        <div class="size mr-1">
+                            <!-- <span class="text-grey">ID:</span><span class="font-weight-bold">&nbsp;{{ item.ingredient_id }}</span> -->
+                            <span class="text-grey">UPC:</span><span class="font-weight-bold">&nbsp;{{ item.upc }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <label for=""><input class="col-1 form-check-input me-1" type="checkbox" value="">Add Me</label>
+                <!-- <div class="d-flex align-items-center pantry_delete_button" style="font-size: 1.5rem;"><a href="" class="bi bi-trash" style="color: red;"></a></div> -->
+                <a href="" class="btn btn-outline-danger"> <span class="bi bi-trash" style="font-size: 1.2rem;"></span> </a>
+                
+
+            </div>
+            
+            {% endfor %}
+            
+            <div class="d-flex justify-content-between align-items-center mt-3 p-2 rounded" style="background-color: rgba(47, 48, 35, 0);">
+                <a href="{% url 'search-pantry-ingredients' %}" class="btn btn-secondary btn-lg">Add Ingredients</a>
+                <a href="" class="btn btn-secondary btn-lg ">Search Selected Ingredients</a>
+                <a href="" class="btn btn-secondary btn-lg"> Search All Ingredients</a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+{% else %}
+<div class="text-white text-center"><p> Nothing in pantry</p></div>
+{% endif %}
 {% endblock %}
