@@ -1,5 +1,3 @@
-from re import S
-from unittest import mock
 from django.test import TestCase
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from googleapiclient.errors import HttpError
@@ -41,8 +39,7 @@ class SpoonacularApiTest(TestCase):
         global recipe_json
         global recipe_payload
 
-        with patch('prestopantry_app.backends.spoonacular_api.SpoonacularAPI') as googMock:
-            googMock.side_effect = HttpError(Mock(status=404), 'not found'.encode())
+        with patch('google_images_search.GoogleImagesSearch.search', side_effect=HttpError(Mock(status=404), 'not found'.encode())) as googMock:
             self.ingredient_scraper = SpoonacularAPI.harvest_ingredients(ingredient_json)
 
         self.recipe_scraper = SpoonacularAPI.harvest_recipe_per_ingredients(recipe_json)
