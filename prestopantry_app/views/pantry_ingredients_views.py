@@ -1,6 +1,7 @@
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
 from prestopantry_app.models.user_ingredients import UserIngredient
 
@@ -8,16 +9,19 @@ from prestopantry_app.models.user_ingredients import UserIngredient
 @login_required(login_url='login')
 @require_http_methods(["GET", "POST"])
 def search_pantry_ingredients(request):
+    context = {'error': 'No results found, please check spelling and try again'}
     if request.method == 'POST':
         if 'ingredient_button' in request.POST:
-            response = search_ingredient(request)
-            if response:
-                return response
-
+            if request.user.allow_api_call():
+                response = search_ingredient(request)
+                if response:
+                    return response
+            else:
+                context = request.session['ingredient_search_results'] if 'ingredient_search_results' in request.session else context
+                context['api_frequency'] = 'Woah, slow down there. Please wait and try again.'
         elif 'add_ingredient_button' in request.POST:
             return add_ingredient(request)
-
-    return render(request, 'search_pantry_ingredients.html', {'error': 'No results found, please check spelling and try again'})
+    return TemplateResponse(request, 'search_pantry_ingredients.html', context)
 
 
 def search_ingredient(request):
@@ -33,9 +37,9 @@ def search_ingredient(request):
             context = SpoonacularAPI.harvest_ingredients(ingredient_json)
             request.session['ingredient_search_results'] = context
 
-            return render(request, 'search_pantry_ingredients.html', context)
+            return TemplateResponse(request, 'search_pantry_ingredients.html', context)
     else:
-        return render(request, 'search_pantry_ingredients.html', {'error': 'Search Error'})
+        return TemplateResponse(request, 'search_pantry_ingredients.html', {'error': 'Search Error'})
 
 
 def add_ingredient(request):
@@ -51,8 +55,8 @@ def add_ingredient(request):
             request.session['ingredient_search_results'] = new_ingredient_search_results
             break
 
-    return render(request, 'search_pantry_ingredients.html', request.session['ingredient_search_results'])
-    
+    return TemplateResponse(request, 'search_pantry_ingredients.html', request.session['ingredient_search_results'])
+
 #Left for reference for searching for recipes PLEASE DELETE THIS AFTER IMPLIMENTING RECIPE SEARCH
 
 # def search_by_ingredient(request):
@@ -82,4 +86,4 @@ def add_ingredient(request):
 @login_required(login_url='login')
 def display_pantry(request):
     ingredients = UserIngredient.objects.filter(user=request.user)
-    return render(request, 'pantry.html', {'ingred': ingredients})
+    return render(request, 'pantry.html', {'ingredients': ingredients}) 

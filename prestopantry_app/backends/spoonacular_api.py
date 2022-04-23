@@ -38,7 +38,7 @@ class SpoonacularAPI():
         ingredient_tup = ()
         ingredient_arr = []
 
-        gis = GoogleImagesSearch(GCS_DEVELOPER_KEY, GCS_CX)
+        gis = GoogleImagesSearch(GCS_DEVELOPER_KEY, GCS_CX, validate_images=False)
 
         for product in products[:5]:
           name = product['title']
