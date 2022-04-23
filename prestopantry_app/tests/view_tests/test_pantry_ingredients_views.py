@@ -5,24 +5,35 @@ from prestopantry_app.models.users import User
 from prestopantry_app.models.user_ingredients import UserIngredient
 from unittest.mock import patch
 
+
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('goldmember','drevil@gmail.com','ilovegold')
         self.global_preferences = global_preferences_registry.manager()
-    
+        self.global_preferences['time_between_api_calls'] = 0
+        self.client.force_login(self.user)
+
     def test_my_pantry_view(self):
         self.client.force_login(self.user)
         response = self.client.get('/pantry/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'pantry.html')
 
-    def test_search_by_ingredient_view(self):
-        # login
-        self.client.force_login(self.user)
+    def test_search_pantry_ingredients(self):
         # go to pantry search page
         response = self.client.get(reverse('search-pantry-ingredients'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search_pantry_ingredients.html')
+
+        # test search page
+        self.assertContains(response, 'No results found, please check spelling and try again')
+
+        # test spam check
+        with patch.object(User, 'allow_api_call', return_value=False):
+            response = self.client.post(reverse('search-pantry-ingredients'), {'ingredient_button': '', 'ingredient_name': 'test'})
+            self.assertContains(response, 'Woah, slow down there. Please wait and try again.')
+
+    def test_search_ingredient(self):
 
         with patch('prestopantry_app.backends.spoonacular_api.requests.request') as mock_request:
             # Test when Spoon API is disabled
@@ -38,10 +49,7 @@ class PantryIngredientsViewTest(TestCase):
             mock_request.assert_called_once()
             self.assertEqual(response.status_code, 200)
 
-        # test search page
-        response = self.client.get(reverse('search-pantry-ingredients'))
-        self.assertContains(response, 'No results found, please check spelling and try again')
-
+    def test_add_ingredient(self):
         # test add
         session = self.client.session
         session.update({'ingredient_search_results': {'ingredient_info': [[None, 'Torkelson Cheese Co. Brick Cheese Wisconsin', 406181, 123344564378]]}})
@@ -51,17 +59,13 @@ class PantryIngredientsViewTest(TestCase):
         response = self.client.post('/search-pantry-ingredients/', data)
         self.assertEqual(response.status_code, 200)
         try:
-            ingredient=UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+            UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
                                                   ingredient_id='406181', user=self.user, upc=123344564378)
         except UserIngredient.DoesNotExist:
             self.fail("Ingredient failed to save." + str(data))
         self.assertTrue(self.client.session['ingredient_search_results']['ingredient_info'][0][4])
 
     def test_my_pantry_ingredients_view(self):
-        response = self.client.get(reverse('pantry'))
-        self.assertRedirects(response, '/login/?next=/pantry/')
-         # login
-        self.client.force_login(self.user)
         # go to pantry search page
         response = self.client.get(reverse('pantry'))
         self.assertEqual(response.status_code, 200)
@@ -78,3 +82,7 @@ class PantryIngredientsViewTest(TestCase):
         response = self.client.get('/pantry/')
         self.assertEqual(response.context['ingred'].all().get(), ingredient)
 
+        # test no user
+        self.client.logout()
+        response = self.client.get(reverse('pantry'))
+        self.assertRedirects(response, '/login/?next=/pantry/')
