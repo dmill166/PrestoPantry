@@ -1,4 +1,5 @@
 from django.test import TestCase
+from dynamic_preferences.registries import global_preferences_registry
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from googleapiclient.errors import HttpError
 from unittest.mock import patch, Mock
@@ -98,3 +99,17 @@ class SpoonacularApiTest(TestCase):
         unused_payload = recipe_payload[0][5]
         for i in range(len(unused_json) - 1):
             self.assertEqual(unused_json[i], unused_payload[i])
+    
+    def test_google_image_setting(self):
+        global_preferences = global_preferences_registry.manager()
+
+        with patch('google_images_search.GoogleImagesSearch.search', side_effect=HttpError(Mock(status=404), 'not found'.encode())) as googMock:
+            # Test setting off
+            global_preferences['google_custom_search_api_enabled'] = False
+            SpoonacularAPI.harvest_ingredients(ingredient_json)
+            googMock.assert_not_called()
+
+            # Test setting on
+            global_preferences['google_custom_search_api_enabled'] = True
+            SpoonacularAPI.harvest_ingredients(ingredient_json)
+            googMock.assert_called()

@@ -17,17 +17,19 @@ headers = {
 url1 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/map"
 url2 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
 
-class SpoonacularAPI():
-    global_preferences = global_preferences_registry.manager()
+global_preferences = global_preferences_registry.manager()
 
-    def ingredient_request(cls, request, data):
-        if cls.global_preferences['spoonacular_api_enabled']:
+class SpoonacularAPI():
+
+    @staticmethod
+    def ingredient_request(request, data):
+        if global_preferences['spoonacular_api_enabled']:
             return requests.request(request, url1, data=str(data), headers=headers)
 
-    def recipe_request(cls, request, params):
-        if cls.global_preferences['spoonacular_api_enabled']:
+    @staticmethod
+    def recipe_request(request, params):
+        if global_preferences['spoonacular_api_enabled']:
             return requests.request(request, url2, params=params, headers=headers)
-        
 
     @staticmethod
     def harvest_ingredients(json_file):
@@ -41,23 +43,24 @@ class SpoonacularAPI():
         gis = GoogleImagesSearch(GCS_DEVELOPER_KEY, GCS_CX, validate_images=False)
 
         for product in products[:5]:
-          name = product['title']
-          id = product['id']
-          upc = product['upc']         
-          
-          try:
-            gis.search({'q': name, 'imgType': 'photo', 'num': 1})
-            imageurl = gis.results()[0].url
-          except HttpError:
+            name = product['title']
+            id = product['id']
+            upc = product['upc']
             imageurl = None
-          ingredient_tup =(imageurl, name, id, upc)
-          ingredient_arr.append(ingredient_tup)
+            if global_preferences['google_custom_search_api_enabled']:
+                try:
+                    gis.search({'q': name, 'imgType': 'photo', 'num': 1})
+                    imageurl = gis.results()[0].url
+                except HttpError:
+                    pass
+            ingredient_tup = (imageurl, name, id, upc)
+            ingredient_arr.append(ingredient_tup)
 
-        ingredient_payload = {
-            'ingredient_name': ingredient_name ,
-            'image': image, 
-            'ingredient_info': ingredient_arr,
-            }
+            ingredient_payload = {
+                'ingredient_name': ingredient_name,
+                'image': image,
+                'ingredient_info': ingredient_arr,
+                }
 
         return ingredient_payload
 
@@ -90,9 +93,9 @@ class SpoonacularAPI():
                 miss_arr.append(missed_tup)
 
             for used in used_ingredients:
-                used_id = used['id'] # used.0
-                used_ing = used['name'] # used.6
-                used_ing_image = used['image'] # used.10
+                used_id = used['id']  # used.0
+                used_ing = used['name']  # used.6
+                used_ing_image = used['image']  # used.10
                 used_tup = (used_id, used_ing, used_ing_image)
                 used_arr.append(used_tup)
 
