@@ -30,7 +30,7 @@ def search_ingredient(request):
         'servings': 1
         }
 
-    response = SpoonacularAPI().ingredient_request(request="POST", data=str(payload))
+    response = SpoonacularAPI.ingredient_request(request="POST", data=str(payload))
     if response and response.status_code == 200:
         ingredient_json = response.json()
         if ingredient_json != []:

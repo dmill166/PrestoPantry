@@ -32,7 +32,9 @@
                 <h5 class="text-white text-center">Ingredient List</h5>
             </div> -->
 
-            {% if ingredients %}
+            {% if not ingredients %}
+                <div class="text-white text-center"><p> Nothing in pantry</p></div>
+            {% endif %}
 
             {% for item in ingredients %}
               
@@ -67,7 +69,4 @@
 </div>
 </section>
 
-{% else %}
-<div class="text-white text-center"><p> Nothing in pantry</p></div>
-{% endif %}
 {% endblock %}
