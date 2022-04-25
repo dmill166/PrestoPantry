@@ -18,17 +18,18 @@ url1 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredi
 url2 = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
 
 global_preferences = global_preferences_registry.manager()
+
 class SpoonacularAPI():
 
     @staticmethod
     def ingredient_request(request, data):
         if global_preferences['spoonacular_api_enabled']:
             return requests.request(request, url1, data=str(data), headers=headers)
+
     @staticmethod
     def recipe_request(request, params):
         if global_preferences['spoonacular_api_enabled']:
             return requests.request(request, url2, params=params, headers=headers)
-        
 
     @staticmethod
     def harvest_ingredients(json_file):
@@ -56,7 +57,7 @@ class SpoonacularAPI():
             ingredient_arr.append(ingredient_tup)
 
             ingredient_payload = {
-                'ingredient_name': ingredient_name ,
+                'ingredient_name': ingredient_name,
                 'image': image,
                 'ingredient_info': ingredient_arr,
                 }
@@ -92,9 +93,9 @@ class SpoonacularAPI():
                 miss_arr.append(missed_tup)
 
             for used in used_ingredients:
-                used_id = used['id'] # used.0
-                used_ing = used['name'] # used.6
-                used_ing_image = used['image'] # used.10
+                used_id = used['id']  # used.0
+                used_ing = used['name']  # used.6
+                used_ing_image = used['image']  # used.10
                 used_tup = (used_id, used_ing, used_ing_image)
                 used_arr.append(used_tup)
 
