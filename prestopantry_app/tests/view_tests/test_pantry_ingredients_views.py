@@ -5,7 +5,6 @@ from prestopantry_app.models.users import User
 from prestopantry_app.models.user_ingredients import UserIngredient
 from unittest.mock import patch
 
-
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('goldmember','drevil@gmail.com','ilovegold')
@@ -60,10 +59,17 @@ class PantryIngredientsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         try:
             UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+                                                  ingredient_id=406181, user=self.user, upc=123344564378)
         except UserIngredient.DoesNotExist:
             self.fail("Ingredient failed to save." + str(data))
-        self.assertTrue(self.client.session['ingredient_search_results']['ingredient_info'][0][4])
+
+        self.assertTrue(response.context['ingredient_info'][0][4])
+
+        session.delete('ingredient_search_results')
+        session.save()
+        # test add ingredient already in pantry
+        response = self.client.post('/search-pantry-ingredients/', data)
+        self.assertFalse(response.context['ingredient_info'][0][4])
 
     def test_my_pantry_ingredients_view(self):
         # go to pantry search page

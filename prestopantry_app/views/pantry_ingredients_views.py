@@ -44,12 +44,19 @@ def search_ingredient(request):
 
 def add_ingredient(request):
     obj = UserIngredient.objects
-    ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
-                            ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
+    try:
+        ingredient = obj.get(user=request.user, ingredient_id=int(request.POST['ingredient_id']))
+        ingredient_added = False
+    except UserIngredient.DoesNotExist:
+        ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
+                                ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
+        ingredient_added = True
+
+
     session_ingredient_info = request.session['ingredient_search_results']['ingredient_info']
     for i in session_ingredient_info:
         if i[2] == ingredient.ingredient_id:
-            i.append(True)
+            i.append(ingredient_added)
             new_ingredient_search_results = request.session['ingredient_search_results']
             new_ingredient_search_results['ingredient_info'] = session_ingredient_info
             request.session['ingredient_search_results'] = new_ingredient_search_results
