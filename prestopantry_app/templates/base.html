@@ -3,17 +3,13 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" href="#" />
+    <link rel="shortcut icon" href="#">
     <title>PrestoPantry</title>
   </head>
   <body class= "main_container" style="background-color: rgb(0, 0, 0);">
@@ -29,28 +25,28 @@
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 padd_nav_button">
           <li class="nav-item pb-2">
-            <a  href="{% url 'account' %}" class="btn btn-outline-light btn-lg" > My Account </a>
+            <a  href="{% url 'account' %}" class="btn btn-outline-light btn-lg">My Account</a>
+          </li>
+          <li class="nav-item pb-2">
+            <a href="{% url 'pantry' %}" class="btn btn-outline-light btn-lg">My Pantry</a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'pantry' %}" class="btn btn-outline-light btn-lg" > My Pantry </a>
+            <a href="{% url 'search-pantry-ingredients' %}" class="btn btn-outline-light btn-lg">Search Ingredients</a>
           </li>
         </ul>
-          <a href="{% url 'logout' %}" class="btn btn-outline-light btn-lg" >Logout</a>
+          <a href="{% url 'logout' %}" class="btn btn-outline-light btn-lg">Logout</a>
 
           {% comment %}
-          <a href="{% url 'community' %}" class="btn btn-outline-light btn-lg" >Community</a>
+          <a href="{% url 'community' %}" class="btn btn-outline-light btn-lg">Community</a>
             
           {% endcomment %}
-
 
         {% else %}
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
         <div class="">
-          <a href="{% url 'signup' %}" class="btn btn-outline-light btn-lg" >Sign Up</a>
-          <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg" >Login</a>
-
-
+          <a href="{% url 'signup' %}" class="btn btn-outline-light btn-lg">Sign Up</a>
+          <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg">Login</a>
         </div>
      
         {% endif %}
@@ -66,27 +62,23 @@
       </main>
 
 
-<!-- Footer -->
 <footer class="footer text-center text-white mt-auto ">
   <div class="container p-1">
     <div class="about-button">
     <a class="" href="{% url 'about' %}">About Us</a>
   </div>
     <section class="mb-3">
-      <a class="btn btn-floating m-0" href="https://github.com/dmill166/PrestoPantry" role="button"><i class="fab fa-github"></i></a>
+      <a class="btn btn-floating m-0" href="https://github.com/dmill166/PrestoPantry" role="button"><em class="fab fa-github"></em></a>
     </section>
   </div>
  <div class="copyright"> All Rights Reserved, &copy; 2022 PrestoPantry</div>
-
 </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
   </body>
 </html>
 
