@@ -4,7 +4,6 @@ from dynamic_preferences.registries import global_preferences_registry
 from prestopantry_app.models.users import User
 from prestopantry_app.models.user_ingredients import UserIngredient
 from unittest.mock import patch
-import ipdb
 
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
