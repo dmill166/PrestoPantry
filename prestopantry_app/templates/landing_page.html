@@ -2,22 +2,12 @@
 {% load static %}
 {% block content %}
 
-
-
-<!-- <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-  <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 fw-normal">Welcome to PresoPantry!</h1>
-    <p class="lead fw-normal">Search for ingredients, add them to your online pantry and search for recipes!</p>
-    <a class="btn btn-outline-secondary" href="#">Coming soon</a>
-  </div>
-</div> -->
-
 <div class="landing_header_text" style="background-color: rgb(0, 0, 0);"> 
  
   {% if request.user.is_authenticated and user.first_name %}
   <h1 class="display-4 fw-normal">Welcome back {{user.first_name}} {{user.last_name}}! </h1>
     {% else %} 
-    <h1 class="display-4 fw-normal">Welcome {{ user.username }} to PrestoPantry!</h1>
+    <h1 class="display-4 fw-normal">Welcome {{user.username}} to PrestoPantry!</h1>
   {% endif %}
 
   <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel ">
@@ -35,7 +25,7 @@
               <h2 class="display-4 fw-normal">Customize your pantry</h2>
                 <img src="{% static "images/spoon_ingredients.jpeg" %}" class="d-block w-100 " alt="...">
               <p class="lead fw-normal landing_descr" >Search for ingredients, add them to your online pantry and search for recipes!</p>
-              <a class="btn btn-outline-danger btn-lg" href="#">Go to My Pantry</a>
+              <a class="btn btn-outline-danger btn-lg" href="{% url 'pantry' %}">Go to My Pantry</a>
             </div>
           </div>
       </div>
@@ -46,7 +36,7 @@
               <h2 class="display-4 fw-normal">Ingredient Searching Made Simple</h2>
               <img src="{% static "images/vegetables1.png" %}" class="d-block w-100  " alt="...">
               <p class="lead fw-normal landing_descr">Search for ingredients in your pantry and add them to your online pantry.</p>
-              <a class="btn btn-outline-danger btn-lg" href="#">Start Searching</a>
+              <a class="btn btn-outline-danger btn-lg" href="{% url 'search-pantry-ingredients' %}">Start Searching</a>
             </div>
           </div>
       </div>
@@ -58,24 +48,21 @@
               <img src="{% static "images/community.jpeg" %}" class="d-block w-100  " alt="...">
 
               <p class="lead fw-normal landing_descr">Check out the recipe community where you can explore and share recipes with others.</p>
-              <a class="btn btn-outline-danger btn-lg" href="#">Recipe Community</a>
+              <a class="btn btn-outline-danger btn-lg" href="#">Coming Soon!</a>
             </div>
           </div>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev" >
-      <span><i class='fas fa-angle-left' style='font-size:54px;color:red'></i></span>
+      <span><em class='fas fa-angle-left' style='font-size:54px;color:red'></em></span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span><i class='fas fa-angle-right' style='font-size:54px;color:red'></i></span>
+      <span><em class='fas fa-angle-right' style='font-size:54px;color:red'></em></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
 
 </div>
 
-
-<!-- <h1>LANDING PAGE <br/> Welcome to PrestoPantry! </h1>
-<h2>What we do</h2> -->
 {% endblock %}
