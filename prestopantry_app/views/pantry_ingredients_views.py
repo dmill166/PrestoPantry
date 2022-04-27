@@ -89,13 +89,15 @@ def add_ingredient(request):
 
 #     return render(request, 'search_pantry_ingredients.html', {'error': 'No results found, please check spelling and try again'})
 
-
+@require_http_methods(["GET"])
 @login_required(login_url='login')
 def display_pantry(request):
     ingredients = UserIngredient.objects.filter(user=request.user)
     context = {'ingredients': ingredients}
     return TemplateResponse(request, 'pantry.html', context) 
 
+@require_http_methods(["GET"])
+@login_required(login_url='login')
 def delete_ingredient(request, delete_id):
     try:
         ingredient_delete = UserIngredient.objects.get(ingredient_id=delete_id)
@@ -105,6 +107,8 @@ def delete_ingredient(request, delete_id):
 
     return display_pantry(request)
 
+@require_http_methods(["GET"])
+@login_required(login_url='login')
 def delete_all_ingredients(request):
     UserIngredient.objects.filter(user=request.user).delete()
     return display_pantry(request)
