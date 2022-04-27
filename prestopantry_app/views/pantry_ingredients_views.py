@@ -1,10 +1,10 @@
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
 from prestopantry_app.models.user_ingredients import UserIngredient
-
+from django.urls import reverse
 
 @login_required(login_url='login')
 @require_http_methods(["GET", "POST"])
@@ -93,4 +93,18 @@ def add_ingredient(request):
 @login_required(login_url='login')
 def display_pantry(request):
     ingredients = UserIngredient.objects.filter(user=request.user)
-    return render(request, 'pantry.html', {'ingredients': ingredients}) 
+    context = {'ingredients': ingredients}
+    return TemplateResponse(request, 'pantry.html', context) 
+
+def delete_ingredient(request, delete_id):
+    try:
+        ingredient_delete = UserIngredient.objects.get(ingredient_id=delete_id)
+        ingredient_delete.delete()
+    except UserIngredient.DoesNotExist:
+        pass
+
+    return display_pantry(request)
+
+def delete_all_ingredients(request):
+    UserIngredient.objects.filter(user=request.user).delete()
+    return display_pantry(request)

@@ -2,16 +2,15 @@
 {% block content %}
 {% load static %}
 
-<div class="text-danger">
-<p>{{api_frequency}}</p>
-</div>
-
 <div class="container text-white text-center ">
 <form action = "{% url 'search-pantry-ingredients' %}" method = "post">
     {% csrf_token %}
     <div class="row height d-flex justify-content-center align-items-center">
         <div class="col-md-4 border rounded ">
             <label for="ingredient_field" class="pb-3 fw-bolder fs-4">Search for an Ingredient</label>
+                <div class="text-danger">
+                    <p>{{api_frequency}}</p>
+                </div>
                 <input class="form-control" id="ingredient_field"  type="text" required="required" placeholder="Herdez Green Salsa" name="ingredient_name">
                 <br>
                 <input type="submit" value="Search" name="ingredient_button" class="btn btn-secondary btn-lg mb-3">

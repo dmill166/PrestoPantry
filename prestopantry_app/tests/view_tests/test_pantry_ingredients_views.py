@@ -92,3 +92,37 @@ class PantryIngredientsViewTest(TestCase):
         self.client.logout()
         response = self.client.get(reverse('pantry'))
         self.assertRedirects(response, '/login/?next=/pantry/')
+
+    def test_delete_ingredients(self):
+        # test delete
+        ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+                                            
+        # Check ingredient was added
+        self.client.force_login(self.user)
+        response = self.client.get('/pantry/')
+        self.assertEqual(response.context['ingredients'].all().get(), ingredient)
+        response = self.client.get('/pantry/delete=406181')
+        try:
+            response.context['ingredients'].all().get()
+            self.fail("Expected ingredient to not exist.")
+        except UserIngredient.DoesNotExist:
+            pass
+
+    def test_delete_all(self):
+        # test delete all
+        ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+
+        ingredient2 = UserIngredient.objects.create(ingredient_name='Hector incredible pizza',
+                                                  ingredient_id='12345', user=self.user, upc=123344566543)
+
+        response = self.client.get('/pantry/')
+        self.assertEqual(response.context['ingredients'].all().get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin'), ingredient)
+        self.assertEqual(response.context['ingredients'].all().get(ingredient_name='Hector incredible pizza'), ingredient2)
+
+        response = self.client.get('/pantry/delete-all')
+        ingredients = UserIngredient.objects.filter(user=self.user)
+
+        self.assertFalse(ingredients.exists())
+        self.assertFalse(response.context['ingredients'].exists())
