@@ -1,10 +1,10 @@
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
 from prestopantry_app.models.user_ingredients import UserIngredient
-
+from django.urls import reverse
 
 @login_required(login_url='login')
 @require_http_methods(["GET", "POST"])
@@ -30,7 +30,7 @@ def search_ingredient(request):
         'servings': 1
         }
 
-    response = SpoonacularAPI().ingredient_request(request="POST", data=str(payload))
+    response = SpoonacularAPI.ingredient_request(request="POST", data=str(payload))
     if response and response.status_code == 200:
         ingredient_json = response.json()
         if ingredient_json != []:
@@ -44,12 +44,19 @@ def search_ingredient(request):
 
 def add_ingredient(request):
     obj = UserIngredient.objects
-    ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
-                            ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
+    try:
+        ingredient = obj.get(user=request.user, ingredient_id=int(request.POST['ingredient_id']))
+        ingredient_added = False
+    except UserIngredient.DoesNotExist:
+        ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
+                                ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
+        ingredient_added = True
+
+
     session_ingredient_info = request.session['ingredient_search_results']['ingredient_info']
     for i in session_ingredient_info:
         if i[2] == ingredient.ingredient_id:
-            i.append(True)
+            i.append(ingredient_added)
             new_ingredient_search_results = request.session['ingredient_search_results']
             new_ingredient_search_results['ingredient_info'] = session_ingredient_info
             request.session['ingredient_search_results'] = new_ingredient_search_results
@@ -82,8 +89,26 @@ def add_ingredient(request):
 
 #     return render(request, 'search_pantry_ingredients.html', {'error': 'No results found, please check spelling and try again'})
 
-
+@require_http_methods(["GET"])
 @login_required(login_url='login')
 def display_pantry(request):
     ingredients = UserIngredient.objects.filter(user=request.user)
-    return render(request, 'pantry.html', {'ingredients': ingredients}) 
+    context = {'ingredients': ingredients}
+    return TemplateResponse(request, 'pantry.html', context) 
+
+@require_http_methods(["GET"])
+@login_required(login_url='login')
+def delete_ingredient(request, delete_id):
+    try:
+        ingredient_delete = UserIngredient.objects.get(ingredient_id=delete_id)
+        ingredient_delete.delete()
+    except UserIngredient.DoesNotExist:
+        pass
+
+    return display_pantry(request)
+
+@require_http_methods(["GET"])
+@login_required(login_url='login')
+def delete_all_ingredients(request):
+    UserIngredient.objects.filter(user=request.user).delete()
+    return display_pantry(request)

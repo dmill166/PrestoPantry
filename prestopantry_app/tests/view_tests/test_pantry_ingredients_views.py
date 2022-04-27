@@ -5,7 +5,6 @@ from prestopantry_app.models.users import User
 from prestopantry_app.models.user_ingredients import UserIngredient
 from unittest.mock import patch
 
-
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('goldmember','drevil@gmail.com','ilovegold')
@@ -60,10 +59,17 @@ class PantryIngredientsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         try:
             UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+                                                  ingredient_id=406181, user=self.user, upc=123344564378)
         except UserIngredient.DoesNotExist:
             self.fail("Ingredient failed to save." + str(data))
-        self.assertTrue(self.client.session['ingredient_search_results']['ingredient_info'][0][4])
+
+        self.assertTrue(response.context['ingredient_info'][0][4])
+
+        session.delete('ingredient_search_results')
+        session.save()
+        # test add ingredient already in pantry
+        response = self.client.post('/search-pantry-ingredients/', data)
+        self.assertFalse(response.context['ingredient_info'][0][4])
 
     def test_my_pantry_ingredients_view(self):
         # go to pantry search page
@@ -86,3 +92,37 @@ class PantryIngredientsViewTest(TestCase):
         self.client.logout()
         response = self.client.get(reverse('pantry'))
         self.assertRedirects(response, '/login/?next=/pantry/')
+
+    def test_delete_ingredients(self):
+        # test delete
+        ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+                                            
+        # Check ingredient was added
+        self.client.force_login(self.user)
+        response = self.client.get('/pantry/')
+        self.assertEqual(response.context['ingredients'].all().get(), ingredient)
+        response = self.client.get('/pantry/delete=406181')
+        try:
+            response.context['ingredients'].all().get()
+            self.fail("Expected ingredient to not exist.")
+        except UserIngredient.DoesNotExist:
+            pass
+
+    def test_delete_all(self):
+        # test delete all
+        ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+
+        ingredient2 = UserIngredient.objects.create(ingredient_name='Hector incredible pizza',
+                                                  ingredient_id='12345', user=self.user, upc=123344566543)
+
+        response = self.client.get('/pantry/')
+        self.assertEqual(response.context['ingredients'].all().get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin'), ingredient)
+        self.assertEqual(response.context['ingredients'].all().get(ingredient_name='Hector incredible pizza'), ingredient2)
+
+        response = self.client.get('/pantry/delete-all')
+        ingredients = UserIngredient.objects.filter(user=self.user)
+
+        self.assertFalse(ingredients.exists())
+        self.assertFalse(response.context['ingredients'].exists())

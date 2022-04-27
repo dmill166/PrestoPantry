@@ -2,41 +2,36 @@
 {% block content %}
 {% load static %}
 
-<div class=""> 
-<h2 class="text-white text-center">Ingredient Search Central</h2>
-<p class="text-white text-center">Search for ingredients to add to your pantry!</p>
-<section class="text-center text-white">
-
-<div class="text-danger">
-<p>{{api_frequency}}</p>
-</div>
-
+<div class="container text-white text-center ">
 <form action = "{% url 'search-pantry-ingredients' %}" method = "post">
     {% csrf_token %}
-    <label for="ingredient_field"> <b>Search for an Ingredient:</b> </label>
-    <input id="ingredient_field"  type="text" required="required" placeholder="onion" name="ingredient_name">
-    <input type="submit" value="SEARCH" name="ingredient_button">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-4 border rounded ">
+            <label for="ingredient_field" class="pb-3 fw-bolder fs-4">Search for an Ingredient</label>
+                <div class="text-danger">
+                    <p>{{api_frequency}}</p>
+                </div>
+                <input class="form-control" id="ingredient_field"  type="text" required="required" placeholder="Herdez Green Salsa" name="ingredient_name">
+                <br>
+                <input type="submit" value="Search" name="ingredient_button" class="btn btn-secondary btn-lg mb-3">
+            </div>
+    </div>
 </form>
+</div>
 
+<hr class="my-4 text-white">
+
+<!--  SAVE FOR DISPLAYING INGREDIENTS -->
 {% comment %}
 <form action = "{% url 'search-pantry-ingredients' %}" method = "post">
     {% csrf_token %}
-    <label for="ingredient_name"> <b>Search for a recipe via ingredients:</b> </label>
+    <label for="ingredient_name fw-bolder">Search for a recipe via ingredients:</label>
     <input id="ingredients" type="text" placeholder="pepperoni, cheese, olive" name="ingredients">
     <input type="submit" value="SEARCH" name="ingredient_per_recipe_button">
 </form>
   
 {% endcomment %}
 
-</section>
-
-
-
-
-    {% comment %}
-    <h5 class="card-title">{{ingredient_name}}</h5>
-    {% endcomment %}
-    
     <h3 class="text-center text-white">{{error}}</h3>
 
     <div class="row ps-4">
@@ -47,25 +42,28 @@
                 {% if item.0 == None %}
                 <img class="card-img-top" src="{% static "images/hcruz.png" %}" alt="...">
                 {% else %}
-                  
-                <img class="card-img-top" src="{{ item.0 }}" alt=" {% static "images/hcruz.png" %} NO IMAGE">
+                <img class="card-img-top" src="{{ item.0 }}" alt="NO IMAGE">
                 {% endif %}
 
              
             <div class="card-body">
                     <ul class="list-group list-group-flush bg-transparent">
-                        <li class="list-group-item overflow-auto" style="height: 7rem;"><b>Ingredient:</b> {{item.1}}</li>
-                        <li class="list-group-item"><b>Id:</b> {{item.2}}</li>
-                        <li class="list-group-item"><b>Upc:</b> {{item.3}}</li>
+                        <li class="list-group-item overflow-auto" style="height: 7rem;"><strong>Ingredient:</strong>{{item.1}}</li>
+                        <li class="list-group-item"><strong>Id:</strong>{{item.2}}</li>
+                        <li class="list-group-item"><strong>Upc:</strong>{{item.3}}</li>
                     </ul>
 
                     <hr class="my-2">
+
                     {% if item.4 == True %}
                     <div class="text-success">
                        <b>Ingredient Added!</b>
-                           
-
                     </div>
+                    {% elif item.4 == False %}
+                    <div class="text-danger">
+                       <b>Ingredient Already in Pantry!</b>
+                    </div>
+
                     {% else %}
                     
                         <form method = "post">
@@ -74,7 +72,6 @@
                             <input type="hidden" value="{{item.1}}" name="ingredient_name">
                             <input type="hidden" value="{{item.3}}" name="upc">
                             <input type="submit" value="Add" name="add_ingredient_button" class="btn btn-success btn-md ">
-
                         </form>
                     
                     {% endif %}
@@ -85,20 +82,20 @@
         </div>
         <br>
 
+
+        <!--SAVE FOR SHOWING RECIPES  -->
 {% comment %}
   
-
-
 {% elif recipe_context %}
 
     {% for item in recipe_context.recipe  %}
-        <h5><b>-------------Recipe Info-------------</b></h5>
+        <h5 class="fw-bolder">-------------Recipe Info-------------</h5>
         <li>Recipe Name: {{item.1}}</li>
         <li>Recipe Id: {{item.0}}</li>
         <img src="{{item.2}}" alt="">
         
         
-            <h5><b>Missing Ingredients</b></h5>
+            <h5 class="fw-bolder">Missing Ingredients</h5>
             {% for element in item.3 %}
             <li>Missing Ingredient Id: {{element.0}} Missing Ingredient: {{ element.1}}</li>
             <img src="{{element.2}}" alt="">
@@ -106,7 +103,7 @@
             <li>No Missing Ingredients</li>
             {% endfor %}
 
-            <h5><b>Used Ingredients</b></h5>
+            <h5 class="fw-bolder">Used Ingredients</h5>
             {% for element in item.4  %}
             <li>Used Ingredient Id: {{element.0}} Used Ingredient: {{ element.1}}</li>
             <img src="{{element.2}}" alt="">
@@ -114,7 +111,7 @@
             <li>No Used Ingredients</li>
             {% endfor %}
 
-            <h5><b>Unused Ingredients</b></h5>
+            <h5 class="fw-bolder">Unused Ingredients</h5>
             {% for element in item.5  %}
             <li>Unused Ingredient Id: {{element.0}} Unused Ingredient: {{ element.1}}</li>
             <img src="{{element.2}}" alt="">  
@@ -126,7 +123,4 @@
 
     {% endcomment %}
         
-
-</div>
-
 {% endblock %}
