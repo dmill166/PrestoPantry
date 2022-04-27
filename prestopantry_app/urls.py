@@ -12,6 +12,8 @@ urlpatterns = [
     path('logout/', main_views.logout_view, name='logout'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
     path('pantry/', pantry_ingredients_views.display_pantry, name='pantry'),
+    path('pantry/delete=<int:delete_id>', pantry_ingredients_views.delete_ingredient, name='pantry'),
+    path('pantry/delete-all', pantry_ingredients_views.delete_all_ingredients, name='delete'),
     path('search-pantry-ingredients/', pantry_ingredients_views.search_pantry_ingredients, name='search-pantry-ingredients'),
     path('auth/', include('social_django.urls', namespace='social')),
 ]
