@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <label for=""><input class="col-1 form-check-input me-1" type="checkbox" value="">Add Me</label>
+                <label for=""><input class="col-1 form-check-input me-1 select-all" type="checkbox" name="select" value="">Add Me</label>
                 <a href="delete={{ item.ingredient_id }}" class="btn btn-outline-danger" > <span class="bi bi-trash" style="font-size: 1.2rem;"></span> </a>
                 
 
@@ -37,12 +37,32 @@
             <div class="d-flex justify-content-between align-items-center mt-3 p-2 rounded" style="background-color: rgba(47, 48, 35, 0);">
                 <a href="{% url 'search-pantry-ingredients' %}" class="btn btn-success btn-lg">Add Ingredients</a>
                 <a href="delete-all" class="btn btn-danger btn-lg ">Delete All</a>
-                <a href="" class="btn btn-secondary btn-lg"> Select All</a>
+                <input type="button" onClick="toggle(this)" class="btn btn-secondary btn-lg" value="Select All"></input>
                 <a href="" class="btn btn-secondary btn-lg"> Search</a>
             </div>
         </div>
     </div>
 </div>
 </section>
+
+<!--JS script to' Select All' and check all boxes or 'Deselect All' and unselect all-->
+<script language="JavaScript">
+    function toggle(source) {
+        checkboxes = document.getElementsByName('select');
+        if (source.value === "Deselect All") {
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+                checkboxes[i].checked = false;
+                }
+            source.value = "Select All";
+        }
+        else {
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+                checkboxes[i].checked = true;
+                }
+            source.value = "Deselect All";
+        }
+    }
+</script>
+
 
 {% endblock %}
