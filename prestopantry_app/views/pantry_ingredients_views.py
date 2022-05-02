@@ -1,10 +1,9 @@
 from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
 from prestopantry_app.models.user_ingredients import UserIngredient
-from django.urls import reverse
+
 
 @login_required(login_url='login')
 @require_http_methods(["GET", "POST"])
@@ -52,7 +51,6 @@ def add_ingredient(request):
                                 ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
         ingredient_added = True
 
-
     session_ingredient_info = request.session['ingredient_search_results']['ingredient_info']
     for i in session_ingredient_info:
         if i[2] == ingredient.ingredient_id:
@@ -64,37 +62,49 @@ def add_ingredient(request):
 
     return TemplateResponse(request, 'search_pantry_ingredients.html', request.session['ingredient_search_results'])
 
-#Left for reference for searching for recipes PLEASE DELETE THIS AFTER IMPLIMENTING RECIPE SEARCH
 
-# def search_by_ingredient(request):
-#     json_scraper = SpoonacularAPI()
+@require_http_methods(["GET"])
+@login_required(login_url='login')
+def search_recipes(request):
+    context = {'error': 'No recipes found'}
+    ingredients_list = request.GET.getlist('select')
+    if ingredients_list:
+        if not request.user.allow_api_call():
+            request.session['error'] = 'Woah, slow down there. Please wait and try again.'
+            return display_pantry(request)
+        payload = {
+          'ingredients': [', '.join(ingredients_list)],
+          'number': 5,
+          'ignorePantry': 'false',
+          'ranking': 2
+          }
+        recipe_search_response = SpoonacularAPI.recipe_request("GET", params=payload)
+        if recipe_search_response and recipe_search_response.status_code == 200:
+            recipe_search_json = recipe_search_response.json()
 
-#     elif request.method == 'POST' and 'ingredient_per_recipe_button' in request.POST:
+            if recipe_search_json != []:
+                recipes = SpoonacularAPI.harvest_recipe_per_ingredients(recipe_search_json)
+                return TemplateResponse(request, 'recipes_results.html', {'recipe_context': recipes})
+        else:
+            context['error'] = 'API Search Error'
+    else:
+        request.session['error'] = 'Please select at least one ingredient'
+        return display_pantry(request)
 
-#         # Whether to maximize used ingredients ranking:1 or minimize missing ingredients ranking:2 first.
-#         payload = {
-#           'ingredients':[request.POST['ingredients']],
-#           'number':5,
-#           'ignorePantry':'false',
-#           'ranking':2
-#           }
+    return TemplateResponse(request, 'recipes_results.html', context)
 
-#         response = json_scraper.recipe_request("GET", params=payload)
-#         recipe_json = response.json()
-#         if response.status_code == 200 and recipe_json != []:
-
-#             context = json_scraper.harvest_recipe_per_ingredients(recipe_json)
-
-#             return render(request, 'search_pantry_ingredients.html', {'recipe_context': context})
-
-#     return render(request, 'search_pantry_ingredients.html', {'error': 'No results found, please check spelling and try again'})
 
 @require_http_methods(["GET"])
 @login_required(login_url='login')
 def display_pantry(request):
+    context = {}
     ingredients = UserIngredient.objects.filter(user=request.user)
-    context = {'ingredients': ingredients}
-    return TemplateResponse(request, 'pantry.html', context) 
+    if 'error' in request.session:
+        context['error'] = request.session['error']
+        del request.session['error']
+    context['ingredients'] = ingredients
+    return TemplateResponse(request, 'pantry.html', context)
+
 
 @require_http_methods(["GET"])
 @login_required(login_url='login')
@@ -106,6 +116,7 @@ def delete_ingredient(request, delete_id):
         pass
 
     return display_pantry(request)
+
 
 @require_http_methods(["GET"])
 @login_required(login_url='login')

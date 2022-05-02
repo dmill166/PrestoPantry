@@ -3,13 +3,16 @@ from django.urls import reverse
 from dynamic_preferences.registries import global_preferences_registry
 from prestopantry_app.models.users import User
 from prestopantry_app.models.user_ingredients import UserIngredient
+from prestopantry_app.backends.spoonacular_api import SpoonacularAPI
 from unittest.mock import patch
+
 
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user('goldmember','drevil@gmail.com','ilovegold')
+        self.user = User.objects.create_user('goldmember', 'drevil@gmail.com', 'ilovegold')
         self.global_preferences = global_preferences_registry.manager()
         self.global_preferences['time_between_api_calls'] = 0
+        self.global_preferences['spoonacular_api_enabled'] = True
         self.client.force_login(self.user)
 
     def test_my_pantry_view(self):
@@ -59,7 +62,7 @@ class PantryIngredientsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         try:
             UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-                                                  ingredient_id=406181, user=self.user, upc=123344564378)
+                                       ingredient_id=406181, user=self.user, upc=123344564378)
         except UserIngredient.DoesNotExist:
             self.fail("Ingredient failed to save." + str(data))
 
@@ -83,7 +86,7 @@ class PantryIngredientsViewTest(TestCase):
 
         # test search for pantry with ingredients
         ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+                                                   ingredient_id='406181', user=self.user, upc=123344564378)
         self.client.force_login(self.user)
         response = self.client.get('/pantry/')
         self.assertEqual(response.context['ingredients'].all().get(), ingredient)
@@ -96,8 +99,8 @@ class PantryIngredientsViewTest(TestCase):
     def test_delete_ingredients(self):
         # test delete
         ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-                                                  ingredient_id='406181', user=self.user, upc=123344564378)
-                                            
+                                                   ingredient_id='406181', user=self.user, upc=123344564378)
+
         # Check ingredient was added
         self.client.force_login(self.user)
         response = self.client.get('/pantry/')
@@ -112,10 +115,10 @@ class PantryIngredientsViewTest(TestCase):
     def test_delete_all(self):
         # test delete all
         ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-                                                  ingredient_id='406181', user=self.user, upc=123344564378)
+                                                   ingredient_id='406181', user=self.user, upc=123344564378)
 
         ingredient2 = UserIngredient.objects.create(ingredient_name='Hector incredible pizza',
-                                                  ingredient_id='12345', user=self.user, upc=123344566543)
+                                                    ingredient_id='12345', user=self.user, upc=123344566543)
 
         response = self.client.get('/pantry/')
         self.assertEqual(response.context['ingredients'].all().get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin'), ingredient)
@@ -126,3 +129,51 @@ class PantryIngredientsViewTest(TestCase):
 
         self.assertFalse(ingredients.exists())
         self.assertFalse(response.context['ingredients'].exists())
+
+    def test_search_recipes(self):
+        session = self.client.session
+
+        # Test search no with no ingredients selected - Display pantry and prompts user to select an ingredient
+        session.update({'error': 'Please select at least one ingredient.'})
+        session.save()
+        response = self.client.get('/search-recipes/')
+        self.assertTemplateUsed(response, 'pantry.html')
+        self.assertContains(response, 'Please select at least one ingredient')
+        self.assertRaises(KeyError, lambda: self.client.session['api_frequency'])
+        self.assertNotContains(response, 'No recipes found')
+        self.assertNotContains(response, 'Woah, slow down there. Please wait and try again.')
+
+        ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+                                                   ingredient_id='406181', user=self.user, upc=123344564378)
+        ingredient2 = UserIngredient.objects.create(ingredient_name='Hector incredible pizza',
+                                                    ingredient_id='12345', user=self.user, upc=123344566543)
+        ingredient_query = {'select': [ingredient.ingredient_name, ingredient2.ingredient_name]}
+
+        # Test Spoon API to search for recipes is called
+        with patch.object(SpoonacularAPI, 'recipe_request') as recipe_request_mock:
+            response = self.client.get('/search-recipes/', ingredient_query)
+            recipe_request_mock.assert_called_once_with('GET', params={
+                    'ingredients': [ingredient.ingredient_name + ', ' + ingredient2.ingredient_name],
+                    'number': 5,
+                    'ignorePantry': 'false',
+                    'ranking': 2
+                    }
+                )
+            self.assertTemplateUsed(response, 'recipes_results.html')
+            self.assertNotContains(response, 'Woah, slow down there. Please wait and try again.')
+
+        # Test spoon api disabled - Search Error displayed
+        self.global_preferences['spoonacular_api_enabled'] = False
+        response = self.client.get('/search-recipes/', ingredient_query)
+        self.assertContains(response, 'API Search Error')
+        self.assertNotContains(response, 'Woah, slow down there. Please wait and try again.')
+        self.assertTemplateUsed(response, 'recipes_results.html')
+
+        # Test api frequency enforcement - Displays pantry page with an api frequency error
+        self.global_preferences['time_between_api_calls'] = 5
+        session.update({'error': 'Woah, slow down there. Please wait and try again.'})
+        session.save()
+        response = self.client.get('/search-recipes/', ingredient_query)
+        self.assertTemplateUsed(response, 'pantry.html')
+        self.assertContains(response, 'Woah, slow down there. Please wait and try again.')
+        self.assertRaises(KeyError, lambda: self.client.session['error'])

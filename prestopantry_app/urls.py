@@ -16,6 +16,7 @@ urlpatterns = [
     path('pantry/delete-all', pantry_ingredients_views.delete_all_ingredients, name='delete'),
     path('search-pantry-ingredients/', pantry_ingredients_views.search_pantry_ingredients, name='search-pantry-ingredients'),
     path('auth/', include('social_django.urls', namespace='social')),
-]
+    path('search-recipes/', pantry_ingredients_views.search_recipes, name='search-recipes'),
+    ]
 
 urlpatterns += staticfiles_urlpatterns()
