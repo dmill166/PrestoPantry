@@ -15,7 +15,7 @@
   <body class= "main_container" style="background-color: rgb(0, 0, 0);">
 
     <nav class="navbar navbar-expand-lg navbar-light nav_bar">
-      <a class="navbar-brand" href="{% url 'landing_page' %}">Presto Pantry</a>
+      <a class="navbar-brand pe-5" href="{% url 'landing_page' %}">Presto Pantry</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,6 +32,9 @@
           </li>
           <li class="nav-item">
             <a href="{% url 'search-pantry-ingredients' %}" class="btn btn-outline-light btn-lg">Search Ingredients</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'search-recipes' %}" class="btn btn-outline-light btn-lg">Search Recipes</a>
           </li>
         </ul>
           <a href="{% url 'logout' %}" class="btn btn-outline-light btn-lg">Logout</a>
@@ -67,7 +70,7 @@
     <div class="about-button">
     <a class="" href="{% url 'about' %}">About Us</a>
   </div>
-    <section class="mb-3">
+    <section class="mb-2">
       <a class="btn btn-floating m-0" href="https://github.com/dmill166/PrestoPantry" role="button"><em class="fab fa-github"></em></a>
     </section>
   </div>

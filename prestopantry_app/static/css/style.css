@@ -133,7 +133,11 @@ color: black;
 }
 
 .edit_account_section{
-  background-color: #000000;
+/* background-color: #000000; */
+background: url("/static/images/soup.jpeg") ;
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
 }
 .success_msg{
   color: green;
@@ -182,4 +186,24 @@ color: black;
   background-position: center;
   background-size: cover; 
   background-attachment: fixed;
+}
+
+.recipe_card_image{
+  /* height: 508.59px; 
+  width: 546px; */
+  min-height: 60%;
+  max-width: 65%;
+  /* display: block; */
+  border-radius: 1rem;
+}
+.recipe_ingredient_image{
+  height: 5.1rem;
+  width: 6rem;
+}
+.logout_section{
+  background: url("/static/images/burger.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  /* background-attachment: fixed; */
 }

@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.base import TemplateView
 from .views.account_views import login, signup, edit_account
-from .views import main_views, pantry_ingredients_views
+from .views import main_views, pantry_ingredients_views, recipe_results_views
 
 urlpatterns = [
     path('', main_views.landing_page, name='landing_page'),
