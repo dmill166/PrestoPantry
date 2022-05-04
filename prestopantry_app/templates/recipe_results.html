@@ -1,171 +1,122 @@
-{% extends 'base.html' %}
-{% block content %}
-{{error}}
+{% extends 'base.html' %} 
+{% block content %} 
+{{error}} 
 {% load static %}
 
-
 <h2 class="text-white text-center">Recipe Search Page</h2>
-
 <div class="container text-white text-center"></div>
-<form action = "{% url 'search-recipes' %}" method = "post">
+<form action="{% url 'search-recipes' %}" method="post">
     {% csrf_token %}
     <div class="row height d-flex justify-content-center align-items-center">
         <div class="col-md-6 border rounded  text-center text-white">
 
-    <label for="ingredient_name" class="pb-3 fw-bolder fs-4">Search for a recipe via ingredients</label>
-    <input class="form-control" id="ingredients" type="text" placeholder="pepperoni, cheese, olive" name="ingredients">
-    <br>
-    <input type="submit" value="Search recipes" name="search_recipe_button" class="btn btn-secondary btn-lg mb-3">
+            <label for="ingredient_name" class="pb-3 fw-bolder fs-4">Search for a recipe via ingredients</label>
+            <input class="form-control" id="ingredients" type="text" placeholder="pepperoni, cheese, olive" name="ingredients">
+            <br>
+            <input type="submit" value="Search recipes" name="search_recipe_button" class="btn btn-secondary btn-lg mb-3">
         </div>
     </div>
 </form>
 </div>
 <br>
-<hr class="fw-bold pb-3" style="color: rgb(228, 0, 0);">
-
-  {% if recipe_context %}
+<hr class="fw-bold pb-3" style="color: rgb(228, 0, 0);"> {% if recipe_context %}
 
 <div class="container">
 
-    {% for item in recipe_context.recipe  %}
+    {% for item in recipe_context.recipe %}
     <div class="row ">
-      <div class="col text-center text-white fs-3">
-        <div class="col fw-bolder">{{item.1}}</div>
-        <!-- <br> -->
-        <img class="card-img-top recipe_card_image mx-auto d-block" src="{{item.2}}" alt="NO IMAGE">
-      </div>
-
+        <div class="col text-center text-white fs-3">
+            <div class="col fw-bolder">{{item.1}}</div>
+            <img class="card-img-top recipe_card_image mx-auto d-block" src="{{item.2}}" alt="NO IMAGE">
+        </div>
     </div>
     <br>
 
     <div class="row">
 
-      <div class="col">
-        <div class="card-group">
-            <div class="card text-center text-white bg-dark">
-                <h5 class="card-title">Used Ingredients</h5>
+        <div class="col">
+            <div class="card-group">
+                <div class="card text-center text-white bg-dark">
+                    <h5 class="card-title">Used Ingredients</h5>
 
-                {% if item.4|length <= 4 %}
-                <div class="card-body" style="height: 29rem;">
-                  {% else %}
-                <div class="card-body overflow-auto" style="height: 29rem;">
-                {% endif %}
-                  
-                  <ul class="list-unstyled">
-                    {% for used in item.4 %}
-                    <li class="d-flex justify-content-between px-3">
-                        <img src="{{used.2}}" alt="NO IMAGE" class="recipe_ingredient_image"><strong>{{used.1}}</strong>
-                    </li>
-                    <hr class="" style="color: rgb(228, 0, 0);">
-                      {% empty %}
-                      <li>No Used Ingredients</li>
-                      {% endfor %}
-                  </ul>
+                    {% if item.4|length <= 4 %} 
+                    <div class="card-body" style="height: 29rem;">
+                        {% else %}
+                        <div class="card-body overflow-auto" style="height: 29rem;">
+                            {% endif %}
 
-              </div>
-            </div>
-      </div>
-    </div>
+                            <ul class="list-unstyled">
+                                {% for used in item.4 %}
+                                <li class="d-flex justify-content-between px-3">
+                                    <img src="{{used.2}}" alt="NO IMAGE" class="recipe_ingredient_image"><strong>{{used.1}}</strong>
+                                </li>
+                                <hr class="" style="color: rgb(228, 0, 0);">
+                                 {% empty %}
+                                <li>No Used Ingredients</li>
+                                {% endfor %}
+                            </ul>
 
-      <div class="col">
-        <div class="card-group">
-            <div class="card text-center text-white bg-dark">
-                <h5 class="card-title">Missing Ingredients</h5>
-
-                {% if item.3|length <= 4 %}
-                <div class="card-body" style="height: 29rem;">
-                  {% else %}
-                <div class="card-body overflow-auto" style="height: 29rem;">
-                {% endif %}
-
-
-                <ul class="list-unstyled">
-                    {% for missing in item.3 %}
-                    <li class="d-flex justify-content-between px-3">
-                        <img src="{{missing.2}}" alt="NO IMAGE" class="recipe_ingredient_image"><strong>{{missing.1}}</strong>
-                    </li>
-                    <hr class="" style="color: rgb(228, 0, 0);">
-                        {% empty %}
-                        <li>No Missing Ingredients</li>
-                        {% endfor %}
-                </ul>
-
-              </div>
-            </div>
-      </div>
-      </div>
-
-      <div class="col">
-        <div class="card-group">
-            <div class="card text-center text-white bg-dark">
-                <h5 class="card-title">Unused Ingredients</h5>
-
-                {% if item.5|length <= 4 %}
-                <div class="card-body" style="height: 29rem;">
-                  {% else %}
-                <div class="card-body overflow-auto" style="height: 29rem;">
-                {% endif %}
-
-
-                <ul class="list-unstyled">
-                    {% for unused in item.5  %}
-                    <li class="d-flex justify-content-between px-3">
-                        <img src="{{unused.2}}" alt="NO IMAGE" class="recipe_ingredient_image"><strong>{{unused.1}}</strong>
-                    </li>
-                    <hr class="" style="color: rgb(228, 0, 0);">
-                        {% empty %}
-                        <li>No Unused Ingredients</li>
-                        {% endfor %}
-                </ul>
-
-              </div>
+                        </div>
+                </div>
             </div>
         </div>
-      </div>
+
+        <div class="col">
+            <div class="card-group">
+                <div class="card text-center text-white bg-dark">
+                    <h5 class="card-title">Missing Ingredients</h5>
+
+                    {% if item.3|length <= 4 %} 
+                    <div class="card-body" style="height: 29rem;">
+                        {% else %}
+                        <div class="card-body overflow-auto" style="height: 29rem;">
+                        {% endif %}
+
+                            <ul class="list-unstyled">
+                                {% for missing in item.3 %}
+                                <li class="d-flex justify-content-between px-3">
+                                    <img src="{{missing.2}}" alt="NO IMAGE" class="recipe_ingredient_image"><strong>{{missing.1}}</strong>
+                                </li>
+                                <hr class="" style="color: rgb(228, 0, 0);"> 
+                                {% empty %}
+                                <li>No Missing Ingredients</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card-group">
+                <div class="card text-center text-white bg-dark">
+                    <h5 class="card-title">Unused Ingredients</h5>
+
+                    {% if item.5|length <= 4 %} 
+                    <div class="card-body" style="height: 29rem;">
+                        {% else %}
+                        <div class="card-body overflow-auto" style="height: 29rem;">
+                            {% endif %}
+
+                            <ul class="list-unstyled">
+                                {% for unused in item.5 %}
+                                <li class="d-flex justify-content-between px-3">
+                                    <img src="{{unused.2}}" alt="NO IMAGE" class="recipe_ingredient_image"><strong>{{unused.1}}</strong>
+                                </li>
+                                <hr class="" style="color: rgb(228, 0, 0);"> 
+                                {% empty %}
+                                <li>No Unused Ingredients</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<hr class="fw-bold pb-3" style="color: rgb(228, 0, 0);">
-{% endfor %}
-{% endif %}
+<hr class="fw-bold pb-3" style="color: rgb(228, 0, 0);"> 
 
-
-{% comment %}
-{% if recipe_context %}
-
-    {% for item in recipe_context.recipe  %}
-        <h5 class="fw-bolder">-------------Recipe Info-------------</h5>
-        <li>Recipe Name: {{item.1}}</li>
-        <li>Recipe Id: {{item.0}}</li>
-        <img src="{{item.2}}" alt="">
-        
-        
-            <h5 class="fw-bolder">Missing Ingredients</h5>
-            {% for element in item.3 %}
-            <li>Missing Ingredient Id: {{element.0}} Missing Ingredient: {{element.1}}</li>
-            <img src="{{element.2}}" alt="">
-            {% empty %}
-            <li>No Missing Ingredients</li>
-            {% endfor %}
-
-            <h5 class="fw-bolder">Used Ingredients</h5>
-            {% for element in item.4 %}
-            <li>Used Ingredient Id: {{element.0}} Used Ingredient: {{element.1}}</li>
-            <img src="{{element.2}}" alt="">
-            {% empty %}
-            <li>No Used Ingredients</li>
-            {% endfor %}
-
-            <h5 class="fw-bolder">Unused Ingredients</h5>
-            {% for element in item.5  %}
-            <li>Unused Ingredient Id: {{element.0}} Unused Ingredient: {{element.1}}</li>
-            <img src="{{element.2}}" alt="">  
-            {% empty %}
-            <li>No Unused Ingredients</li>
-            {% endfor %}
-        
-    {% endfor %}
-    {% endif %}
-    {% endcomment %}
-
-    {% endblock %}
+{% endfor %} 
+{% endif %} 
+{% endblock %}
