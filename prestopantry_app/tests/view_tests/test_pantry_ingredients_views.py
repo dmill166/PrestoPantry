@@ -10,7 +10,6 @@ from unittest.mock import patch
 class PantryIngredientsViewTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('goldmember', 'drevil@gmail.com', 'ilovegold')
-        self.user2 = User.objects.create_user('djkhalid', 'sufferingfromsuccess@gmail.com', 'anotherone')
         self.global_preferences = global_preferences_registry.manager()
         self.global_preferences['time_between_api_calls'] = 0
         self.global_preferences['spoonacular_api_enabled'] = True
@@ -98,12 +97,14 @@ class PantryIngredientsViewTest(TestCase):
         self.assertRedirects(response, '/login/?next=/pantry/')
 
     def test_delete_ingredients(self):
+        user2 = User.objects.create_user('djkhalid', 'sufferingfromsuccess@gmail.com', 'anotherone')
+
         # test delete
         ingredient1 = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
                                                    ingredient_id='406181', user=self.user, upc=123344564378)
 
         ingredient2 = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
-                                                   ingredient_id='406181', user=self.user2, upc=123344564378)
+                                                   ingredient_id='406181', user=user2, upc=123344564378)
 
         # Check ingredient was added
         self.client.force_login(self.user)
@@ -116,9 +117,8 @@ class PantryIngredientsViewTest(TestCase):
         except UserIngredient.DoesNotExist:
             pass
 
-        self.client.force_login(self.user2)
-        response = self.client.get('/pantry/')
-        self.assertEqual(response.context['ingredients'].all().get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin'), ingredient2)
+        # response = self.client.get('/pantry/')
+        self.assertEqual(UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin'), ingredient2)
 
     def test_delete_all(self):
         # test delete all

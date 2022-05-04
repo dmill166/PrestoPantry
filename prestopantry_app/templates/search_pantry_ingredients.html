@@ -2,11 +2,12 @@
 {% block content %}
 {% load static %}
 
-<div class="container text-white text-center ">
+<section class="vh-100 search_ingredient_section rounded overflow-auto">
+    <div class="container text-white text-center py-4 ">
 <form action = "{% url 'search-pantry-ingredients' %}" method = "post">
     {% csrf_token %}
     <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-4 border rounded ">
+        <div class="col-md-4 border rounded">
             <label for="ingredient_field" class="pb-3 fw-bolder fs-4">Search for an Ingredient</label>
                 <div class="text-danger">
                     <p>{{api_frequency}}</p>
@@ -14,25 +15,10 @@
                 <input class="form-control" id="ingredient_field"  type="text" required="required" placeholder="Herdez Green Salsa" name="ingredient_name">
                 <br>
                 <input type="submit" value="Search" name="ingredient_button" class="btn btn-secondary btn-lg mb-3">
-            </div>
+        </div>
     </div>
 </form>
 </div>
-
-<hr class="my-4 text-white">
-
-<!--  SAVE FOR DISPLAYING INGREDIENTS -->
-
-{% comment %}
-<form action = "{% url 'search-pantry-ingredients' %}" method = "post">
-    {% csrf_token %}
-    <label for="ingredient_name fw-bolder">Search for a recipe via ingredients:</label>
-    <input id="ingredients" type="text" placeholder="pepperoni, cheese, olive" name="ingredients">
-    <input type="submit" value="SEARCH" name="ingredient_per_recipe_button">
-</form>
-{% endcomment %}
-  
-
 
     <h3 class="text-center text-white">{{error}}</h3>
 
@@ -42,12 +28,12 @@
             <div class="card ingredient_cards" style="width: 18rem;">
 
                 {% if item.0 == None %}
-                <img class="card-img-top" src="{% static "images/hcruz.png" %}" alt="...">
+                <img class="card-img-top" src="{% static "images/hcruz.png" %}" alt="NO IMAGE">
                 {% else %}
                 <img class="card-img-top" src="{{ item.0 }}" alt="NO IMAGE">
                 {% endif %}
 
-             
+    
             <div class="card-body">
                     <ul class="list-group list-group-flush bg-transparent">
                         <li class="list-group-item overflow-auto" style="height: 7rem;"><strong>Ingredient:</strong>{{item.1}}</li>
@@ -82,48 +68,7 @@
             </div>
             {% endfor %}
         </div>
-        <br>
-
-
-        <!--SAVE FOR SHOWING RECIPES  -->
-{% comment %}
-{% if recipe_context %}
-
-    {% for item in recipe_context.recipe  %}
-        <h5 class="fw-bolder">-------------Recipe Info-------------</h5>
-        <li>Recipe Name: {{item.1}}</li>
-        <li>Recipe Id: {{item.0}}</li>
-        <img src="{{item.2}}" alt="">
-        
-        
-            <h5 class="fw-bolder">Missing Ingredients</h5>
-            {% for element in item.3 %}
-            <li>Missing Ingredient Id: {{element.0}} Missing Ingredient: {{ element.1}}</li>
-            <img src="{{element.2}}" alt="">
-            {% empty %}
-            <li>No Missing Ingredients</li>
-            {% endfor %}
-
-            <h5 class="fw-bolder">Used Ingredients</h5>
-            {% for element in item.4  %}
-            <li>Used Ingredient Id: {{element.0}} Used Ingredient: {{ element.1}}</li>
-            <img src="{{element.2}}" alt="">
-            {% empty %}
-            <li>No Used Ingredients</li>
-            {% endfor %}
-
-            <h5 class="fw-bolder">Unused Ingredients</h5>
-            {% for element in item.5  %}
-            <li>Unused Ingredient Id: {{element.0}} Unused Ingredient: {{ element.1}}</li>
-            <img src="{{element.2}}" alt="">  
-            {% empty %}
-            <li>No Unused Ingredients</li>
-            {% endfor %}
-        
-    {% endfor %}
-    {% endif %}
-    {% endcomment %}
-
-  
+        <br>  
+        </section>
         
 {% endblock %}
