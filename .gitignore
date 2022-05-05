@@ -132,3 +132,7 @@ dmypy.json
 # Adding these as they appeared when I made a new virtual environment
 bin/*
 pyvenv.cfg
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

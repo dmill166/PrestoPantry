@@ -31,9 +31,9 @@ SPOON_API_KEY = os.environ["SPOON_API_KEY"]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-env.eba-fatems2z.us-west-2.elasticbeanstalk.com']
 
 
 # Application definitioAUTH_
