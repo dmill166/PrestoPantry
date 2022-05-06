@@ -182,4 +182,4 @@ STATICFILES_DIRS = [BASE_DIR/'prestopantry_app/static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #~/.bash_profile
-GITGUARDIAN_API_KEY=os.environ['GITGUARDIAN_API_KEY']
+# GITGUARDIAN_API_KEY=os.environ['GITGUARDIAN_API_KEY']
