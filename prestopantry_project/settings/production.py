@@ -15,4 +15,4 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['django-env.eba-fatems2z.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['PresotPantryenv.eba-ed5zcunn.us-east-1.elasticbeanstalk.com']
