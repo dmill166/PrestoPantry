@@ -15,4 +15,4 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['PresotPantryenv.eba-ed5zcunn.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['PrestoPantryEnv.eba-f7pbnqnf.us-east-1.elasticbeanstalk.com']
