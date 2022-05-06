@@ -94,19 +94,6 @@ WSGI_APPLICATION = 'prestopantry_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['PRESTOPANTRY_DB_NAME'],
-        'USER': os.environ['PRESTOPANTRY_DB_USER'],
-        'PASSWORD': os.environ['PRESTOPANTRY_DB_PASSWORD'],
-        'HOST': os.environ['PRESTOPANTRY_DB_HOST'],
-        'PORT': os.environ['PRESTOPANTRY_DB_PORT'],
-
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
