@@ -15,7 +15,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['PrestoPantryEnv.eba-f7pbnqnf.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['c2-3-230-126-48.compute-1.amazonaws.com']
 
 DATABASES = {
     'default': {
