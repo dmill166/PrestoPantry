@@ -5,22 +5,6 @@
     </div>
 {% load static %}
 
-<h2 class="text-white text-center">Recipe Search Page</h2>
-<div class="container text-white text-center"></div>
-<form action="{% url 'search-recipes' %}" method="post">
-    {% csrf_token %}
-    <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-6 border rounded  text-center text-white">
-
-            <label for="ingredient_name" class="pb-3 fw-bolder fs-4">Search for a recipe via ingredients</label>
-            <input class="form-control" id="ingredients" type="text" placeholder="pepperoni, cheese, olive" name="ingredients">
-            <br>
-            <input type="submit" value="Search recipes" name="search_recipe_button" class="btn btn-secondary btn-lg mb-3">
-        </div>
-    </div>
-</form>
-</div>
-<br>
 <hr class="fw-bold pb-3" style="color: rgb(228, 0, 0);"> {% if recipe_context %}
 
 <div class="container">
