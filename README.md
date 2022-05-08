@@ -23,3 +23,30 @@ In order to use the project as we left it in May 2022, you'll need a few environ
 * [GITGUARDIAN_API_KEY](https://docs.gitguardian.com/internal-repositories-monitoring/gg_shield/getting_started): This solution was used to ensure as we pushed commits to the remote repository that we were not pushing secrets (such as API Keys)
 * [PRESTOPANTRY_GCS_DEVELOPER_KEY](https://developers.google.com/custom-search/v1/introduction): Use of Google Custom Search imported images for recipe ingredients to display while searching for ingredients (can help a user validate they are adding the correct ingredient to their pantry)
 * PRESTOPANTRY_GCS_CX: Reference link from PRESTOPANTRY_GCS_DEVELOPER_KEY above for more details
+
+## Supported Modules
+
+### Landing Page
+Features:<br>
+
+- Sign Up / Log In buttons easily accessible
+- Carousel options to provide alternate user-driven routing
+- (not shown) Link to GitHub Repo at bottom of every page
+
+![](/prestopantry_app/static/images/readme_landing_page.png)
+
+### Sign Up Page
+Features:<br>
+
+- Various enforcements in place to drive stable back-end design and secure user experience
+- Supplemental option available for Google OAuth account creation
+- Meaningful error messaging provided to aid users in account creation
+![](/prestopantry_app/static/images/readme_sign_up.png)
+
+### Log In Page
+Features:<br>
+
+- Various enforcements in place to drive stable back-end design and secure user experience
+- Supplemental option available for Google OAuth Sign In
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/readme_log_in.png)
