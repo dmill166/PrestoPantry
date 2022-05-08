@@ -15,7 +15,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['c2-3-230-126-48.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['3.230.126.48']
 
 DATABASES = {
     'default': {
@@ -27,3 +27,38 @@ DATABASES = {
         'PORT': os.environ['RDS_PORT'],
     }
 }
+
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_DEFAULT_REGION = 'us-east-1'
+
+AWS_STORAGE_BUCKET_NAME = 'flavor-town-bucket'
+# AWS_DEFAULT_ACL = 'public-read'
+AWS_DEFAULT_ACL = None
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+# s3 static settings
+AWS_LOCATION = 'static'
+
+# STATIC_URL = 'static/'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+AWS_S3_FILE_OVERWRITE = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_DIRS = [BASE_DIR/'prestopantry_app/static']
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
+
+
