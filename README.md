@@ -1,14 +1,34 @@
 # PrestoPantry [![Build Status](https://app.travis-ci.com/dmill166/PrestoPantry.svg?branch=main)](https://app.travis-ci.com/dmill166/PrestoPantry) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dmill166_PrestoPantry&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dmill166_PrestoPantry)
 The PrestoPantry project started as a group project initially contributed to by Adam Wojdyla, Riley Strong, Dakota Miller, and Hector Cruz.<br>
-This project was completed for the purpose of CS 4360 (Technical Software Project) as our Senior Experience course at Metropolitan State University of Denver.
+This project was completed for the purpose of CS 4360 (Technical Software Project) as our Senior Experience course at Metropolitan State University of Denver.<br>
 
+## Technologies Used
+- Python3/HTML/CSS
+- Django
+- PostgreSQL (prior to AWS RDS deployment)
+- AWS
+  - RDS
+  - S3
+  - EC2
+  - Elastic Beanstalk
+  - Cloudwatch
+- [Figma](https://www.figma.com/file/yXShQOP8BtZpHq88UahKqI/Flavor-Town-WireFrame?node-id=0%3A1)
+- [Trello](https://trello.com/b/Nb03JChw/presto-pantry)
+- dbdiagram.io
+- Travis CI
+- Spoonacular API
+- Google OAuth Sign In
+- Google Custom Search API
+- GitGuardian
+- Radon
+- Sonar Cloud
+
+<br>
 
 ## Required Modules
-To install required modules run these commands **INSIDE** of the Python virtualenv (assuming Python is installed):
-<br>
-1. `python -m ensurepip --upgrade`
-2. `pip install -r requirements.txt`
-<br>
+To install required modules run these commands **INSIDE** of the Python virtualenv (assuming Python is installed):<br>
+  - `python -m ensurepip --upgrade`<br><br>
+  - `pip install -r requirements.txt`<br><br>
 ## Required Environment Variables
 In order to use the project as we left it in May 2022, you'll need a few environment variables:<br>
 
