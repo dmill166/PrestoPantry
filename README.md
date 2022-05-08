@@ -10,7 +10,8 @@ To install required modules run these commands **INSIDE** of the Python virtuale
 2. `pip install -r requirements.txt`
 <br>
 ## Required Environment Variables
-In order to use the project as we left it in May 2022, you'll need a few environment variables:
+In order to use the project as we left it in May 2022, you'll need a few environment variables:<br>
+
 - [DJANGO_SECRET_KEY](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-SECRET_KEY): A secret key for a particular Django installation. This is used to provide cryptographic signing, and should be set to a unique, unpredictable value.
 - SPOON_API_KEY
 - [PRESTOPANTRY_DB_NAME](https://docs.djangoproject.com/en/4.0/ref/databases/): Pending your database solution, the need for these credentials may vary. Tailor your code appropriately. (used in storing user models and ingredients models)
