@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 
-
   <section class="vh-100 login_section" >
     <div class="container py-5 h-100 ">
       <div class="row d-flex justify-content-center align-items-center h-100 ">
@@ -14,7 +13,6 @@
               <form action = "{% url 'login' %}" method = "POST">
                 {% csrf_token %}
                 <div class="form-group" >
-
 
                   {% for field in form %}
                   <label class="form-label login_label">{{ field.label }}</label>

@@ -2,52 +2,59 @@
 {% load static %}
 {% block content %}
 
-<div class="text-white text-center"><h2>My Pantry</h2></div>
+<section class="vh-100 pantry_section rounded overflow-auto">
+    <div class="text-white text-center"><h2>My Pantry</h2></div>
+    <div class="container mt-3 mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                <div class="text-danger">
+                    <p>{{error}}</p>
+                </div>
 
-<section class="pantry_section rounded">
-<div class="container mt-5 mb-5">
-    <div class="d-flex justify-content-center row">
-        <div class="col-md-8" >
-            <div class="text-danger">
-                <p>{{error}}</p>
-            </div>
+                {% if not ingredients %}
+                <div class="text-white text-center">
+                    <p> Nothing in pantry</p>
+                </div>
+                {% endif %}
 
-            {% if not ingredients %}
-                <div class="text-white text-center"><p> Nothing in pantry</p></div>
-            {% endif %}
+                <form action={% url 'search-recipes' %} method="GET">
+                    {% for item in ingredients %}
 
-            <form action={% url 'search-recipes' %} method="GET">
-                {% for item in ingredients %}
-                
-                <div class="d-flex flex-row justify-content-around align-items-center p-2 mt-4 px-3 rounded text-white" style="background-color: rgba(47, 48, 35, 0.621);">
-                    
-                    <div class="mr-1"><img class="rounded" src="https://i.imgur.com/XiFJkhI.jpg" alt="NO IMAGE" width="70"></div>
-                    <div class="col-7 d-flex flex-column align-items-center "><span style="font-size: 1rem; font-weight: bolder;">{{ item.ingredient_name }}</span>
-                        <div class="d-flex flex-row">
-                            <div class="size mr-1">
-                                <span class="text-grey">UPC:</span><span class="font-weight-bold">&nbsp;{{ item.upc }}</span>
+                    <div class="d-flex flex-row justify-content-around align-items-center p-2 mt-4 px-3 rounded text-white"
+                        style="background-color: rgba(47, 48, 35, 0.621);">
+
+                        <div class="mr-1"><img class="rounded" src="https://i.imgur.com/XiFJkhI.jpg" alt="NO IMAGE"
+                                width="70"></div>
+                        <div class="col-7 d-flex flex-column align-items-center "><span
+                                style="font-size: 1rem; font-weight: bolder;">{{ item.ingredient_name }}</span>
+                            <div class="d-flex flex-row">
+                                <div class="size mr-1">
+                                    <span class="text-grey">UPC:</span><span
+                                        class="font-weight-bold">&nbsp;{{ item.upc }}</span>
+                                </div>
                             </div>
                         </div>
+
+                        <label for=""><input class="col-1 form-check-input me-1 select-all" type="checkbox"
+                                name="select" value="{{item.ingredient_name}}">Add Me</label>
+                        <a href="delete={{ item.ingredient_id }}" class="btn btn-outline-danger"> <span
+                                class="bi bi-trash" style="font-size: 1.2rem;"></span> </a>
+
                     </div>
 
-                    <label for=""><input class="col-1 form-check-input me-1 select-all" type="checkbox" name="select" value="{{item.ingredient_name}}">Add Me</label>
-                    <a href="delete={{ item.ingredient_id }}" class="btn btn-outline-danger" > <span class="bi bi-trash" style="font-size: 1.2rem;"></span> </a>
-                    
+                    {% endfor %}
 
-                </div>
-                
-                {% endfor %}
-            
-            <div class="d-flex justify-content-between align-items-center mt-3 p-2 rounded" style="background-color: rgba(47, 48, 35, 0);">
-                <a href="{% url 'search-pantry-ingredients' %}" class="btn btn-success btn-lg">Add Ingredients</a>
-                <a href="delete-all" class="btn btn-danger btn-lg ">Delete All</a>
-                <input type="button" onClick="toggle(this)" class="btn btn-secondary btn-lg" value="Select All">
-                <input type="submit" name="search_recipe" value="Search" class="btn btn-secondary btn-lg">
+                    <div class="d-flex justify-content-between align-items-center mt-3 p-2 rounded"
+                        style="background-color: rgba(47, 48, 35, 0);">
+                        <a href="{% url 'search-pantry-ingredients' %}" class="btn btn-success btn-lg">Add Ingredients</a>
+                        <a href="delete-all" class="btn btn-danger btn-lg ">Delete All</a>
+                        <input type="button" onClick="toggle(this)" class="btn btn-secondary btn-lg" value="Select All">
+                        <input type="submit" name="search_recipe" value="Search" class="btn btn-secondary btn-lg">
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</div>
 </section>
 
 <!--JS script to' Select All' and check all boxes or 'Deselect All' and unselect all-->
@@ -55,19 +62,17 @@
     function toggle(source) {
         checkboxes = document.getElementsByName('select');
         if (source.value === "Deselect All") {
-            for(var i=0, n=checkboxes.length;i<n;i++) {
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
                 checkboxes[i].checked = false;
-                }
+            }
             source.value = "Select All";
-        }
-        else {
-            for(var i=0, n=checkboxes.length;i<n;i++) {
+        } else {
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
                 checkboxes[i].checked = true;
-                }
+            }
             source.value = "Deselect All";
         }
     }
 </script>
-
 
 {% endblock %}
