@@ -11,18 +11,18 @@ To install required modules run these commands **INSIDE** of the Python virtuale
 <br>
 ## Required Environment Variables
 In order to use the project as we left it in May 2022, you'll need a few environment variables:
-* [DJANGO_SECRET_KEY](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-SECRET_KEY): A secret key for a particular Django installation. This is used to provide cryptographic signing, and should be set to a unique, unpredictable value.
-* SPOON_API_KEY
-* [PRESTOPANTRY_DB_NAME](https://docs.djangoproject.com/en/4.0/ref/databases/): Pending your database solution, the need for these credentials may vary. Tailor your code appropriately. (used in storing user models and ingredients models)
-* PRESTOPANTRY_DB_USER: Reference link from PRESTOPANTRY_DB_NAME above for more details
-* PRESTOPANTRY_DB_PASSWORD: Reference link from PRESTOPANTRY_DB_NAME above for more details
-* PRESTOPANTRY_DB_HOST: Reference link from PRESTOPANTRY_DB_NAME above for more details
-* PRESTOPANTRY_DB_PORT: Reference link from PRESTOPANTRY_DB_NAME above for more details
-* [PRESTOPANTRY_GOAUTH_CLIENT_ID](https://developers.google.com/identity/sign-in/web/sign-in): You'll need an account through the Google Developers Platform to be assigned a Client_ID and Client_Secret for using this feature (allowing users to create an account at PrestoPantry & then log in using their Google Account)
-* PRESTOPANTRY_GOAUTH_CLIENT_SECRET: Reference link from PRESTOPANTRY_GOAUTH_CLIENT_ID above for more details
-* [GITGUARDIAN_API_KEY](https://docs.gitguardian.com/internal-repositories-monitoring/gg_shield/getting_started): This solution was used to ensure as we pushed commits to the remote repository that we were not pushing secrets (such as API Keys)
-* [PRESTOPANTRY_GCS_DEVELOPER_KEY](https://developers.google.com/custom-search/v1/introduction): Use of Google Custom Search imported images for recipe ingredients to display while searching for ingredients (can help a user validate they are adding the correct ingredient to their pantry)
-* PRESTOPANTRY_GCS_CX: Reference link from PRESTOPANTRY_GCS_DEVELOPER_KEY above for more details
+- [DJANGO_SECRET_KEY](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-SECRET_KEY): A secret key for a particular Django installation. This is used to provide cryptographic signing, and should be set to a unique, unpredictable value.
+- SPOON_API_KEY
+- [PRESTOPANTRY_DB_NAME](https://docs.djangoproject.com/en/4.0/ref/databases/): Pending your database solution, the need for these credentials may vary. Tailor your code appropriately. (used in storing user models and ingredients models)
+- PRESTOPANTRY_DB_USER: Reference link from PRESTOPANTRY_DB_NAME above for more details
+- PRESTOPANTRY_DB_PASSWORD: Reference link from PRESTOPANTRY_DB_NAME above for more details
+- PRESTOPANTRY_DB_HOST: Reference link from PRESTOPANTRY_DB_NAME above for more details
+- PRESTOPANTRY_DB_PORT: Reference link from PRESTOPANTRY_DB_NAME above for more details
+- [PRESTOPANTRY_GOAUTH_CLIENT_ID](https://developers.google.com/identity/sign-in/web/sign-in): You'll need an account through the Google Developers Platform to be assigned a Client_ID and Client_Secret for using this feature (allowing users to create an account at PrestoPantry & then log in using their Google Account)
+- PRESTOPANTRY_GOAUTH_CLIENT_SECRET: Reference link from PRESTOPANTRY_GOAUTH_CLIENT_ID above for more details
+- [GITGUARDIAN_API_KEY](https://docs.gitguardian.com/internal-repositories-monitoring/gg_shield/getting_started): This solution was used to ensure as we pushed commits to the remote repository that we were not pushing secrets (such as API Keys)
+- [PRESTOPANTRY_GCS_DEVELOPER_KEY](https://developers.google.com/custom-search/v1/introduction): Use of Google Custom Search imported images for recipe ingredients to display while searching for ingredients (can help a user validate they are adding the correct ingredient to their pantry)
+- PRESTOPANTRY_GCS_CX: Reference link from PRESTOPANTRY_GCS_DEVELOPER_KEY above for more details
 
 ## Supported Modules
 
