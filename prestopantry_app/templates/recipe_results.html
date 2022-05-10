@@ -113,25 +113,10 @@
 
 <ul class="list-unstyled">
     <li class="text-center">
-        <a id="back-to-top" href="#" class="btn btn-outline-primary btn-md back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>    </li>
+    <a id="back-to-top" href="#" class="btn btn-outline-primary btn-md back-to-top" role="button"><em class="fas fa-chevron-up"></em></a>    
+    </li>
 </ul>
 
-<script language="jQuery">
-    $(document).ready(function(){
-	$(window).scroll(function () {
-			if ($(this).scrollTop() > 2000) {
-				$('#back-to-top').fadeIn();
-			} else {
-				$('#back-to-top').fadeOut();
-			}
-		});
-		// scroll body to 0px on click
-		$('#back-to-top').click(function () {
-			$('body,html').animate({
-				scrollTop: 0
-			}, 400);
-			return false;
-		});
-});
-</script>
+{% include "jquery.html"%}
+
 {% endblock %}
