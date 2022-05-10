@@ -97,20 +97,27 @@ class PantryIngredientsViewTest(TestCase):
         self.assertRedirects(response, '/login/?next=/pantry/')
 
     def test_delete_ingredients(self):
+        user2 = User.objects.create_user('djkhalid', 'sufferingfromsuccess@gmail.com', 'anotherone')
+
         # test delete
-        ingredient = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+        ingredient1 = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
                                                    ingredient_id='406181', user=self.user, upc=123344564378)
+
+        ingredient2 = UserIngredient.objects.create(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin',
+                                                   ingredient_id='406181', user=user2, upc=123344564378)
 
         # Check ingredient was added
         self.client.force_login(self.user)
         response = self.client.get('/pantry/')
-        self.assertEqual(response.context['ingredients'].all().get(), ingredient)
+        self.assertEqual(response.context['ingredients'].all().get(), ingredient1)
         response = self.client.get('/pantry/delete=406181')
         try:
             response.context['ingredients'].all().get()
             self.fail("Expected ingredient to not exist.")
         except UserIngredient.DoesNotExist:
             pass
+
+        self.assertEqual(UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin'), ingredient2)
 
     def test_delete_all(self):
         # test delete all
@@ -156,10 +163,10 @@ class PantryIngredientsViewTest(TestCase):
                     'ingredients': [ingredient.ingredient_name + ', ' + ingredient2.ingredient_name],
                     'number': 5,
                     'ignorePantry': 'false',
-                    'ranking': 2
+                    'ranking': 1
                     }
                 )
-            self.assertTemplateUsed(response, 'recipes_results.html')
+            self.assertTemplateUsed(response, 'recipe_results.html')
             self.assertNotContains(response, 'Woah, slow down there. Please wait and try again.')
 
         # Test spoon api disabled - Search Error displayed
@@ -167,7 +174,7 @@ class PantryIngredientsViewTest(TestCase):
         response = self.client.get('/search-recipes/', ingredient_query)
         self.assertContains(response, 'API Search Error')
         self.assertNotContains(response, 'Woah, slow down there. Please wait and try again.')
-        self.assertTemplateUsed(response, 'recipes_results.html')
+        self.assertTemplateUsed(response, 'recipe_results.html')
 
         # Test api frequency enforcement - Displays pantry page with an api frequency error
         self.global_preferences['time_between_api_calls'] = 5

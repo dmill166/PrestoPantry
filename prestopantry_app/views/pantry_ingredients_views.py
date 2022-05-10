@@ -76,7 +76,7 @@ def search_recipes(request):
           'ingredients': [', '.join(ingredients_list)],
           'number': 5,
           'ignorePantry': 'false',
-          'ranking': 2
+          'ranking': 1
           }
         recipe_search_response = SpoonacularAPI.recipe_request("GET", params=payload)
         if recipe_search_response and recipe_search_response.status_code == 200:
@@ -84,14 +84,14 @@ def search_recipes(request):
 
             if recipe_search_json != []:
                 recipes = SpoonacularAPI.harvest_recipe_per_ingredients(recipe_search_json)
-                return TemplateResponse(request, 'recipes_results.html', {'recipe_context': recipes})
+                return TemplateResponse(request, 'recipe_results.html', {'recipe_context': recipes})
         else:
             context['error'] = 'API Search Error'
     else:
         request.session['error'] = 'Please select at least one ingredient'
         return display_pantry(request)
 
-    return TemplateResponse(request, 'recipes_results.html', context)
+    return TemplateResponse(request, 'recipe_results.html', context)
 
 
 @require_http_methods(["GET"])
@@ -110,7 +110,7 @@ def display_pantry(request):
 @login_required(login_url='login')
 def delete_ingredient(request, delete_id):
     try:
-        ingredient_delete = UserIngredient.objects.get(ingredient_id=delete_id)
+        ingredient_delete = UserIngredient.objects.get(user=request.user, ingredient_id=delete_id)
         ingredient_delete.delete()
     except UserIngredient.DoesNotExist:
         pass
