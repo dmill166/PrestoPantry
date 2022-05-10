@@ -1,4 +1,4 @@
-# PrestoPantry [![Build Status](https://app.travis-ci.com/dmill166/PrestoPantry.svg?branch=main)](https://app.travis-ci.com/dmill166/PrestoPantry) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dmill166_PrestoPantry&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dmill166_PrestoPantry)
+# [PrestoPantry](https://prestopantryapp.com) [![Build Status](https://app.travis-ci.com/dmill166/PrestoPantry.svg?branch=main)](https://app.travis-ci.com/dmill166/PrestoPantry) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dmill166_PrestoPantry&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dmill166_PrestoPantry)
 The PrestoPantry project started as a group project initially contributed to by Adam Wojdyla, Riley Strong, Dakota Miller, and Hector Cruz.<br>
 This project was completed for the purpose of CS 4360 (Technical Software Project) as our Senior Experience course at Metropolitan State University of Denver.<br>
 
@@ -10,7 +10,6 @@ This project was completed for the purpose of CS 4360 (Technical Software Projec
   - RDS
   - S3
   - EC2
-  - Elastic Beanstalk
   - Cloudwatch
 - [Figma](https://www.figma.com/file/yXShQOP8BtZpHq88UahKqI/Flavor-Town-WireFrame?node-id=0%3A1)
 - [Trello](https://trello.com/b/Nb03JChw/presto-pantry)
