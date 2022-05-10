@@ -203,3 +203,8 @@ background-size: cover;
   background-position: center;
   background-size: cover;
 }
+.back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}

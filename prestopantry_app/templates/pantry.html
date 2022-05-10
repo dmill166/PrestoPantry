@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<section class="vh-100 pantry_section rounded overflow-auto">
+<section class="min-vh-100 pantry_section rounded">
     <div class="text-white text-center"><h2>My Pantry</h2></div>
     <div class="container mt-3 mb-5">
         <div class="d-flex justify-content-center row">
@@ -54,6 +54,31 @@
         </div>
     </div>
 </section>
+
+<ul class="list-unstyled">
+    <li class="text-center">
+    <a id="back-to-top" href="#" class="btn btn-outline-primary btn-md back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>   
+    </li>
+</ul>
+
+<script language="jQuery">
+    $(document).ready(function(){
+	$(window).scroll(function () {
+			if ($(this).scrollTop() > 2000) {
+				$('#back-to-top').fadeIn();
+			} else {
+				$('#back-to-top').fadeOut();
+			}
+		});
+		// scroll body to 0px on click
+		$('#back-to-top').click(function () {
+			$('body,html').animate({
+				scrollTop: 0
+			}, 400);
+			return false;
+		});
+});
+</script>
 
 <!--JS script to' Select All' and check all boxes or 'Deselect All' and unselect all-->
 <script language="JavaScript">
