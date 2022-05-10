@@ -21,8 +21,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-CSRF_TRUSTED_ORIGINS = ['https://prestopantryapp.com', 'https://www.prestopantryapp.com']
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -33,6 +31,8 @@ DATABASES = {
         'PORT': os.environ['RDS_PORT'],
     }
 }
+
+CSRF_TRUSTED_ORIGINS = ['https://prestopantryapp.com', 'https://www.prestopantryapp.com']
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']

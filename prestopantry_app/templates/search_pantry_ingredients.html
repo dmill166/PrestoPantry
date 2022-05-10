@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 
-<section class="vh-100 search_ingredient_section rounded overflow-auto">
+<section class="min-vh-100 search_ingredient_section rounded">
     <div class="container text-white text-center py-4 ">
 <form action = "{% url 'search-pantry-ingredients' %}" method = "post">
     {% csrf_token %}

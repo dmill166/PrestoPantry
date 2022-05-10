@@ -32,7 +32,7 @@ def search_ingredient(request):
     response = SpoonacularAPI.ingredient_request(request="POST", data=str(payload))
     if response and response.status_code == 200:
         ingredient_json = response.json()
-        if ingredient_json != []:
+        if 'products' in ingredient_json and ingredient_json['products'] != []:
             context = SpoonacularAPI.harvest_ingredients(ingredient_json)
             request.session['ingredient_search_results'] = context
 

@@ -56,11 +56,11 @@ class SpoonacularAPI():
             ingredient_tup = (imageurl, name, id, upc)
             ingredient_arr.append(ingredient_tup)
 
-            ingredient_payload = {
-                'ingredient_name': ingredient_name,
-                'image': image,
-                'ingredient_info': ingredient_arr,
-                }
+        ingredient_payload = {
+            'ingredient_name': ingredient_name,
+            'image': image,
+            'ingredient_info': ingredient_arr,
+            }
 
         return ingredient_payload
 
