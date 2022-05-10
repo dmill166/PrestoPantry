@@ -67,6 +67,7 @@ def edit_account_post(request, context):
             context['name_form'].save()
             context.pop('name_form')
             context['success_msg'] = 'Name updated successfully'
+
     elif 'old_password' and 'new_password1' and 'new_password2' in request.POST:
         context['pass_form'] = PasswordChangeForm(request.user, request.POST)
         if context['pass_form'].is_valid():
