@@ -21,16 +21,17 @@
 </div>
 
     <h3 class="text-center text-white">{{error}}</h3>
-
-    <div class="row ps-4">
+    <div class="container-fluid">
+    <div class="row">
         {% for item in ingredient_info %}
-        <div class=" col-sm-2 col-md-3 col-lg-3 g-4">
-            <div class="card ingredient_cards" style="width: 18rem;">
+        
+        <div class="card-columns col-sm col-xs-12 g-4">
+            <div class="card mx-auto ingredient_cards" style="width: 18rem;">
 
                 {% if item.0 == None %}
-                <img class="card-img-top" src="{% static "images/hcruz.png" %}" alt="NO IMAGE">
+                <img class="card-img-top img-fluid"  src="{% static "images/hcruz.png" %}" alt="NO IMAGE">
                 {% else %}
-                <img class="card-img-top" src="{{ item.0 }}" alt="NO IMAGE">
+                <img class="card-img-top img-fluid"  src="{{ item.0 }}" alt="NO IMAGE">
                 {% endif %}
 
     
@@ -68,6 +69,7 @@
             </div>
             {% endfor %}
         </div>
+    </div>
         <br>  
         </section>
         

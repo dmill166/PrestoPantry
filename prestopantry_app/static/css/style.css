@@ -18,13 +18,13 @@
 .nav_bar{
   padding-left: .5rem;
   padding-right: .5rem;
-  background-color: rgb(197, 103, 103);
+  background-color: rgb(182, 81, 81);
 }
 .padd_nav_button > li{
   padding-right: .4rem;
 }
 .footer{
-  background-color: rgb(197, 103, 103);
+  background-color: rgb(182, 81, 81);
 }
 .fa-linkedin-in{
   font-size: 2.6rem;
@@ -202,4 +202,9 @@ background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+.back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
 }
