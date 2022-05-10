@@ -117,7 +117,6 @@ class PantryIngredientsViewTest(TestCase):
         except UserIngredient.DoesNotExist:
             pass
 
-        # response = self.client.get('/pantry/')
         self.assertEqual(UserIngredient.objects.get(ingredient_name='Torkelson Cheese Co. Brick Cheese Wisconsin'), ingredient2)
 
     def test_delete_all(self):
