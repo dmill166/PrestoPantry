@@ -1,11 +1,16 @@
 {% extends 'base.html' %} 
 {% block content %} 
-    <div class="text-danger">
-        <p>{{error}}</p>
-    </div>
 {% load static %}
+    <div class="text-danger"><p>{{error}}</p></div>
+    <h2 class="text-white text-center">Recipe Results</h2>
+    <br>
+    <ul class="list-unstyled">
+        <li class="text-center"><a href="{% url 'pantry' %}" class="btn btn-success btn-lg">Return To Pantry</a></li>
+    </ul>
 
-<hr class="fw-bold pb-3" style="color: rgb(228, 0, 0);"> {% if recipe_context %}
+<hr class="fw-bold pb-3 mt-0" style="color: rgb(228, 0, 0);"> 
+
+{% if recipe_context %}
 
 <div class="container">
 
@@ -18,7 +23,7 @@
     </div>
     <br>
 
-    <div class="row">
+    <div class="row mx-auto">
 
         <div class="col">
             <div class="card-group">
@@ -41,7 +46,6 @@
                                 <li>No Used Ingredients</li>
                                 {% endfor %}
                             </ul>
-
                         </div>
                 </div>
             </div>
@@ -74,7 +78,7 @@
         </div>
 
         <div class="col">
-            <div class="card-group">
+            <div class="card-group pt-2">
                 <div class="card text-center text-white bg-dark">
                     <h5 class="card-title">Unused Ingredients</h5>
 
