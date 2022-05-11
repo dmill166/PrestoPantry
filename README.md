@@ -10,7 +10,7 @@ This project was completed for the purpose of CS 4360 (Technical Software Projec
   - RDS
   - S3
   - EC2
-  - Elastic Beanstalk
+  - IAM (Group and User Management)
   - Cloudwatch
 - [Figma](https://www.figma.com/file/yXShQOP8BtZpHq88UahKqI/Flavor-Town-WireFrame?node-id=0%3A1)
 - [Trello](https://trello.com/b/Nb03JChw/presto-pantry)
