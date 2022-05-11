@@ -6,4 +6,4 @@ class UserIngredient(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ingredient_id = models.IntegerField()
     ingredient_name = models.CharField(max_length=300)
-    upc = models.BigIntegerField()
+    upc = models.CharField(max_length=50)
