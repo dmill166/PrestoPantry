@@ -48,7 +48,7 @@ def add_ingredient(request):
         ingredient_added = False
     except UserIngredient.DoesNotExist:
         ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
-                                ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
+                                ingredient_name=request.POST['ingredient_name'], upc=request.POST['upc'])
         ingredient_added = True
 
     session_ingredient_info = request.session['ingredient_search_results']['ingredient_info']
