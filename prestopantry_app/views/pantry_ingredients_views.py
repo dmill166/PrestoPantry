@@ -8,13 +8,14 @@ from prestopantry_app.models.user_ingredients import UserIngredient
 @login_required(login_url='login')
 @require_http_methods(["GET", "POST"])
 def search_pantry_ingredients(request):
-    context = {'error': 'No results found, please check spelling and try again'}
+    context = {}
     if request.method == 'POST':
         if 'ingredient_button' in request.POST:
             if request.user.allow_api_call():
                 response = search_ingredient(request)
                 if response:
                     return response
+                context['error'] = 'No results found, please check spelling and try again'
             else:
                 context = request.session['ingredient_search_results'] if 'ingredient_search_results' in request.session else context
                 context['api_frequency'] = 'Woah, slow down there. Please wait and try again.'
@@ -48,7 +49,7 @@ def add_ingredient(request):
         ingredient_added = False
     except UserIngredient.DoesNotExist:
         ingredient = obj.create(user=request.user, ingredient_id=int(request.POST['ingredient_id']),
-                                ingredient_name=request.POST['ingredient_name'], upc=int(request.POST['upc']))
+                                ingredient_name=request.POST['ingredient_name'], upc=request.POST['upc'])
         ingredient_added = True
 
     session_ingredient_info = request.session['ingredient_search_results']['ingredient_info']

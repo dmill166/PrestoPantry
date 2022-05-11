@@ -28,7 +28,13 @@ class PantryIngredientsViewTest(TestCase):
         self.assertTemplateUsed(response, 'search_pantry_ingredients.html')
 
         # test search page
-        self.assertContains(response, 'No results found, please check spelling and try again')
+        self.assertNotContains(response, 'No results found, please check spelling and try again')
+
+        # No results found
+        with patch('prestopantry_app.views.pantry_ingredients_views.search_ingredient', return_value=None):
+            response = self.client.post(reverse('search-pantry-ingredients'), data={'ingredient_button': ''})
+            self.assertContains(response, 'No results found, please check spelling and try again')
+
 
         # test spam check
         with patch.object(User, 'allow_api_call', return_value=False):
