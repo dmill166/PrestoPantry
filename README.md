@@ -104,20 +104,20 @@ Features:<br>
 ### Ingredient Search Page (Finding Results)
 Features:<br>
 
-- 
+- Upon searching ingredients, users will be offered various products to add to their personal pantry for use in recipe searches
 ![](/prestopantry_app/static/images/readme_ingredient_search_w_results.png)
+
+### Pantry Ingredients page
+Features:<br>
+
+- Displays current ingredients present in a user's pantry. From here, users can choose to add more ingredients, remove some or all ingredients, or begin searching recipes matching their ingredients
+![](/prestopantry_app/static/images/readme_pantry_w_ingredients.png)
 
 ### Recipe Results Page
 Features:<br>
 
-- 
+- Once a user is satisfied with their pantry ingredients they've personalized, they can search recipes detailed with used ingredients, unused ingredients, and missing ingredients
 ![](/prestopantry_app/static/images/readme_recipe_results.png)
-
-### Ingredient Search Page (No Results)
-Features:<br>
-
-- 
-![](/prestopantry_app/static/images/lorem_ipsum.png)
 
 ### Read Me Page
 Features:<br>
