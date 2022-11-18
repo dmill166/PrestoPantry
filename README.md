@@ -47,7 +47,7 @@ In order to use the project as we left it in May 2022, you'll need a few environ
 
 ## Supported Modules
 
-### Landing Page (pre-log in)
+### Landing Page (Pre-Log In)
 Features:<br>
 
 - Sign Up / Log In buttons easily accessible
@@ -72,7 +72,7 @@ Features:<br>
 - Meaningful error messaging provided to aid users in sign in
 ![](/prestopantry_app/static/images/readme_log_in.png)
 
-### Landing Page (post-log in)
+### Landing Page (Post-Log In)
 Features:<br>
 
 - Successful Google OAuth Sign In illustrated
@@ -80,14 +80,14 @@ Features:<br>
 - Carousel option currently showing placeholder for new feature (Community interactions page, TBD delivery date)
 ![](/prestopantry_app/static/images/readme_landing_page_after.png)
 
-### My Account Page (email log in)
+### My Account Page (Email Log In)
 Features:<br>
 
 - Enables users to edit all account details after account creation
 - Meaningful error messaging provided to aid users in sign in
 ![](/prestopantry_app/static/images/readme_my_account_email.png)
 
-### My Account Page (Google log in)
+### My Account Page (Google Log In)
 Features:<br>
 
 - Enables users to edit account details specific to PrestoPantry application after account creation
@@ -95,42 +95,33 @@ Features:<br>
 - Meaningful error messaging provided to aid users in sign in
 ![](/prestopantry_app/static/images/readme_my_account_google.png)
 
-### Lorem Ipsum 1 Page
+### Empty Pantry Page
 Features:<br>
 
-- Enables users to edit account details specific to PrestoPantry application after account creation
-  - Other details should only be edited directly in users' Google account
-- Meaningful error messaging provided to aid users in sign in
-![](/prestopantry_app/static/images/lorem_ipsum.png)
+- Prior to adding any ingredients or after removing all ingredients, a user will not have any ingredients in their pantry
+![](/prestopantry_app/static/images/readme_empty_pantry.png)
 
-### Lorem Ipsum 2 (Google log in)
+### Ingredient Search Page (Finding Results)
 Features:<br>
 
-- Enables users to edit account details specific to PrestoPantry application after account creation
-  - Other details should only be edited directly in users' Google account
-- Meaningful error messaging provided to aid users in sign in
-![](/prestopantry_app/static/images/lorem_ipsum.png)
+- 
+![](/prestopantry_app/static/images/readme_ingredient_search_w_results.png)
 
-### Lorem Ipsum 3 (Google log in)
+### Recipe Results Page
 Features:<br>
 
-- Enables users to edit account details specific to PrestoPantry application after account creation
-  - Other details should only be edited directly in users' Google account
-- Meaningful error messaging provided to aid users in sign in
-![](/prestopantry_app/static/images/lorem_ipsum.png)
+- 
+![](/prestopantry_app/static/images/readme_recipe_results.png)
 
-### Lorem Ipsum 4 (Google log in)
+### Ingredient Search Page (No Results)
 Features:<br>
 
-- Enables users to edit account details specific to PrestoPantry application after account creation
-  - Other details should only be edited directly in users' Google account
-- Meaningful error messaging provided to aid users in sign in
+- 
 ![](/prestopantry_app/static/images/lorem_ipsum.png)
 
-### Lorem Ipsum 5 (Google log in)
+### Read Me Page
 Features:<br>
 
-- Enables users to edit account details specific to PrestoPantry application after account creation
-  - Other details should only be edited directly in users' Google account
-- Meaningful error messaging provided to aid users in sign in
-![](/prestopantry_app/static/images/lorem_ipsum.png)
+- Introduced website vistors to site creators
+  - In addition to photos and descriptions, included embedded links to GitHub/LinkedIn specific to each user
+![](/prestopantry_app/static/images/readme_readme.png)
