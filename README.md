@@ -47,14 +47,14 @@ In order to use the project as we left it in May 2022, you'll need a few environ
 
 ## Supported Modules
 
-### Landing Page
+### Landing Page (pre-log in)
 Features:<br>
 
 - Sign Up / Log In buttons easily accessible
 - Carousel options to provide alternate user-driven routing
 - (not shown) Link to GitHub Repo at bottom of every page
 
-![](/prestopantry_app/static/images/readme_landing_page.png)
+![](/prestopantry_app/static/images/readme_landing_page_before.png)
 
 ### Sign Up Page
 Features:<br>
@@ -71,3 +71,66 @@ Features:<br>
 - Supplemental option available for Google OAuth Sign In
 - Meaningful error messaging provided to aid users in sign in
 ![](/prestopantry_app/static/images/readme_log_in.png)
+
+### Landing Page (post-log in)
+Features:<br>
+
+- Successful Google OAuth Sign In illustrated
+- Greeting message individualized for each user
+- Carousel option currently showing placeholder for new feature (Community interactions page, TBD delivery date)
+![](/prestopantry_app/static/images/readme_landing_page_after.png)
+
+### My Account Page (email log in)
+Features:<br>
+
+- Enables users to edit all account details after account creation
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/readme_my_account_email.png)
+
+### My Account Page (Google log in)
+Features:<br>
+
+- Enables users to edit account details specific to PrestoPantry application after account creation
+  - Other details should only be edited directly in users' Google account
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/readme_my_account_google.png)
+
+### Lorem Ipsum 1 Page
+Features:<br>
+
+- Enables users to edit account details specific to PrestoPantry application after account creation
+  - Other details should only be edited directly in users' Google account
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/lorem_ipsum.png)
+
+### Lorem Ipsum 2 (Google log in)
+Features:<br>
+
+- Enables users to edit account details specific to PrestoPantry application after account creation
+  - Other details should only be edited directly in users' Google account
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/lorem_ipsum.png)
+
+### Lorem Ipsum 3 (Google log in)
+Features:<br>
+
+- Enables users to edit account details specific to PrestoPantry application after account creation
+  - Other details should only be edited directly in users' Google account
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/lorem_ipsum.png)
+
+### Lorem Ipsum 4 (Google log in)
+Features:<br>
+
+- Enables users to edit account details specific to PrestoPantry application after account creation
+  - Other details should only be edited directly in users' Google account
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/lorem_ipsum.png)
+
+### Lorem Ipsum 5 (Google log in)
+Features:<br>
+
+- Enables users to edit account details specific to PrestoPantry application after account creation
+  - Other details should only be edited directly in users' Google account
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/lorem_ipsum.png)
