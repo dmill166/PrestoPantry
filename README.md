@@ -47,14 +47,14 @@ In order to use the project as we left it in May 2022, you'll need a few environ
 
 ## Supported Modules
 
-### Landing Page
+### Landing Page (Pre-Log In)
 Features:<br>
 
 - Sign Up / Log In buttons easily accessible
 - Carousel options to provide alternate user-driven routing
 - (not shown) Link to GitHub Repo at bottom of every page
 
-![](/prestopantry_app/static/images/readme_landing_page.png)
+![](/prestopantry_app/static/images/readme_landing_page_before.png)
 
 ### Sign Up Page
 Features:<br>
@@ -71,3 +71,57 @@ Features:<br>
 - Supplemental option available for Google OAuth Sign In
 - Meaningful error messaging provided to aid users in sign in
 ![](/prestopantry_app/static/images/readme_log_in.png)
+
+### Landing Page (Post-Log In)
+Features:<br>
+
+- Successful Google OAuth Sign In illustrated
+- Greeting message individualized for each user
+- Carousel option currently showing placeholder for new feature (Community interactions page, TBD delivery date)
+![](/prestopantry_app/static/images/readme_landing_page_after.png)
+
+### My Account Page (Email Log In)
+Features:<br>
+
+- Enables users to edit all account details after account creation
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/readme_my_account_email.png)
+
+### My Account Page (Google Log In)
+Features:<br>
+
+- Enables users to edit account details specific to PrestoPantry application after account creation
+  - Other details should only be edited directly in users' Google account
+- Meaningful error messaging provided to aid users in sign in
+![](/prestopantry_app/static/images/readme_my_account_google.png)
+
+### Empty Pantry Page
+Features:<br>
+
+- Prior to adding any ingredients or after removing all ingredients, a user will not have any ingredients in their pantry
+![](/prestopantry_app/static/images/readme_empty_pantry.png)
+
+### Ingredient Search Page (Finding Results)
+Features:<br>
+
+- Upon searching ingredients, users will be offered various products to add to their personal pantry for use in recipe searches
+![](/prestopantry_app/static/images/readme_ingredient_search_w_results.png)
+
+### Pantry Ingredients page
+Features:<br>
+
+- Displays current ingredients present in a user's pantry. From here, users can choose to add more ingredients, remove some or all ingredients, or begin searching recipes matching their ingredients
+![](/prestopantry_app/static/images/readme_pantry_w_ingredients.png)
+
+### Recipe Results Page
+Features:<br>
+
+- Once a user is satisfied with their pantry ingredients they've personalized, they can search recipes detailed with used ingredients, unused ingredients, and missing ingredients
+![](/prestopantry_app/static/images/readme_recipe_results.png)
+
+### Read Me Page
+Features:<br>
+
+- Introduced website vistors to site creators
+  - In addition to photos and descriptions, included embedded links to GitHub/LinkedIn specific to each user
+![](/prestopantry_app/static/images/readme_readme.png)
